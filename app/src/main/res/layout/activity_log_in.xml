@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    tools:ignore="HardcodedText">
+
+    <!-- Log In Layout -->
+
+    <!-- Field is used to direct to activity_logup layout when click on it -->
+
+    <!-- Layout is used to wrap all of the login item -->
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/id_SignIn_TextView"
+        android:layout_width="101dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="156dp"
+        android:layout_marginLeft="156dp"
+        android:layout_marginEnd="156dp"
+        android:layout_marginRight="156dp"
+        android:layout_marginBottom="586dp"
+        android:gravity="center"
+        android:text="@string/log_in"
+        android:textColor="@color/loguptextcolor"
+        android:textSize="@dimen/textsize_28"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtvDHAccount"
+        android:layout_width="227dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="79dp"
+        android:layout_marginLeft="79dp"
+        android:layout_marginEnd="87dp"
+        android:layout_marginRight="87dp"
+        android:layout_marginBottom="150dp"
+        android:background="@drawable/rect"
+        android:gravity="center"
+        android:text="@string/don_t_have_an_account"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textsize_16"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtvDHAccount2"
+        android:layout_width="227dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="79dp"
+        android:layout_marginLeft="79dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginRight="86dp"
+        android:layout_marginBottom="114dp"
+        android:background="@drawable/rect"
+        android:gravity="center"
+        android:onClick="registerIntent"
+        android:text="@string/register"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/textsize_16"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="301dp"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="213dp"
+        android:layout_marginRight="51dp"
+        android:layout_marginBottom="134dp"
+        android:background="@drawable/rect"
+        android:orientation="vertical">
+
+        <!-- Field to fill in user's username -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/id_Email_textInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:layout_marginLeft="@dimen/marign_23"
+            android:layout_marginTop="@dimen/marign_33"
+            android:layout_marginRight="@dimen/marign_23"
+            android:background="@null"
+            tools:ignore="HardcodedText">
+            <!-- Fill in here -->
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/txt_username_login"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="@string/username"
+                android:textColor="@color/primarytext"
+                android:textSize="@dimen/textsize_18"
+                tools:ignore="ContentDescription" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/id_view_1"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="@dimen/marign_23"
+            android:layout_marginTop="@dimen/marign_2"
+            android:layout_marginRight="@dimen/marign_23"
+            android:background="@color/linecolor"
+            android:contentDescription="For more visit www.materialuiux.com" />
+
+        <!-- Field to fill in user's password -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/id_Password_textInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:layout_marginLeft="@dimen/marign_23"
+            android:layout_marginTop="@dimen/marign_4"
+            android:layout_marginRight="@dimen/marign_23"
+            android:background="@null"
+            android:contentDescription="For more visit www.materialuiux.com">
+            <!-- Fill in here -->
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/txt_password_login"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:contentDescription="For more visit www.materialuiux.com"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:textColor="@color/primarytext"
+                android:textSize="@dimen/textsize_18"
+                tools:ignore="ContentDescription" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/id_view_2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="@dimen/marign_23"
+            android:layout_marginTop="@dimen/marign_2"
+            android:layout_marginRight="@dimen/marign_23"
+            android:background="@color/linecolor" />
+
+        <!-- Textview is used to direct user to the forgot password site (not design yet) -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtvForgotPassword"
+            android:layout_width="150dp"
+            android:layout_height="29dp"
+            android:layout_gravity="right"
+            android:layout_marginStart="@dimen/marign_8"
+            android:layout_marginLeft="@dimen/marign_8"
+            android:layout_marginTop="@dimen/marign_12"
+            android:layout_marginEnd="@dimen/marign_8"
+            android:layout_marginRight="@dimen/marign_10"
+            android:text="@string/forgot_password"
+            android:textColor="@color/secondarytext"
+            android:textSize="@dimen/textsize_18" />
+
+        <!-- Button is used to log in -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            android:layout_width="@dimen/width_180"
+            android:layout_height="@dimen/height_36"
+            android:layout_marginHorizontal="@dimen/marign_58"
+            android:layout_marginTop="@dimen/marign_12"
+            android:background="@drawable/rectloginlogup"
+            android:text="@string/log_in"
+            android:onClick="onButtonLoginClick"
+            android:textAllCaps="false"
+            android:textColor="@color/thirdtext"
+            android:textSize="@dimen/textsize_16"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

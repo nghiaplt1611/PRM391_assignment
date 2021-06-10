@@ -1,0 +1,20 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- Background -->
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:angle="0"
+                android:endColor="#E1341E"
+                android:startColor="#E75D4B"
+                android:type="linear" />
+            <size
+                android:height="50dp"
+                android:width="50dp" />
+        </shape>
+    </item>
+    <item android:drawable="@drawable/ic_back"
+        android:bottom="15dp"
+        android:left="15dp"
+        android:right="15dp"
+        android:top="15dp"/>
+</layer-list>
