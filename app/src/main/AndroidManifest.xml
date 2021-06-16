@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.gtw_101">
 
     <application
@@ -10,16 +11,18 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.GTW_101">
-        <activity android:name=".controller.RegisterActivity" />
-        <activity android:name=".controller.InGameActivity" />
-        <activity android:name=".controller.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".controller.RegisterActivity"  android:screenOrientation="portrait" />
+        <activity android:name=".controller.InGameActivity"    android:screenOrientation="portrait" />
 
+        <activity android:name=".controller.MainActivity">
+            android:screenOrientation="portrait"
+            <intent-filter tools:ignore="ExtraText">
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.LoginActivity" />
+
+        <activity android:name=".controller.LoginActivity" android:screenOrientation="portrait" />
 
         <meta-data
             android:name="preloaded_fonts"

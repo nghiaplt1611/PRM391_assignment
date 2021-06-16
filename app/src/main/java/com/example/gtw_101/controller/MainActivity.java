@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import com.example.gtw_101.R;
 import com.example.gtw_101.utilities.DatabaseHandler;
