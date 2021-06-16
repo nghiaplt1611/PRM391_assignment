@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_maincolor"
@@ -21,19 +20,16 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="88dp"
-        android:layout_marginLeft="88dp"
-        android:layout_marginEnd="75dp"
-        android:layout_marginRight="75dp"
-        android:layout_marginBottom="62dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/rectmenu"
+        android:onClick="loginIntent"
         android:text="@string/log_in"
         android:textSize="@dimen/textsize_19"
-        android:onClick="loginIntent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/id_Main_Guideline_4"
+        app:layout_constraintEnd_toStartOf="@+id/id_Main_Guideline_2"
+        app:layout_constraintStart_toStartOf="@+id/id_Main_Guideline_1"
+        app:layout_constraintTop_toBottomOf="@+id/btn_play_now"
+        app:layout_constraintVertical_bias="0.212" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_play_now"
@@ -45,36 +41,14 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="89dp"
-        android:layout_marginLeft="89dp"
-        android:layout_marginEnd="74dp"
-        android:layout_marginRight="74dp"
-        android:layout_marginBottom="118dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/rectmenu"
-        android:text="@string/play_now"
         android:onClick="playGameIntent"
+        android:text="@string/play_now"
         android:textSize="@dimen/textsize_19"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="163dp"
-        android:layout_height="149dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="73dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginRight="120dp"
-        android:layout_marginBottom="214dp"
-        android:background="@drawable/test_3d_button"
-        app:backgroundTint="@null"
-        app:icon="@drawable/play_button"
-        app:iconSize="400px" />
+        app:layout_constraintEnd_toStartOf="@+id/id_Main_Guideline_2"
+        app:layout_constraintStart_toStartOf="@+id/id_Main_Guideline_1"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <View
         android:id="@+id/view"
@@ -83,10 +57,45 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:background="@drawable/logo_temp" />
+        android:background="@drawable/logo_temp"
+        app:layout_constraintEnd_toStartOf="@+id/id_Main_Guideline_2"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="@+id/id_Main_Guideline_1"
+        app:layout_constraintTop_toTopOf="@+id/id_Main_Guideline_3" />
+
+    <!-- The id_Main_Guideline_1 is used to limit the left space where items are being place inside -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id_Main_Guideline_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <!-- The id_Main_Guideline_2 is used to limit the right space where items are being place inside -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id_Main_Guideline_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <!-- The id_Main_Guideline_3 is used to limit the top space where items are being place inside -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id_Main_Guideline_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05"/>
+
+    <!-- The id_Main_Guideline_4 is used to limit the bottom space where items are being place inside -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id_Main_Guideline_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
 
     <!-- Will put the logo in here -->
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

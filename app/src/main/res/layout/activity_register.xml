@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
-    tools:ignore="HardcodedText"
-    tools:context=".controller.RegisterActivity">
+    tools:context=".controller.RegisterActivity"
+    tools:ignore="HardcodedText">
 
 
     <!--Place to fill information, for register-->
@@ -23,28 +24,28 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="111dp"
-        android:layout_marginLeft="111dp"
-        android:layout_marginTop="53dp"
-        android:layout_marginEnd="111dp"
-        android:layout_marginRight="111dp"
         android:gravity="center"
         android:text="@string/log_up"
         android:textColor="@color/loguptextcolor"
         android:textSize="@dimen/textsize_28"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/id_Register_Guideline_2"
+        app:layout_constraintStart_toStartOf="@+id/id_Register_Guideline_1"
+        app:layout_constraintTop_toTopOf="@+id/id_Register_Guideline_3"
+        app:layout_constraintVertical_bias="0.0"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="422dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:layout_marginLeft="51dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginRight="51dp"
-        android:layout_marginBottom="159dp"
         android:background="@drawable/rect"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/id_Register_Guideline_4"
+        app:layout_constraintEnd_toStartOf="@+id/id_Register_Guideline_2"
+        app:layout_constraintStart_toStartOf="@+id/id_Register_Guideline_1"
+        app:layout_constraintTop_toBottomOf="@+id/id_SignIn_TextView"
+        app:layout_constraintVertical_bias="0.0">
 
         <!-- Field to fill in user's fullname -->
         <com.google.android.material.textfield.TextInputLayout
@@ -169,12 +170,46 @@
             android:layout_marginHorizontal="@dimen/marign_58"
             android:layout_marginTop="@dimen/marign_32"
             android:background="@drawable/rectloginlogup"
-            android:text="@string/log_up"
+            android:layout_gravity="center"
             android:onClick="onButtonRegisterClick"
+            android:text="@string/log_up"
             android:textAllCaps="false"
             android:textColor="@color/thirdtext"
             android:textSize="@dimen/textsize_16"
             android:textStyle="bold" />
     </LinearLayout>
 
-</RelativeLayout>
+    <!-- The id_Register_Guideline_1 is used to limit the left space where all items are being place inside -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id_Register_Guideline_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <!-- The id_Register_Guideline_2 is used to limit the right space where items are being place inside -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id_Register_Guideline_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"/>
+
+    <!-- The id_Register_Guideline_3 is used to limit the top space where items are being place inside -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id_Register_Guideline_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.164" />
+
+    <!-- The id_Register_Guideline_4 is used to limit the bottom space where items are being place inside -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id_Register_Guideline_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
