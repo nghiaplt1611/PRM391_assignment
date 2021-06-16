@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Guess The Word</string>
     <string name="play_now">Play Now</string>
     <string name="log_in">Login</string>
@@ -38,4 +38,7 @@
     <string name="m">M</string>
     <string name="d">D</string>
     <string name="register">Click here to register</string>
+    <string name="highestScore">Highest Score \n 16516</string>
+    <string name="achievement">ACHIEVEMENT</string>
+    <string name="achi_title">Achievement Title</string>
 </resources>
