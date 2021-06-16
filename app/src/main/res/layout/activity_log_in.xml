@@ -27,9 +27,10 @@
         android:textColor="@color/loguptextcolor"
         android:textSize="@dimen/textsize_28"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toStartOf="@+id/id_Login_Guideline_2"
         app:layout_constraintStart_toStartOf="@+id/id_Login_Guideline_1"
-        app:layout_constraintTop_toTopOf="@id/id_Login_Guideline_3"
+        app:layout_constraintTop_toTopOf="@+id/id_Login_Guideline_3"
         tools:ignore="HardcodedText" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -80,12 +81,12 @@
         android:layout_height="301dp"
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
         android:background="@drawable/rect"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/id_Login_Guideline_4"
         app:layout_constraintEnd_toEndOf="@id/id_Login_Guideline_2"
         app:layout_constraintStart_toStartOf="@+id/id_Login_Guideline_1"
-        app:layout_constraintTop_toBottomOf="@+id/id_LogIn_TextView">
+        app:layout_constraintTop_toTopOf="@+id/id_Login_Guideline_3">
 
         <!-- Field to fill in user's username -->
         <com.google.android.material.textfield.TextInputLayout
