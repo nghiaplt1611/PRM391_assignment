@@ -65,7 +65,9 @@
                 android:inputType="text"
                 android:hint="@string/full_name"
                 android:textColor="@color/primarytext"
-                android:textSize="@dimen/textsize_18" />
+                android:textSize="@dimen/textsize_18"
+                android:maxLength="8"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
