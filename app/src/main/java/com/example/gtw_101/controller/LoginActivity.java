@@ -85,7 +85,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Intent intent = new Intent(this, LoginActivity.class);
         EditText txtUsername = (EditText) findViewById(R.id.txt_username_login);
         EditText txtPassword = (EditText) findViewById(R.id.txt_password_login);
         txtPassword.setText("");

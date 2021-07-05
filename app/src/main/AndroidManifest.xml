@@ -11,18 +11,27 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.GTW_101">
-        <activity android:name=".controller.RegisterActivity"  android:screenOrientation="portrait" />
-        <activity android:name=".controller.InGameActivity"    android:screenOrientation="portrait" />
-
-        <activity android:name=".controller.MainActivity">
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".controller.PlayerProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.InGameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter tools:ignore="ExtraText">
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".controller.LoginActivity" android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.LoginActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="preloaded_fonts"
