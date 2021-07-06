@@ -5,14 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.gtw_101.R;
 import com.example.gtw_101.model.Account;
 import com.example.gtw_101.utilities.AlertDialogBuilder;
 import com.example.gtw_101.utilities.MD5Hashing;
 import com.example.gtw_101.utilities.Validation;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -45,10 +50,25 @@ public class LoginActivity extends AppCompatActivity {
 
         } else {
             Account account = MainActivity.database.login(username.trim(), MD5Hashing.getMD5Hash(password));
-            if (account == null){
-                AlertDialogBuilder.showAlertDialog("Alert!!!", "Username or password is invalid!", this);
+            if (account != null){
+                //AlertDialogBuilder.showAlertDialog("Alert!!!", "Username or password is invalid!", this);
             }
             else {
+
+                /**
+                 * Test Login by Firebase
+                 */
+                Log.e("a", "AAA");
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                auth.signInWithEmailAndPassword(username, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+
+                    }
+                });
+
+                /////////////
+                /*
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("Login successfully! Have fun with the game!");
 
@@ -77,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                 AlertDialog alertDialog = builder.create();
 
                 // Show the Alert Dialog box
-                alertDialog.show();
+                alertDialog.show();*/
             }
         }
     }
