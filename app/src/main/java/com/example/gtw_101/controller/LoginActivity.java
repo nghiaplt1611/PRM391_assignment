@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onButtonLoginClick(View view) {
-        EditText txtUsername = (EditText) findViewById(R.id.txt_username_login);
+        EditText txtUsername = (EditText) findViewById(R.id.txt_email_login);
         EditText txtPassword = (EditText) findViewById(R.id.txt_password_login);
 
         String username = txtUsername.getText().toString();
@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        EditText txtUsername = (EditText) findViewById(R.id.txt_username_login);
+        EditText txtUsername = (EditText) findViewById(R.id.txt_email_login);
         EditText txtPassword = (EditText) findViewById(R.id.txt_password_login);
         txtPassword.setText("");
         txtUsername.setText("");
