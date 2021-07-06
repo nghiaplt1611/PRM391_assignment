@@ -20,12 +20,15 @@ public class Validation {
     /**
      * Create method checkNameFormat() to check the name format
      *
+     * Vietnamese, no others languages, no emojis
+     *
      * @param name storing name
      * @return the status of checking format
      */
     public static boolean checkNameFormat(String name){
+        String specialCharacters = "~`!@#$%^&*()-_=+[{]}\\|;:'\"<>,./?*";
         for (int i = 0; i < name.length(); i++){
-            if (!((name.charAt(i) >= 65 && name.charAt(i) <= 90) || (name.charAt(i) >= 97 && name.charAt(i) <= 122) || (name.charAt(i) == 32))){
+            if (specialCharacters.indexOf(name.charAt(i)) != -1 || (name.charAt(i) >= 48 && name.charAt(i) <= 57)){
                 return false;
             }
         }
@@ -85,5 +88,21 @@ public class Validation {
     public static boolean checkConfirmPassword(String password, String confirmPassword){
         return password.equals(confirmPassword);
     }
+
+    /**
+     * Create method checkRegisterFormat() to check all fields when registering new account
+     *
+     * @param name storing the name
+     * @param username storing the username
+     * @param password storing the password
+     * @param confirmPassword storing the confirm password
+     *
+     * @return the status of checking format
+     */
+    public static boolean checkRegisterFormat(String name, String username, String password, String confirmPassword){
+        return checkNameFormat(name) && checkUsernameFormat(username) && checkPasswordFormat(password) && checkConfirmPassword(password, confirmPassword);
+    }
+
+
 
 }

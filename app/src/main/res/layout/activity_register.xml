@@ -61,9 +61,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
+                android:maxLines="1"
+                android:inputType="text"
                 android:hint="@string/full_name"
                 android:textColor="@color/primarytext"
-                android:textSize="@dimen/textsize_18" />
+                android:textSize="@dimen/textsize_18"
+                android:maxLength="8"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,6 +93,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
+                android:maxLines="1"
+                android:inputType="text"
                 android:hint="@string/username"
                 android:textColor="@color/primarytext"
                 android:textSize="@dimen/textsize_18" />
@@ -162,7 +168,7 @@
             android:layout_marginTop="@dimen/marign_2"
             android:layout_marginRight="@dimen/marign_23"
             android:background="@color/linecolor" />
-        <!-- Button is used to add new account -->
+        <!-- Button is used to add new accountTest -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLogup"
             android:layout_width="@dimen/width_180"
