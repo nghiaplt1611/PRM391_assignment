@@ -18,6 +18,9 @@
             android:name=".controller.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".controller.InGameActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".controller.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter tools:ignore="ExtraText">
