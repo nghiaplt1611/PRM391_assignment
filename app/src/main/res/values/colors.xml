@@ -34,4 +34,7 @@
     <color name="linecolor">#d2d2d2</color>
     <color name="black">#000</color>
     <color name="blue">#ff0000ff</color>
+    <color name="ingame_top_background_color">#5277FF</color>
+    <color name="ingame_background_color">#FFAB43</color>
+    <color name="ingame_img_background_color">#5CB0FF</color>
 </resources>
