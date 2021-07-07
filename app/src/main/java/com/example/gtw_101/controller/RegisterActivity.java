@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -21,6 +22,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
@@ -66,11 +68,11 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             if (password.isEmpty()){
-                txtEmail.setError("Password cannot be empty! Please input!");
+                txtPassword.setError("Password cannot be empty! Please input!");
             }
 
             if (confirmPassword.isEmpty()){
-                txtEmail.setError("Confirm password cannot be empty! Please input!");
+                txtConfirmPassword.setError("Confirm password cannot be empty! Please input!");
             }
         }
         else if (!Validation.checkRegisterFormat(email, fullName, yearOfBirth, password, confirmPassword)){
@@ -89,21 +91,23 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             if (!Validation.checkStrongPassword(password)){
-                txtEmail.setError("Your password is not strong enough. It must contain at least 1 uppercase, 1 lowercase letter, 1 digit, and 1 special character.");
+                txtPassword.setError("Your password is not strong enough. It must contain at least 1 uppercase, 1 lowercase letter, 1 digit, and 1 special character.");
             }
 
             if (!Validation.checkConfirmPassword(password, confirmPassword)){
-                txtEmail.setError("The confirm password did not match.");
+                txtConfirmPassword.setError("The confirm password did not match.");
             }
 
         }
         else {
-
             auth = FirebaseAuth.getInstance();
-            auth.createUserWithEmailAndPassword(email, MD5Hashing.getMD5Hash(password)).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+            db = FirebaseFirestore.getInstance();
+            auth.createUserWithEmailAndPassword(email, MD5Hashing.getMD5Hash(password)).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+                    Log.e("AAA", "***");
                     if (task.isSuccessful()) {
+                        Log.e("AAA", "2");
                         Account account = new Account();
                         account.setEmail(email);
                         account.setFullName(fullName);
@@ -112,7 +116,8 @@ public class RegisterActivity extends AppCompatActivity {
                         db.collection("users").document().set(account).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                AlertDialogBuilder.showAlertDialog("Notification!", "", getApplicationContext());
+                                Log.e("AAA", "3");
+                                FirebaseUser user = auth.getCurrentUser();
 
                                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                                 builder.setMessage("Registered successfully! You will be returned to the login page.");
@@ -126,6 +131,11 @@ public class RegisterActivity extends AppCompatActivity {
                                         finish();
                                     }
                                 });
+                                // Create the Alert dialog
+                                AlertDialog alertDialog = builder.create();
+
+                                // Show the Alert Dialog box
+                                alertDialog.show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

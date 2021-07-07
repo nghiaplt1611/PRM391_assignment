@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             //currentUser.sendEmailVerification();
 //            mAuth.sendPasswordResetEmail(currentUser.getEmail());
 
-            playGameIntent(findViewById(android.R.id.content).getRootView());
+            //playGameIntent(findViewById(android.R.id.content).getRootView());
         }
     }
 

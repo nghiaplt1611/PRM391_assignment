@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.gtw_101.R;
 import com.example.gtw_101.utilities.AlertDialogBuilder;
+import com.example.gtw_101.utilities.MD5Hashing;
 import com.example.gtw_101.utilities.Validation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -51,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
 
             auth = FirebaseAuth.getInstance();
-            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            auth.signInWithEmailAndPassword(email, MD5Hashing.getMD5Hash(password)).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){

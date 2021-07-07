@@ -40,14 +40,11 @@ public class Validation {
 
 
     public static boolean checkYearOfBirth(String yearOfBirth){
-        if (CheckConversion.convertToInteger(yearOfBirth))
+        if (!CheckConversion.convertToInteger(yearOfBirth))
             return false;
 
         int birthYear = Integer.parseInt(yearOfBirth);
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        Log.e("AAA", String.valueOf(birthYear));
-        Log.e("AAA", String.valueOf(currentYear));
-
         return birthYear >= 1900 && birthYear <= currentYear;
     }
 
