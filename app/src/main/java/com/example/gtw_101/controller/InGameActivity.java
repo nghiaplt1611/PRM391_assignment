@@ -35,6 +35,8 @@ public class InGameActivity extends AppCompatActivity {
     private List<String> list1 = new ArrayList<>();
     private List<String> list2 = new ArrayList<>();
     Button newBtn;
+
+    //cai chua chay nay giai thich sau :v
     private int chuachay=998;
 
 
@@ -51,7 +53,6 @@ public class InGameActivity extends AppCompatActivity {
 
         //tao nut
         layout = findViewById(R.id.twoline_layout1);
-        System.out.println("gia tri cua do dai "+layout.getWidth());
         splitString();
         createButton();
     }
@@ -156,30 +157,30 @@ public class InGameActivity extends AppCompatActivity {
 
 
 
+    //tao nut moi
     public void addButton(String character, LinearLayout.LayoutParams layoutParams){
         newBtn = new Button(this);
         newBtn.setText(character);
         layout.addView(newBtn,layoutParams);
         Log.e("newButton","shit just got birth");
     }
+
+    //tinh toan khoan cach neu ko chia dong
     public void calForMiddle(){
         firstMar = chuachay-((maxButton*buttonWid)+(maxButton-1)*buttonSpace+buttonSpace);
         firstMar= firstMar/2;
         lastMar = firstMar;
-        Log.e("width",String.valueOf(layout.getWidth()));
-        Log.e("left",String.valueOf(firstMar));
-        Log.e("right",String.valueOf(lastMar));
     }
 
+    //tinh toan khoan cach neu chia dong
     public void calForTwoLine(int nums){
 
         firstMar = chuachay-((nums*buttonWid)+(nums-1)*buttonSpace+buttonSpace);
-        System.out.println("gia tri cua "+layout.getWidth());
-        System.out.println("left trc khi chia "+firstMar);
         firstMar= firstMar/2;
-        Log.e("left",String.valueOf(firstMar));
     }
 
+
+    //xoa het child cua linear layout
     public void removeButton(){
         layout = findViewById(R.id.oneline_lay1);
         layout.removeAllViews();
@@ -191,6 +192,7 @@ public class InGameActivity extends AppCompatActivity {
         layout.removeAllViews();
     }
 
+    //tach chu
     public void splitString(){
         word = "bao cao";
         maxButton = word.length();
@@ -208,6 +210,8 @@ public class InGameActivity extends AppCompatActivity {
         }
     }
 
+
+    //code tao nut
     public void createButton(){
         if (maxButton<=6){
 
