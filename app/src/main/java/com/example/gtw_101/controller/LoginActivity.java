@@ -3,12 +3,15 @@ package com.example.gtw_101.controller;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
 import com.example.gtw_101.R;
+import com.example.gtw_101.dao.UserDAO;
 import com.example.gtw_101.utilities.AlertDialogBuilder;
 import com.example.gtw_101.utilities.MD5Hashing;
 import com.example.gtw_101.utilities.Validation;
@@ -16,12 +19,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 
 public class LoginActivity extends AppCompatActivity {
-
-    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,10 @@ public class LoginActivity extends AppCompatActivity {
     public void registerIntent(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         this.startActivity(intent);
+    }
+
+    public void backToMainMenuIntent(View view){
+        this.finish();
     }
 
     public void onButtonLoginClick(View view) {
@@ -51,16 +55,59 @@ public class LoginActivity extends AppCompatActivity {
 
         } else {
 
-            auth = FirebaseAuth.getInstance();
-            auth.signInWithEmailAndPassword(email, MD5Hashing.getMD5Hash(password)).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            MainActivity.mAuth = FirebaseAuth.getInstance();
+            MainActivity.mAuth.signInWithEmailAndPassword(email, MD5Hashing.getMD5Hash(password)).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
-                        FirebaseUser user = auth.getCurrentUser();
-                        AlertDialogBuilder.showAlertDialog("Notification!", "Login successfully!", LoginActivity.this);
+                        MainActivity.user = MainActivity.mAuth.getCurrentUser();
+
+                        if (!UserDAO.checkEmailVerified()){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                            builder.setMessage("Please verify your email account before playing game!");
+                            builder.setTitle("Notification!");
+                            builder.setCancelable(false);
+                            builder.setPositiveButton("Verify now", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                    AlertDialogBuilder.showAlertDialog("Notification!", "A email message has been sent to your email account for verification. Please check it!", LoginActivity.this);
+                                    MainActivity.user.sendEmailVerification();
+                                }
+                            }).setNegativeButton("Later", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                            // Create the Alert dialog
+                            AlertDialog alertDialog = builder.create();
+
+                            // Show the Alert Dialog box
+                            alertDialog.show();
+                        }
+                        else {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                            builder.setMessage("Login successfully");
+                            builder.setTitle("Notification!");
+                            builder.setCancelable(false);
+                            builder.setPositiveButton("Main menu", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(LoginActivity.this, UserMainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
+                            // Create the Alert dialog
+                            AlertDialog alertDialog = builder.create();
+
+                            // Show the Alert Dialog box
+                            alertDialog.show();
+                        }
                     }
                     else {
-                        AlertDialogBuilder.showAlertDialog("Notification!", "Email or password is invalid!!!", LoginActivity.this);
+                        AlertDialogBuilder.showAlertDialog("Alert!", "Email or password is invalid!!!", LoginActivity.this);
                     }
                 }
             });
@@ -72,9 +119,23 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        EditText txtUsername = (EditText) findViewById(R.id.txt_email_login);
+        EditText txtEmail = (EditText) findViewById(R.id.txt_email_login);
         EditText txtPassword = (EditText) findViewById(R.id.txt_password_login);
         txtPassword.setText("");
-        txtUsername.setText("");
+        txtEmail.setText("");
+        txtEmail.setError(null);
+        txtPassword.setError(null);
+
     }
+
+    public void hideEmailError(View view){
+        EditText txtEmail = (EditText) findViewById(R.id.txt_email_login);
+        txtEmail.setError(null);
+    }
+
+    public void hidePasswordError(View view){
+        EditText txtPassword = (EditText) findViewById(R.id.txt_password_login);
+        txtPassword.setError(null);
+    }
+
 }

@@ -3,6 +3,7 @@ package com.example.gtw_101.model;
 import java.io.Serializable;
 
 public class Account implements Serializable {
+    private String id;
     private String email;
     private String fullName;
     private int yearOfBirth;
@@ -13,6 +14,14 @@ public class Account implements Serializable {
 //    private String achievements;
 
     public Account() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {

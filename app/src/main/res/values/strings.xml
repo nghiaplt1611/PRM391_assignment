@@ -51,4 +51,7 @@
     <string name="achievement" translatable="false">Achievement</string>
     <string name="achi_title" translatable="false">Achievement Title</string>
     <string name="profile" translatable="false">Profile</string>
+    <string name="update_profile">Update profile</string>
+    <string name="change_password">Change password</string>
+    <string name="logout">Logout</string>
 </resources>

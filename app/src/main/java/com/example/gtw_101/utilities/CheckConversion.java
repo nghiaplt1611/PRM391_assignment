@@ -1,6 +1,5 @@
 package com.example.gtw_101.utilities;
 
-import android.util.Log;
 
 public class CheckConversion {
 
