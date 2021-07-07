@@ -1,5 +1,10 @@
 package com.example.gtw_101.utilities;
 
+import android.util.Log;
+
+import java.util.Calendar;
+import java.util.regex.Pattern;
+
 public class Validation {
 
     /**
@@ -17,66 +22,58 @@ public class Validation {
         return false;
     }
 
-    /**
-     * Create method checkNameFormat() to check the name format
-     *
-     * Vietnamese, no others languages, no emojis
-     *
-     * @param name storing name
-     * @return the status of checking format
-     */
-    public static boolean checkNameFormat(String name){
+
+    public static boolean checkFullNameFormat(String fullName){
         String specialCharacters = "~`!@#$%^&*()-_=+[{]}\\|;:'\"<>,./?*";
-        for (int i = 0; i < name.length(); i++){
-            if (specialCharacters.indexOf(name.charAt(i)) != -1 || (name.charAt(i) >= 48 && name.charAt(i) <= 57)){
+        for (int i = 0; i < fullName.length(); i++){
+            if (specialCharacters.indexOf(fullName.charAt(i)) != -1 || (fullName.charAt(i) >= 48 && fullName.charAt(i) <= 57)){
                 return false;
             }
         }
         return true;
     }
 
-    /**
-     * Create method checkUsernameFormat() to check the username format
-     *
-     * @param username storing the username
-     * @return the status of checking format
-     */
-    public static boolean checkUsernameFormat(String username){
-        if (username.length() < 6){
-            return false;
-        }
-
-        for (int i = 0; i < username.length(); i++){
-            if (username.charAt(i) == 32){
-                return false;
-            }
-        }
-        return true;
+    public static boolean checkEmailFormat(String email){
+        final String emailRegex = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
+        return Pattern.matches(emailRegex, email);
     }
 
-    /**
-     * Create method checkPasswordFormat() to check the password format
-     *
-     * @param password storing the password
-     * @return the status of checking format
-     */
-    public static boolean checkPasswordFormat(String password){
-        if (password.length() < 6){
+
+    public static boolean checkYearOfBirth(String yearOfBirth){
+        if (CheckConversion.convertToInteger(yearOfBirth))
             return false;
-        }
-        boolean checkLetter = false;
-        boolean checkNumber = false;
+
+        int birthYear = Integer.parseInt(yearOfBirth);
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        Log.e("AAA", String.valueOf(birthYear));
+        Log.e("AAA", String.valueOf(currentYear));
+
+        return birthYear >= 1900 && birthYear <= currentYear;
+    }
+
+    public static boolean checkStrongPassword(String password){
+        boolean checkDigit = false;
+        boolean checkLowercase = false;
+        boolean checkUppercase = false;
+        boolean checkSpecialCharacter = false;
+
+        if (password.length() < 8)
+            return false;
 
         for (int i = 0; i < password.length(); i++){
-            if ((password.charAt(i) >= 65 && password.charAt(i) <= 90) || (password.charAt(i) >= 97 && password.charAt(i) <= 122)){
-                checkLetter = true;
-            }
-            if (password.charAt(i) >= 48 && password.charAt(i) <= 57){
-                checkNumber = true;
-            }
+            char c = password.charAt(i);
+            if (Character.isDigit(c))
+                checkDigit = true;
+            else if (Character.isLowerCase(c))
+                checkLowercase = true;
+            else if (Character.isUpperCase(c))
+                checkUppercase = true;
+            else if (!Character.isLetterOrDigit(c) && c != 32)
+                checkSpecialCharacter = true;
         }
-        return checkLetter && checkNumber;
+        return checkDigit && checkLowercase && checkUppercase && checkSpecialCharacter;
     }
+
 
     /**
      * Create method checkConfirmPassword() to check the similarity of password and confirm password
@@ -89,20 +86,9 @@ public class Validation {
         return password.equals(confirmPassword);
     }
 
-    /**
-     * Create method checkRegisterFormat() to check all fields when registering new account
-     *
-     * @param name storing the name
-     * @param username storing the username
-     * @param password storing the password
-     * @param confirmPassword storing the confirm password
-     *
-     * @return the status of checking format
-     */
-    public static boolean checkRegisterFormat(String name, String username, String password, String confirmPassword){
-        return checkNameFormat(name) && checkUsernameFormat(username) && checkPasswordFormat(password) && checkConfirmPassword(password, confirmPassword);
+
+    public static boolean checkRegisterFormat(String email, String fullName, String yearOfBirth, String password, String confirmPassword){
+        return checkEmailFormat(email) && checkFullNameFormat(fullName) && checkYearOfBirth(yearOfBirth) && checkStrongPassword(password) && checkConfirmPassword(password, confirmPassword);
     }
-
-
 
 }

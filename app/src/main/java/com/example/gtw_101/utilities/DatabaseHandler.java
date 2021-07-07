@@ -6,19 +6,21 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.gtw_101.model.Account;
+import com.example.gtw_101.model.Guest;
 
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "GuessTheWord";
     private static final int DATABASE_VERSION = 1;
-    private static final String TABLE_NAME = "Account_Management";
+    private static final String TABLE_NAME = "Guest_Management";
 
-    private static final String KEY_ID = "id";
-    private static final String KEY_FULL_NAME = "full_name";
-    private static final String KEY_USERNAME = "username";
-    private static final String KEY_PASSWORD = "password";
+    private static final String KEY_LEVEL = "level";
+    private static final String KEY_SCORE = "score";
+    private static final String KEY_ANSWER_OF_QUESTION = "answer_of_question";
+    private static final String KEY_NUM_OF_LETTER_SHOWN = "num_of_letter_shown";
+    private static final String KEY_ACHIEVEMENT = "achievement";
+
 
 
     /**
@@ -37,9 +39,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createLecturerTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s TEXT, %s TEXT)",
-                TABLE_NAME, KEY_ID, KEY_FULL_NAME, KEY_USERNAME, KEY_PASSWORD);
-        db.execSQL(createLecturerTable);
+        String createGuestTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s INTEGER, %s TEXT, %s INTEGER, %s TEXT)",
+                TABLE_NAME, KEY_LEVEL, KEY_SCORE, KEY_ANSWER_OF_QUESTION, KEY_NUM_OF_LETTER_SHOWN, KEY_ACHIEVEMENT);
+        db.execSQL(createGuestTable);
     }
 
     /**
@@ -58,11 +60,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     /**
-     * Create method addNewAccount() to add new account
+     * Create method addGuestInfo() to add the guest's information into the SQLite database
      *
-     * @param account storing account
+     * @param guest storing guest's information
      */
-    public void addNewAccount(Account account) {
+    public void addGuestInfo(Guest guest) {
 
         // Notify the database to be read and written
         SQLiteDatabase db = this.getWritableDatabase();
@@ -71,9 +73,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         // Add data to the value by providing the attribute and its value
-        values.put(KEY_FULL_NAME, account.getFullName());
-        values.put(KEY_USERNAME, account.getUsername());
-        values.put(KEY_PASSWORD, MD5Hashing.getMD5Hash(account.getPassword()));
+        values.put(KEY_LEVEL, guest.getLevel());
+        values.put(KEY_SCORE, guest.getScore());
+        values.put(KEY_ANSWER_OF_QUESTION, guest.getAnswerOfQuestion());
+        values.put(KEY_NUM_OF_LETTER_SHOWN, guest.getNumOfLetterShown());
+        values.put(KEY_ACHIEVEMENT, guest.getAchievements());
 
         // Call the insert method from the database
         db.insert(TABLE_NAME, null, values);
@@ -81,34 +85,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
-    /**
-     * Create method checkExistedAccount() to check for existed account
-     *
-     * @param username storing the username needed to be checked
-     * @return true if account existed, else false
-     */
-    public boolean checkExistedAccount(String username) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, null, KEY_USERNAME + " = ?", new String[]{String.valueOf(username)}, null, null, null);
-        return cursor.moveToFirst() && cursor.getCount() > 0;
+    public void updateGuestInfo(Guest updatedGuest){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_LEVEL, updatedGuest.getLevel());
+        values.put(KEY_SCORE, updatedGuest.getScore());
+        values.put(KEY_ANSWER_OF_QUESTION, updatedGuest.getAnswerOfQuestion());
+        values.put(KEY_NUM_OF_LETTER_SHOWN, updatedGuest.getNumOfLetterShown());
+        values.put(KEY_ACHIEVEMENT, updatedGuest.getAchievements());
+
+        db.update(TABLE_NAME, values, null, null);
+        db.close();
     }
 
-    /**
-     * Create method login() to login to login into the game
-     *
-     * @param username storing username
-     * @param password storing password
-     * @return the account if login success, else return null
-     */
-    public Account login(String username, String password){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_NAME, null, KEY_USERNAME + " = ? AND " + KEY_PASSWORD + " = ?", new String[]{username, MD5Hashing.getMD5Hash(password)}, null, null, null);
-        if (cursor.moveToFirst() && cursor.getCount() > 0){
-            Account account = new Account(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
-            return account;
-        }
-        return null;
+    public Guest getGuestInfo(){
+        String query = "SELECT * FROM " + TABLE_NAME;
 
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        Guest guest = new Guest(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getInt(3), cursor.getString(4));
+        return guest;
     }
 
 }

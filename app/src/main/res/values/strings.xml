@@ -47,4 +47,5 @@
     <string name="achievement" translatable="false">ACHIEVEMENT</string>
     <string name="achi_title" translatable="false">Achievement Title</string>
     <string name="profile" translatable="false">Player\'s profile</string>
+    <string name="username">Username</string>
 </resources>

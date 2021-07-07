@@ -29,8 +29,8 @@ public class InGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_game);
         getSupportActionBar().hide();
-        onLetterChosenClick();
-        returnChosenLetter();
+        //onLetterChosenClick();
+        //returnChosenLetter();
     }
 
     public void returnToMainScreen(View view){

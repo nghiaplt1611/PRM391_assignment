@@ -24,12 +24,11 @@ public class Test {
 
         HashMap<String, Object> user = new HashMap<>();
 
-        Account account = new Account(1, "Nghia", "hahaha", "12345");
+        //Account account = new Account(1, "Nghia", "hahaha", "12345");
 
         user.put("first", "Adrrrrrra");
         user.put("last", "Lovelace");
         user.put("born", 1815);
-        user.put("account", account);
 
         Log.e("aaa", "aaaaaaaaaaaaaaaaaaaaaaaaa");
         DocumentReference documentReference = db.collection("users").document();

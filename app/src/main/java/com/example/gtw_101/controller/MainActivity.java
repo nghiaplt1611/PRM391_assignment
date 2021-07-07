@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static DatabaseHandler database;
+    //public static DatabaseHandler database;
     private FirebaseAuth mAuth;
 
     /**
@@ -28,12 +28,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        database = new DatabaseHandler(this);
+        //database = new DatabaseHandler(this);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
         //mAuth.signOut();
-        Test.test();
+        //Test.test();
     }
 
     @Override

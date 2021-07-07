@@ -4,11 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.gtw_101.R;
 import com.example.gtw_101.model.Account;
@@ -16,11 +16,19 @@ import com.example.gtw_101.utilities.AlertDialogBuilder;
 import com.example.gtw_101.utilities.MD5Hashing;
 import com.example.gtw_101.utilities.Validation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Calendar;
 
 public class RegisterActivity extends AppCompatActivity {
+
+    FirebaseAuth auth;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,110 +38,105 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void onButtonRegisterClick(View view) {
-        EditText txtFullName = (EditText) findViewById(R.id.txt_full_name);
-        EditText txtUsername = (EditText) findViewById(R.id.txt_username);
-        EditText txtPassword = (EditText) findViewById(R.id.txt_password);
-        EditText txtConfirmPassword = (EditText) findViewById(R.id.txt_confirm_password);
 
+        EditText txtEmail = findViewById(R.id.txt_email_register);
+        EditText txtFullName = findViewById(R.id.txt_fullname_register);
+        EditText txtYearOfBirth = findViewById(R.id.txt_yearofbirth_register);
+        EditText txtPassword = findViewById(R.id.txt_password_register);
+        EditText txtConfirmPassword = findViewById(R.id.txt_confirm_password_register);
 
+        String email = txtEmail.getText().toString();
         String fullName = txtFullName.getText().toString();
-        String username = txtUsername.getText().toString();
+        String yearOfBirth = txtYearOfBirth.getText().toString();
         String password = txtPassword.getText().toString();
         String confirmPassword = txtConfirmPassword.getText().toString();
 
-        if (Validation.checkNullData(new String[]{fullName, username, password, confirmPassword})){
+        if (Validation.checkNullData(new String[]{email, fullName, yearOfBirth, password, confirmPassword})){
+
+            if (email.isEmpty()){
+                txtEmail.setError("Email cannot be empty! Please input!");
+            }
 
             if (fullName.isEmpty()){
                 txtFullName.setError("Full name cannot be empty! Please input!");
             }
 
-            if (username.isEmpty()){
-                txtUsername.setError("Username cannot be empty! Please input!");
+            if (yearOfBirth.isEmpty()){
+                txtYearOfBirth.setError("Year of birth cannot be empty! Please input!");
             }
 
             if (password.isEmpty()){
-                txtPassword.setError("Password cannot be empty! Please input!");
+                txtEmail.setError("Password cannot be empty! Please input!");
             }
 
             if (confirmPassword.isEmpty()){
-                txtConfirmPassword.setError("Confirm password cannot be empty! Please input!");
+                txtEmail.setError("Confirm password cannot be empty! Please input!");
+            }
+        }
+        else if (!Validation.checkRegisterFormat(email, fullName, yearOfBirth, password, confirmPassword)){
+
+            if (!Validation.checkEmailFormat(email)){
+                txtEmail.setError("Email must be in correct format. (Ex: thanh@gmail.com)");
+            }
+
+            if (!Validation.checkFullNameFormat(fullName)){
+                txtFullName.setError("Full name must be in correct format. (Ex: Tri Thanh)");
+            }
+
+            if (!Validation.checkYearOfBirth(yearOfBirth)){
+                int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+                txtYearOfBirth.setError("Year of birth must be a positive number between 1900 and " + currentYear);
+            }
+
+            if (!Validation.checkStrongPassword(password)){
+                txtEmail.setError("Your password is not strong enough. It must contain at least 1 uppercase, 1 lowercase letter, 1 digit, and 1 special character.");
+            }
+
+            if (!Validation.checkConfirmPassword(password, confirmPassword)){
+                txtEmail.setError("The confirm password did not match.");
             }
 
         }
-        if (!(Validation.checkNameFormat(fullName)
-                && Validation.checkUsernameFormat(username)
-                && Validation.checkPasswordFormat(password)
-                && Validation.checkConfirmPassword(password, confirmPassword))) {
-            if (!Validation.checkNameFormat(fullName)) {
-                txtFullName.setError("Wrong format! Full name can only contain lowercase, uppercase (non-ascii characters) letters and space.");
-            }
+        else {
 
-            if (!Validation.checkUsernameFormat(username)) {
-                txtUsername.setError("Wrong format! Username must have at least 6 characters (non-ascii characters) and cannot contain space.");
-            }
-
-            if (!Validation.checkPasswordFormat(password)) {
-                txtPassword.setError("Wrong format! Password must have at least 6 characters, including letters (non-ascii characters) and numbers.");
-            }
-
-            if (!Validation.checkConfirmPassword(password, confirmPassword)) {
-                txtConfirmPassword.setError("The password and the confirm password did not match!");
-            }
-        } else if (MainActivity.database.checkExistedAccount(username)){
-            AlertDialogBuilder.showAlertDialog("Alert!!!", "This username has already existed in the database!\nPlease consider changing another one.", this);
-        } else {
-            Account account = new Account();
-            account.setFullName(fullName.trim());
-            account.setUsername(username.trim());
-            account.setPassword(MD5Hashing.getMD5Hash(password));
-            MainActivity.database.addNewAccount(account);
-
-
-            ////////////////////////////////////////
-            /**
-             * Test sign up in firebase
-             */
-
-            String email = username;
-            FirebaseAuth auth = FirebaseAuth.getInstance();
-            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+            auth = FirebaseAuth.getInstance();
+            auth.createUserWithEmailAndPassword(email, MD5Hashing.getMD5Hash(password)).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Account account = new Account();
+                        account.setEmail(email);
+                        account.setFullName(fullName);
+                        account.setYearOfBirth(Integer.parseInt(yearOfBirth));
 
+                        db.collection("users").document().set(account).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                AlertDialogBuilder.showAlertDialog("Notification!", "", getApplicationContext());
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                builder.setMessage("Registered successfully! You will be returned to the login page.");
+                                builder.setTitle("Notification!");
+                                builder.setCancelable(false);
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                AlertDialogBuilder.showAlertDialog("Notification!", "Error occurred while registering!", RegisterActivity.this);
+                            }
+                        });
+
+                    }
                 }
             });
-
-
-            ////////////////////////////////////////
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("The account has been registered successfully.\nYou will be redirected to login page.");
-
-            // Set Alert Title
-            builder.setTitle("Notification!");
-
-            // Set Cancelable false
-            // for when the user clicks on the outside
-            // the Dialog Box then it will remain show
-            builder.setCancelable(false);
-
-            // Set the positive button with yes name
-            // OnClickListener method is use of
-            // DialogInterface interface.
-
-            builder.setPositiveButton(
-                    "OK",
-                    (dialog, which) -> {
-                        dialog.cancel();
-                        this.finish();
-                    });
-
-            // Create the Alert dialog
-            AlertDialog alertDialog = builder.create();
-
-            // Show the Alert Dialog box
-            alertDialog.show();
-
         }
     }
 
