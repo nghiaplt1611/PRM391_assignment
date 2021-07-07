@@ -38,8 +38,8 @@
     <string name="m" translatable="false">M</string>
     <string name="d" translatable="false">D</string>
     <string name="register" translatable="false">Click here to register</string>
-    <string name="highestScore" translatable="false">Highest Score\n16516</string>
-    <string name="achievement" translatable="false">ACHIEVEMENT</string>
-    <string name="achi_title" translatable="false">Achievement Title</string>
-    <string name="profile" translatable="false">Player\'s profile</string>
+    <string name="highestScore" translatable="false">16516</string>
+    <string name="changepass" translatable="false">Change password</string>
+    <string name="updateprofile" translatable="false">Update profile</string>
+    <string name="logout" translatable="false">Log out</string>
 </resources>
