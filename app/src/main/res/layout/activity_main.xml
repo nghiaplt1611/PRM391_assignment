@@ -4,65 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_maincolor"
-    android:fadingEdge="horizontal">
+    android:background="@color/ingame_background_color">
 
     <!-- User will play the game as Guest -->
 
-    <!-- User will be direted to activity_log_in layout -->
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_login_home"
-        android:layout_width="248dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/rectmenu"
-        android:onClick="loginIntent"
-        android:text="@string/log_in"
-        android:textSize="@dimen/textsize_19"
-        app:layout_constraintBottom_toTopOf="@+id/id_Main_Guideline_4"
+    <ImageView
+        android:id="@+id/id_img_logo"
+        android:layout_width="360dp"
+        android:layout_height="270dp"
+        android:src="@drawable/logowithbackground"
+        app:layout_constraintBottom_toTopOf="@+id/btn_play_now"
         app:layout_constraintEnd_toStartOf="@+id/id_Main_Guideline_2"
+        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="@+id/id_Main_Guideline_1"
-        app:layout_constraintTop_toBottomOf="@+id/btn_play_now"
-        app:layout_constraintVertical_bias="0.212" />
+        app:layout_constraintTop_toTopOf="@+id/id_Main_Guideline_3"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
 
+    <!-- btn_play_now is used to direct user to activity_in_game layout -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_play_now"
-        android:layout_width="248dp"
+        android:layout_width="@dimen/dimen_180"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/rectmenu"
         android:onClick="playGameIntent"
         android:text="@string/play_now"
-        android:textSize="@dimen/textsize_19"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_24"
+        app:layout_constraintBottom_toTopOf="@+id/id_lbl_or"
         app:layout_constraintEnd_toStartOf="@+id/id_Main_Guideline_2"
-        app:layout_constraintStart_toStartOf="@+id/id_Main_Guideline_1"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/id_Main_Guideline_1" />
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="285dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/logo_temp"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/id_lbl_or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
+        android:text="@string/onlyor"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_26"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btn_save_progress"
         app:layout_constraintEnd_toStartOf="@+id/id_Main_Guideline_2"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="@+id/id_Main_Guideline_1"
-        app:layout_constraintTop_toTopOf="@+id/id_Main_Guideline_3" />
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <!-- The btn_save_progress is used to direct user to the activity_log_in layout -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_save_progress"
+        android:layout_width="@dimen/dimen_300"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="112dp"
+        android:background="@drawable/rectmenu2"
+        android:gravity="center"
+        android:onClick="loginIntent"
+        android:text="@string/save_progress"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_24"
+        app:layout_constraintBottom_toTopOf="@+id/id_Main_Guideline_4"
+        app:layout_constraintEnd_toStartOf="@+id/id_Main_Guideline_2"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="@+id/id_Main_Guideline_1" />
 
     <!-- The id_Main_Guideline_1 is used to limit the left space where items are being place inside -->
     <androidx.constraintlayout.widget.Guideline
@@ -70,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.03" />
 
     <!-- The id_Main_Guideline_2 is used to limit the right space where items are being place inside -->
     <androidx.constraintlayout.widget.Guideline
@@ -78,7 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.97" />
 
     <!-- The id_Main_Guideline_3 is used to limit the top space where items are being place inside -->
     <androidx.constraintlayout.widget.Guideline
@@ -86,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05"/>
+        app:layout_constraintGuide_percent="0.03"/>
 
     <!-- The id_Main_Guideline_4 is used to limit the bottom space where items are being place inside -->
     <androidx.constraintlayout.widget.Guideline
@@ -94,19 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.95" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="248dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:onClick="profileIntent"
-        android:text="@string/profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/btn_login_home" />
-
-
-    <!-- Will put the logo in here -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

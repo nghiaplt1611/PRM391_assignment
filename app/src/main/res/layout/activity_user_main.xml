@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ingame_background_color"
+    tools:context=".controller.UserMainActivity">
+
+    <!-- User will play the game as Guest -->
+
+    <ImageView
+        android:id="@+id/id_img_logo"
+        android:layout_width="360dp"
+        android:layout_height="270dp"
+        android:src="@drawable/logowithbackground"
+        app:layout_constraintBottom_toTopOf="@+id/btn_achievement"
+        app:layout_constraintEnd_toStartOf="@+id/id_User_Main_Guideline_2"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="@+id/id_User_Main_Guideline_1"
+        app:layout_constraintTop_toTopOf="@+id/id_User_Main_Guideline_3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!-- btn_achievement is used to direct user to achievement fragment -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_achievement"
+        android:layout_width="@dimen/dimen_180"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/rectmenu"
+        android:text="@string/achievement"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_24"
+        app:layout_constraintBottom_toTopOf="@+id/btn_play"
+        app:layout_constraintEnd_toStartOf="@+id/id_User_Main_Guideline_2"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/id_User_Main_Guideline_1" />
+
+    <!-- btn_play is used to direct user to activity_in_game layout -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_play"
+        android:layout_width="@dimen/dimen_180"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/rectmenu"
+        android:text="@string/play"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_24"
+        app:layout_constraintBottom_toTopOf="@+id/btn_profile"
+        app:layout_constraintEnd_toStartOf="@+id/id_User_Main_Guideline_2"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/id_User_Main_Guideline_1" />
+
+    <!-- btn_profile is used to direct user to activity_player_profile layout -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_profile"
+        android:layout_width="@dimen/dimen_180"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/rectmenu"
+        android:text="@string/profile"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_24"
+        app:layout_constraintBottom_toTopOf="@+id/btn_leaderboard"
+        app:layout_constraintEnd_toStartOf="@+id/id_User_Main_Guideline_2"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/id_User_Main_Guideline_1" />
+
+    <!-- btn_leader is used to direct user to activity_leaderboard layout -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_leaderboard"
+        android:layout_width="@dimen/dimen_180"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/rectmenu"
+        android:text="@string/leaderboard"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_24"
+        app:layout_constraintBottom_toTopOf="@+id/id_User_Main_Guideline_4"
+        app:layout_constraintEnd_toStartOf="@+id/id_User_Main_Guideline_2"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/id_User_Main_Guideline_1" />
+
+    <!-- The id_User_Main_Guideline_1 is used to limit the right space where items are being place inside -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id_User_Main_Guideline_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.03" />
+
+    <!-- The id_User_Main_Guideline_2 is used to limit the right space where items are being place inside -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id_User_Main_Guideline_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.97" />
+
+    <!-- The id_User_Main_Guideline_3 is used to limit the top space where items are being place inside -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id_User_Main_Guideline_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.03"/>
+
+    <!-- The id_User_Main_Guideline_4 is used to limit the bottom space where items are being place inside -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/id_User_Main_Guideline_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

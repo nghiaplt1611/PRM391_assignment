@@ -51,13 +51,4 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
-    /**
-     * Create method profileIntent to change to player profile intent
-     *
-     * @param view storing view
-     */
-    public void profileIntent(View view){
-        Intent intent = new Intent(this, PlayerProfileActivity.class);
-        this.startActivity(intent);
-    }
 }

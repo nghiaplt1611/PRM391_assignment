@@ -11,7 +11,8 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.GTW_101">
-        <activity android:name=".controller.AchievementActivity"></activity>
+        <activity android:name=".controller.UserMainActivity"></activity>
+        <activity android:name=".controller.AchievementActivity" />
         <activity
             android:name=".controller.PlayerProfileActivity"
             android:screenOrientation="portrait" />
@@ -29,11 +30,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".controller.LoginActivity"
             android:screenOrientation="portrait" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

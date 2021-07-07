@@ -1,7 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">Guess The Word</string>
     <string name="play_now" translatable="false">Play Now</string>
+    <string name="play" translatable="false">Play</string>
+    <string name="save_progress" translatable="false">Save Your Progress</string>
     <string name="log_in" translatable="false">Log in to your GDW account</string>
+    <string name="leaderboard" translatable="false">Leaderboard</string>
+    <string name="onlyor" translatable="false">OR</string>
     <string name="log_in_button" translatable="false">Login</string>
     <string name="set_password" translatable="false">Set Password</string>
     <string name="full_name" translatable="false">Full Name</string>
@@ -44,7 +48,7 @@
     <string name="register_login" translatable="false">NOT HAVE A GDW ACCOUNT? REGISTER NOW</string>
     <string name="login_register" translatable="false">ALREADY HAVE AN ACCOUNT? LOGIN NOW</string>
     <string name="highestScore" translatable="false">Highest Score\n16516</string>
-    <string name="achievement" translatable="false">ACHIEVEMENT</string>
+    <string name="achievement" translatable="false">Achievement</string>
     <string name="achi_title" translatable="false">Achievement Title</string>
-    <string name="profile" translatable="false">Player\'s profile</string>
+    <string name="profile" translatable="false">Profile</string>
 </resources>

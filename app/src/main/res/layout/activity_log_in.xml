@@ -79,11 +79,11 @@
                 android:id="@+id/txt_email_login"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:background="@drawable/textfield_background"
                 android:hint="@string/email"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textColor="@color/blue"
+                android:textColor="@color/black"
                 android:textSize="@dimen/textsize_18"
                 tools:ignore="ContentDescription" />
 
@@ -113,11 +113,11 @@
                 android:id="@+id/txt_password_login"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:background="@drawable/textfield_background"
                 android:contentDescription="For more visit www.materialuiux.com"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:textColor="@color/primarytext"
+                android:textColor="@color/black"
                 android:textSize="@dimen/textsize_18"
                 tools:ignore="ContentDescription" />
 
