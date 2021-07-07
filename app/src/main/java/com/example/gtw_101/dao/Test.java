@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.gtw_101.model.Account;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -23,6 +24,8 @@ public class Test {
 
         HashMap<String, Object> user = new HashMap<>();
 
+        //Account account = new Account(1, "Nghia", "hahaha", "12345");
+
         user.put("first", "Adrrrrrra");
         user.put("last", "Lovelace");
         user.put("born", 1815);
@@ -41,6 +44,8 @@ public class Test {
             }
         });
 
+
+
         db.collection("users")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -49,11 +54,9 @@ public class Test {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Map<String, Object> a = document.getData();
-                                System.out.println(a.get("born"));
-                            }
-                        } else {
 
-                        }
+                            }
+                        } 
                     }
                 });
     }

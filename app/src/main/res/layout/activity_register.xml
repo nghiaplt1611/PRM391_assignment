@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     tools:context=".controller.RegisterActivity"
+    android:background="@color/ingame_background_color"
     tools:ignore="HardcodedText">
 
 
@@ -13,175 +14,161 @@
 
     <!-- Layout to wrap all the fill -->
 
-    <!-- Back button is used to back to the log in screen -->
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/id_SignIn_TextView"
-        android:layout_width="189dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:gravity="center"
-        android:text="@string/log_up"
-        android:textColor="@color/loguptextcolor"
-        android:textSize="@dimen/textsize_28"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/id_Register_Guideline_2"
-        app:layout_constraintStart_toStartOf="@+id/id_Register_Guideline_1"
-        app:layout_constraintTop_toTopOf="@+id/id_Register_Guideline_3"
-        app:layout_constraintVertical_bias="0.0"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="422dp"
+        android:layout_width="@dimen/dimen_360"
+        android:layout_height="@dimen/dimen_650"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:background="@drawable/rect"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/id_Register_Guideline_4"
         app:layout_constraintEnd_toStartOf="@+id/id_Register_Guideline_2"
+        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="@+id/id_Register_Guideline_1"
-        app:layout_constraintTop_toBottomOf="@+id/id_SignIn_TextView"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/id_Register_Guideline_3"
+        app:layout_constraintVertical_bias="0.391">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id_SignIn_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/marign_33"
+            android:gravity="center"
+            android:text="@string/register_register"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_24"
+            android:textStyle="bold" />
+
+        <!-- Field is used to direct to activity_log_in layout when click on it -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/lbl_login_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/marign_6"
+            android:text="@string/login_register"
+            android:textColor="@color/clickable_text"
+            android:textSize="@dimen/textsize_14"
+            android:textStyle="bold" />
+
+        <!-- Field to fill in user's email -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:layout_marginLeft="@dimen/marign_23"
+            android:layout_marginTop="@dimen/marign_27"
+            android:layout_marginRight="@dimen/marign_23">
+            <!-- Fill in here -->
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/txt_email_register"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:hint="@string/email"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize_18" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Field to fill in user's fullname -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="63dp"
             android:layout_marginLeft="@dimen/marign_23"
-            android:layout_marginTop="@dimen/marign_33"
-            android:layout_marginRight="@dimen/marign_23"
-            android:background="@null">
+            android:layout_marginTop="@dimen/marign_24"
+            android:layout_marginRight="@dimen/marign_23">
             <!-- Fill in here -->
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/txt_full_name"
+                android:id="@+id/txt_fullname_register"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null"
-                android:maxLines="1"
-                android:inputType="text"
+                android:background="@color/white"
                 android:hint="@string/full_name"
-                android:textColor="@color/primarytext"
-                android:textSize="@dimen/textsize_18"
-                android:maxLength="8"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <View
-            android:id="@+id/id_view_1"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="@dimen/marign_23"
-            android:layout_marginTop="@dimen/marign_2"
-            android:layout_marginRight="@dimen/marign_23"
-            android:background="@color/linecolor" />
-        <!-- Field to fill in user's username -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="63dp"
-            android:layout_marginLeft="@dimen/marign_23"
-            android:layout_marginTop="@dimen/marign_4"
-            android:layout_marginRight="@dimen/marign_23"
-            android:background="@null">
-            <!-- Fill in here -->
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/txt_username"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:maxLines="1"
                 android:inputType="text"
-                android:hint="@string/username"
-                android:textColor="@color/primarytext"
+                android:maxLines="1"
+                android:textColor="@color/black"
                 android:textSize="@dimen/textsize_18" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <View
-            android:id="@+id/id_view_2"
+        <!-- Field to fill in user's year of birth -->
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="63dp"
             android:layout_marginLeft="@dimen/marign_23"
-            android:layout_marginTop="@dimen/marign_2"
-            android:layout_marginRight="@dimen/marign_23"
-            android:background="@color/linecolor" />
+            android:layout_marginTop="@dimen/marign_24"
+            android:layout_marginRight="@dimen/marign_23">
+            <!-- Fill in here -->
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/txt_yearofbirth_register"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:hint="@string/yob"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize_18" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Field to fill in user's password -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="63dp"
             android:layout_marginLeft="@dimen/marign_23"
-            android:layout_marginTop="@dimen/marign_4"
-            android:layout_marginRight="@dimen/marign_23"
-            android:background="@null">
+            android:layout_marginTop="@dimen/marign_24"
+            android:layout_marginRight="@dimen/marign_23">
             <!-- Fill in here -->
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/txt_password"
+                android:id="@+id/txt_password_register"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null"
+                android:background="@color/white"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:textColor="@color/primarytext"
+                android:textColor="@color/black"
                 android:textSize="@dimen/textsize_18" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <View
-            android:id="@+id/id_view_3"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="@dimen/marign_23"
-            android:layout_marginTop="@dimen/marign_2"
-            android:layout_marginRight="@dimen/marign_23"
-            android:background="@color/linecolor" />
         <!-- Field to fill in confirmed password -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="63dp"
             android:layout_marginLeft="@dimen/marign_23"
-            android:layout_marginTop="@dimen/marign_4"
-            android:layout_marginRight="@dimen/marign_23"
-            android:background="@null">
+            android:layout_marginTop="@dimen/marign_24"
+            android:layout_marginRight="@dimen/marign_23">
             <!-- Fill in here -->
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/txt_confirm_password"
+                android:id="@+id/txt_confirm_password_register"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null"
+                android:background="@color/white"
                 android:hint="@string/confirmedpassword"
                 android:inputType="textPassword"
-                android:textColor="@color/primarytext"
+                android:textColor="@color/black"
                 android:textSize="@dimen/textsize_18" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <View
-            android:id="@+id/view3"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="@dimen/marign_23"
-            android:layout_marginTop="@dimen/marign_2"
-            android:layout_marginRight="@dimen/marign_23"
-            android:background="@color/linecolor" />
-        <!-- Button is used to add new accountTest -->
+        <!-- Button is used to add new account -->
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnLogup"
-            android:layout_width="@dimen/width_180"
-            android:layout_height="@dimen/height_36"
+            android:id="@+id/btn_create_account"
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginHorizontal="@dimen/marign_58"
             android:layout_marginTop="@dimen/marign_32"
             android:background="@drawable/rectloginlogup"
-            android:layout_gravity="center"
             android:onClick="onButtonRegisterClick"
-            android:text="@string/log_up"
+            android:text="@string/register_button"
             android:textAllCaps="false"
             android:textColor="@color/thirdtext"
-            android:textSize="@dimen/textsize_16"
+            android:textSize="@dimen/textsize_24"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -191,7 +178,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.03" />
 
     <!-- The id_Register_Guideline_2 is used to limit the right space where items are being place inside -->
     <androidx.constraintlayout.widget.Guideline
@@ -199,7 +186,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9"/>
+        app:layout_constraintGuide_percent="0.97"/>
 
     <!-- The id_Register_Guideline_3 is used to limit the top space where items are being place inside -->
     <androidx.constraintlayout.widget.Guideline
@@ -207,7 +194,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.164" />
+        app:layout_constraintGuide_percent="0.03" />
 
     <!-- The id_Register_Guideline_4 is used to limit the bottom space where items are being place inside -->
     <androidx.constraintlayout.widget.Guideline
@@ -215,7 +202,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.95" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
