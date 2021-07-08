@@ -1,16 +1,15 @@
-package com.example.gtw_101.controller;
+package com.example.gtw_101.controller.menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.example.gtw_101.R;
-import com.example.gtw_101.dao.AchievementDAO;
-import com.example.gtw_101.dao.QuestionDAO;
-import com.example.gtw_101.model.Question;
+import com.example.gtw_101.controller.user.AchievementActivity;
+import com.example.gtw_101.controller.user.InGameActivity;
+import com.example.gtw_101.controller.user.PlayerProfileActivity;
 
 public class UserMainActivity extends AppCompatActivity {
 

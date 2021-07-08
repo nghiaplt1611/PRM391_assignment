@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_maincolor"
-    tools:context=".controller.PlayerProfileActivity">
+    tools:context=".controller.user.PlayerProfileActivity">
 
     <Button
         android:id="@+id/btn_go_back"
@@ -61,11 +61,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@drawable/textline"
-        android:paddingLeft="30dp"
-        android:paddingTop="10dp"
+        android:gravity="center"
         android:shadowColor="#F10A0A"
         android:text="David"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
@@ -80,8 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:background="@drawable/scoreline"
-        android:paddingLeft="32dp"
-        android:paddingTop="13dp"
+        android:gravity="center"
         android:text="@string/highestScore"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"

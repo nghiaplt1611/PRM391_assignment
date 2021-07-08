@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.gtw_101.R;
+import com.example.gtw_101.controller.menu.MainActivity;
 import com.example.gtw_101.utilities.LoadData;
 
 public class SlashScreenActivity extends AppCompatActivity {

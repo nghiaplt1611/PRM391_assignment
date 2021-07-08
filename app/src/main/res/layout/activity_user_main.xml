@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ingame_background_color"
-    tools:context=".controller.UserMainActivity">
+    tools:context=".controller.menu.UserMainActivity">
 
     <!-- User will play the game as Guest -->
 

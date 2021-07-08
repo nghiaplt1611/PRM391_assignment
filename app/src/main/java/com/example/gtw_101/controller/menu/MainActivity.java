@@ -1,4 +1,4 @@
-package com.example.gtw_101.controller;
+package com.example.gtw_101.controller.menu;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.gtw_101.R;
-import com.example.gtw_101.dao.QuestionDAO;
-import com.example.gtw_101.model.Question;
+import com.example.gtw_101.controller.user.InGameActivity;
+import com.example.gtw_101.controller.account.LoginActivity;
 import com.example.gtw_101.utilities.LoadData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
-        //mAuth.signOut();
-        //Test.test();
     }
 
     @Override
@@ -46,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         if (user != null){
             //currentUser.sendEmailVerification();
 //            mAuth.sendPasswordResetEmail(currentUser.getEmail());
-
+            LoadData.loadUserData(user);
             userMainMenuIntent(findViewById(android.R.id.content).getRootView());
         }
     }

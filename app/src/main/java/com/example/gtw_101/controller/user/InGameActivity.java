@@ -1,4 +1,4 @@
-package com.example.gtw_101.controller;
+package com.example.gtw_101.controller.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;

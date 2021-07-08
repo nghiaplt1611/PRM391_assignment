@@ -1,4 +1,4 @@
-package com.example.gtw_101.controller;
+package com.example.gtw_101.controller.account;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.gtw_101.R;
-import com.example.gtw_101.dao.GameManagement;
+import com.example.gtw_101.controller.menu.MainActivity;
 import com.example.gtw_101.dao.UserDAO;
 import com.example.gtw_101.model.Account;
 import com.example.gtw_101.utilities.AlertDialogBuilder;

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ingame_background_color"
-    tools:context=".controller.LeaderActivity">
+    tools:context=".controller.user.LeaderActivity">
 
     <ImageView
         android:id="@+id/img_leader_header"
