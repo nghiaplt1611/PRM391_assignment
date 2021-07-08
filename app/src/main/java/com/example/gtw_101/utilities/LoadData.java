@@ -7,5 +7,6 @@ public class LoadData {
     public static void loadAllData(){
         AchievementDAO.loadAchievementData();
         QuestionDAO.getAllQuestionsInLevel(1);
+        QuestionDAO.getQuestion("xmZta7zRioXvNGKhMdSd");
     }
 }

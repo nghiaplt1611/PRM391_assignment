@@ -1,5 +1,7 @@
 package com.example.gtw_101.dao;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.gtw_101.controller.MainActivity;
@@ -18,12 +20,13 @@ import java.util.ArrayList;
 
 public class QuestionDAO {
 
-    public static Question question;
+    public static Question question = new Question();
     public static ArrayList<Question> listQuestion = new ArrayList<>();
 
     public static void getQuestion(String id){
+
         MainActivity.db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = MainActivity.db.collection("questions").document("id");
+        DocumentReference docRef = MainActivity.db.collection("questions").document(id);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -42,8 +45,7 @@ public class QuestionDAO {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Question ques = new Question();
-                                ques = document.toObject(Question.class);
+                                Question ques = document.toObject(Question.class);
                                 listQuestion.add(ques);
                             }
                         }
