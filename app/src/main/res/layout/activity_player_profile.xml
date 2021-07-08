@@ -15,7 +15,7 @@
         app:backgroundTint="@null"
         app:icon="@drawable/back"
         app:iconGravity="textStart"
-        app:iconPadding="2px"
+        app:iconPadding="1dp"
         app:iconSize="32dp"
         app:iconTint="@null"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
