@@ -15,24 +15,26 @@
         app:backgroundTint="@null"
         app:icon="@drawable/back"
         app:iconGravity="textStart"
-        app:iconPadding="2px"
+        app:iconPadding="1dp"
         app:iconSize="32dp"
         app:iconTint="@null"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_profile_image"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        android:src="@drawable/avartar_1"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/avatar_1"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
@@ -50,7 +52,7 @@
         app:iconTint="@null"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.78"
+        app:layout_constraintHorizontal_bias="0.709"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="@+id/img_profile_image"
         app:layout_constraintVertical_bias="0.0" />
@@ -61,14 +63,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:background="@drawable/textline"
-        android:gravity="center"
+        android:gravity="center_horizontal|center_vertical"
         android:shadowColor="#F10A0A"
         android:text="David"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/img_profile_image"
         app:layout_constraintVertical_bias="0.0" />
@@ -79,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:background="@drawable/scoreline"
-        android:gravity="center"
+        android:gravity="center_horizontal|center_vertical"
         android:text="@string/highestScore"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
@@ -87,22 +89,6 @@
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/txt_player_name"
         app:layout_constraintVertical_bias="0.003" />
-
-    <Button
-        android:id="@+id/btn_update_profile"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:background="@drawable/rectmenu"
-        android:text="@string/update_profile"
-        android:textSize="20sp"
-        app:backgroundTint="@null"
-        app:layout_constraintBottom_toTopOf="@+id/guideline9"
-        app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/txt_score"
-        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btn_change_pass"
@@ -115,10 +101,26 @@
         app:backgroundTint="@null"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/btn_update_profile"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_update_profile"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/rectmenu"
+        android:text="@string/update_profile"
+        android:textSize="20sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toTopOf="@+id/guideline9"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/txt_score"
+        app:layout_constraintVertical_bias="0.011" />
 
     <Button
         android:id="@+id/btn_logout"
@@ -132,7 +134,7 @@
         app:backgroundTint="@null"
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/btn_change_pass"
         app:layout_constraintVertical_bias="0.0" />
@@ -144,7 +146,7 @@
         android:layout_marginStart="55dp"
         android:layout_marginLeft="55dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="55dp"
+        app:layout_constraintGuide_percent=".03"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -152,20 +154,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="355dp" />
+        app:layout_constraintGuide_percent=".97" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="50dp" />
+        app:layout_constraintGuide_percent=".03" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="680dp" />
+        app:layout_constraintGuide_percent=".95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
