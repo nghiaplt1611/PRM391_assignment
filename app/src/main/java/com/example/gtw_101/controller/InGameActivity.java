@@ -10,9 +10,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.gtw_101.R;
+import com.example.gtw_101.dao.QuestionDAO;
+import com.example.gtw_101.model.Question;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,6 +65,12 @@ public class InGameActivity extends AppCompatActivity {
         layout = findViewById(R.id.twoline_layout1);
         splitString();
         createButton();
+        getImage();
+    }
+
+    public void getImage(){
+        ImageView imageView = (ImageView)findViewById(R.id.imageView5);
+        Picasso.with(this).load(QuestionDAO.question.getImageURL()).fit().into(imageView);
     }
 
     public void returnToMainScreen(View view){

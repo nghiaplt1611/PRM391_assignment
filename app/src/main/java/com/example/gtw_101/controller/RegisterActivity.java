@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.example.gtw_101.R;
+import com.example.gtw_101.dao.GameManagement;
+import com.example.gtw_101.dao.UserDAO;
 import com.example.gtw_101.model.Account;
 import com.example.gtw_101.utilities.AlertDialogBuilder;
 import com.example.gtw_101.utilities.MD5Hashing;
@@ -101,10 +103,8 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Account account = new Account();
-                        account.setEmail(email);
-                        account.setFullName(fullName);
-                        account.setYearOfBirth(Integer.parseInt(yearOfBirth));
+                        new Account();
+                        Account account = UserDAO.registeredNewAccount(email, fullName, yearOfBirth);
                         DocumentReference documentReference = MainActivity.db.collection("users").document();
                         account.setId(documentReference.getId());
                         documentReference.set(account).addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.gtw_101.R;
+import com.example.gtw_101.utilities.LoadData;
 
 public class SlashScreenActivity extends AppCompatActivity {
 
@@ -16,6 +17,7 @@ public class SlashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_slash_screen);
         getSupportActionBar().hide();
         new Handler().postDelayed(this::slashScreen,2000);
+        LoadData.loadAllData();
     }
 
     /**
