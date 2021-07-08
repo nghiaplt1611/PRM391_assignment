@@ -83,6 +83,7 @@
                 android:hint="@string/email"
                 android:inputType="text"
                 android:maxLines="1"
+                android:onClick="hideEmailError"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize_18"
                 tools:ignore="ContentDescription" />
@@ -117,6 +118,7 @@
                 android:contentDescription="For more visit www.materialuiux.com"
                 android:hint="@string/password"
                 android:inputType="textPassword"
+                android:onClick="hidePasswordError"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize_18"
                 tools:ignore="ContentDescription" />
@@ -174,6 +176,7 @@
             android:layout_marginTop="@dimen/marign_14"
             android:layout_marginEnd="@dimen/marign_8"
             android:layout_marginRight="@dimen/marign_10"
+            android:onClick="backToMainMenuIntent"
             android:text="@string/back_to_menu"
             android:textColor="@color/clickable_text"
             android:textSize="@dimen/textsize_14"

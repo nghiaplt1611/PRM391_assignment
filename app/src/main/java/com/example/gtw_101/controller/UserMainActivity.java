@@ -14,7 +14,16 @@ public class UserMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main);
+        getSupportActionBar().hide();
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
     /**
      * Create method profileIntent to change to player profile intent
      *
@@ -24,4 +33,10 @@ public class UserMainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PlayerProfileActivity.class);
         this.startActivity(intent);
     }
+
+    public void logoutTemp(View view){
+        MainActivity.mAuth.signOut();
+        this.finish();
+    }
+
 }

@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -22,15 +20,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 
 public class RegisterActivity extends AppCompatActivity {
-
-    FirebaseAuth auth;
-    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,25 +95,22 @@ public class RegisterActivity extends AppCompatActivity {
 
         }
         else {
-            auth = FirebaseAuth.getInstance();
-            db = FirebaseFirestore.getInstance();
-            auth.createUserWithEmailAndPassword(email, MD5Hashing.getMD5Hash(password)).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            MainActivity.mAuth = FirebaseAuth.getInstance();
+            MainActivity.db = FirebaseFirestore.getInstance();
+            MainActivity.mAuth.createUserWithEmailAndPassword(email, MD5Hashing.getMD5Hash(password)).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    Log.e("AAA", "***");
                     if (task.isSuccessful()) {
-                        Log.e("AAA", "2");
                         Account account = new Account();
                         account.setEmail(email);
                         account.setFullName(fullName);
                         account.setYearOfBirth(Integer.parseInt(yearOfBirth));
-
-                        db.collection("users").document().set(account).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        DocumentReference documentReference = MainActivity.db.collection("users").document();
+                        account.setId(documentReference.getId());
+                        documentReference.set(account).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                Log.e("AAA", "3");
-                                FirebaseUser user = auth.getCurrentUser();
-
+                                MainActivity.mAuth.signOut();
                                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                                 builder.setMessage("Registered successfully! You will be returned to the login page.");
                                 builder.setTitle("Notification!");
@@ -126,8 +118,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                        startActivity(intent);
                                         finish();
                                     }
                                 });
@@ -149,5 +139,37 @@ public class RegisterActivity extends AppCompatActivity {
             });
         }
     }
+
+    public void hideEmailError(View view){
+        EditText txtEmail = findViewById(R.id.txt_email_register);
+        txtEmail.setError(null);
+    }
+
+    public void hideFullNameError(View view){
+        EditText txtFullName = findViewById(R.id.txt_fullname_register);
+        txtFullName.setError(null);
+    }
+
+    public void hideYearOfBirthError(View view){
+        EditText txtYearOfBirth = findViewById(R.id.txt_yearofbirth_register);
+        txtYearOfBirth.setError(null);
+    }
+
+    public void hidePasswordError(View view){
+        EditText txtPassword = findViewById(R.id.txt_password_register);
+        txtPassword.setError(null);
+    }
+
+    public void hideConfirmPasswordError(View view){
+        EditText txtConfirmPassword = findViewById(R.id.txt_confirm_password_register);
+        txtConfirmPassword.setError(null);
+    }
+
+    public void returnToLoginActivity(View view){
+        this.finish();
+    }
+
+
+
 
 }

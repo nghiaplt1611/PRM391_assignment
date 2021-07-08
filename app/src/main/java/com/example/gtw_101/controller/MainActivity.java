@@ -6,19 +6,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 
 import com.example.gtw_101.R;
-import com.example.gtw_101.dao.Test;
-import com.example.gtw_101.utilities.DatabaseHandler;
-import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
     //public static DatabaseHandler database;
-    private FirebaseAuth mAuth;
+    public static FirebaseAuth mAuth;
+    public static FirebaseFirestore db;
+    public static FirebaseUser user;
+
 
     /**
      * Override method onCreate to initialize basic login of the activity
@@ -39,13 +39,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null){
-            System.out.println(currentUser.getEmail() + currentUser.getDisplayName());
+        user = mAuth.getCurrentUser();
+        if (user != null){
             //currentUser.sendEmailVerification();
 //            mAuth.sendPasswordResetEmail(currentUser.getEmail());
 
-            //playGameIntent(findViewById(android.R.id.content).getRootView());
+            userMainMenuIntent(findViewById(android.R.id.content).getRootView());
         }
     }
 
@@ -67,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
     public void playGameIntent(View view){
         Intent intent = new Intent(this, InGameActivity.class);
         this.startActivity(intent);
+    }
+
+    public void userMainMenuIntent(View view){
+        Intent intent = new Intent(this, UserMainActivity.class);
+        this.startActivity(intent);
+        this.finish();
     }
 
 }

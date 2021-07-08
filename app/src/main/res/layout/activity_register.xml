@@ -47,6 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/marign_6"
+            android:onClick="returnToLoginActivity"
             android:text="@string/login_register"
             android:textColor="@color/clickable_text"
             android:textSize="@dimen/textsize_14"
@@ -68,6 +69,7 @@
                 android:hint="@string/email"
                 android:inputType="text"
                 android:maxLines="1"
+                android:onClick="hideEmailError"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize_18" />
 
@@ -89,6 +91,7 @@
                 android:hint="@string/full_name"
                 android:inputType="text"
                 android:maxLines="1"
+                android:onClick="hideFullNameError"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize_18" />
 
@@ -110,6 +113,7 @@
                 android:hint="@string/yob"
                 android:inputType="text"
                 android:maxLines="1"
+                android:onClick="hideYearOfBirthError"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize_18" />
 
@@ -130,6 +134,7 @@
                 android:background="@drawable/textfield_background"
                 android:hint="@string/password"
                 android:inputType="textPassword"
+                android:onClick="hidePasswordError"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize_18" />
 
@@ -150,6 +155,7 @@
                 android:background="@drawable/textfield_background"
                 android:hint="@string/confirmedpassword"
                 android:inputType="textPassword"
+                android:onClick="hideConfirmPasswordError"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize_18" />
 
