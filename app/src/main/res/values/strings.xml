@@ -47,8 +47,14 @@
     <string name="d" translatable="false">D</string>
     <string name="register_login" translatable="false">NOT HAVE A GDW ACCOUNT? REGISTER NOW</string>
     <string name="login_register" translatable="false">ALREADY HAVE AN ACCOUNT? LOGIN NOW</string>
-    <string name="highestScore" translatable="false">Highest Score\n16516</string>
+    <string name="highestScore" translatable="false">16516</string>
     <string name="achievement" translatable="false">Achievement</string>
     <string name="achi_title" translatable="false">Achievement Title</string>
-    <string name="profile" translatable="false">Profile</string>
+    <string name="updateprofile" translatable="false">Update Profile</string>
+    <string name="changepass" translatable="false">CHANGE PASSWORD</string>
+    <string name="logout" translatable="false">Log out</string>
+    <string name="dob">Date of birth</string>
+    <string name="update">Update</string>
+    <string name="title_edit_profile">Update your current profile</string>
+    <string name="resetpass">Reset password</string>
 </resources>
