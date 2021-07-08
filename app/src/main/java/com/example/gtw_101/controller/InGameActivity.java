@@ -3,6 +3,9 @@ package com.example.gtw_101.controller;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +23,8 @@ import java.util.List;
  */
 public class InGameActivity extends AppCompatActivity {
 
+
+    Dialog congratDiag;
     //var cho ham tao nut
     LinearLayout layout;
     private int firstMar;
@@ -47,6 +52,8 @@ public class InGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_game);
         getSupportActionBar().hide();
+
+        congratDiag = new Dialog(this);
 //        onLetterChosenClick();
 //        returnChosenLetter();
 
@@ -260,5 +267,11 @@ public class InGameActivity extends AppCompatActivity {
         }
     }
 
+
+    public void showPopup(View v){
+        congratDiag.setContentView(R.layout.popup_congratulation);
+        congratDiag.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        congratDiag.show();
+    }
 
 }
