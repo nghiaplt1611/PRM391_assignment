@@ -11,7 +11,9 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.GTW_101">
-        <activity android:name=".controller.UserMainActivity"></activity>
+        <activity android:name=".controller.LeaderActivity"></activity>
+        <activity android:name=".controller.HowToPlayActivity" />
+        <activity android:name=".controller.UserMainActivity" />
         <activity android:name=".controller.AchievementActivity" />
         <activity
             android:name=".controller.PlayerProfileActivity"

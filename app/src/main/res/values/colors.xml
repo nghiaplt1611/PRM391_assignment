@@ -42,4 +42,5 @@
     <color name="ingame_img_background_color">#5CB0FF</color>
     <color name="achievement_item_background_color">#FFEDC9</color>
     <color name="achievement_backround">#9B4C23</color>
+    <color name="achievement_back">#B3000000</color>
 </resources>
