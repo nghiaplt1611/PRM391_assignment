@@ -7,11 +7,10 @@ public class Account implements Serializable {
     private String email;
     private String fullName;
     private int yearOfBirth;
-//    private int level;
-//    private int score;
-//    private String answerOfQuestion;
-//    private int numOfLetterShown;
-//    private String achievements;
+    private Question question;
+    private int numOfLetterShown;
+    private String achievements;
+    private int score;
 
     public Account() {
     }
@@ -48,43 +47,35 @@ public class Account implements Serializable {
         this.yearOfBirth = yearOfBirth;
     }
 
-//    public int getLevel() {
-//        return level;
-//    }
-//
-//    public void setLevel(int level) {
-//        this.level = level;
-//    }
-//
-//    public int getScore() {
-//        return score;
-//    }
-//
-//    public void setScore(int score) {
-//        this.score = score;
-//    }
-//
-//    public String getAnswerOfQuestion() {
-//        return answerOfQuestion;
-//    }
-//
-//    public void setAnswerOfQuestion(String answerOfQuestion) {
-//        this.answerOfQuestion = answerOfQuestion;
-//    }
-//
-//    public int getNumOfLetterShown() {
-//        return numOfLetterShown;
-//    }
-//
-//    public void setNumOfLetterShown(int numOfLetterShown) {
-//        this.numOfLetterShown = numOfLetterShown;
-//    }
-//
-//    public String getAchievements() {
-//        return achievements;
-//    }
-//
-//    public void setAchievements(String achievements) {
-//        this.achievements = achievements;
-//    }
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    public int getNumOfLetterShown() {
+        return numOfLetterShown;
+    }
+
+    public void setNumOfLetterShown(int numOfLetterShown) {
+        this.numOfLetterShown = numOfLetterShown;
+    }
+
+    public String getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(String achievements) {
+        this.achievements = achievements;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 }

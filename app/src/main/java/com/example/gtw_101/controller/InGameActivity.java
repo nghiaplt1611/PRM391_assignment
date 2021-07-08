@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.gtw_101.R;
+import com.example.gtw_101.dao.QuestionDAO;
+import com.example.gtw_101.model.Question;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,6 +56,10 @@ public class InGameActivity extends AppCompatActivity {
         layout = findViewById(R.id.twoline_layout1);
         splitString();
         createButton();
+
+        for (Question q: QuestionDAO.listQuestion){
+            Log.e("*****", q.getAnswer());
+        }
     }
 
     public void returnToMainScreen(View view){

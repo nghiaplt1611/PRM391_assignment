@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.gtw_101.R;
+import com.example.gtw_101.dao.AchievementDAO;
 
 public class UserMainActivity extends AppCompatActivity {
 
@@ -29,14 +30,19 @@ public class UserMainActivity extends AppCompatActivity {
      *
      * @param view storing view
      */
-    public void profileIntent(View view){
+    public void onButtonProfileClick(View view){
         Intent intent = new Intent(this, PlayerProfileActivity.class);
         this.startActivity(intent);
     }
 
-    public void logoutTemp(View view){
-        MainActivity.mAuth.signOut();
-        this.finish();
+    public void onButtonAchievementClick(View view){
+        Intent intent = new Intent(this, AchievementActivity.class);
+        this.startActivity(intent);
+    }
+
+    public void onButtonPlayGameClick(View view){
+        Intent intent = new Intent(this, InGameActivity.class);
+        this.startActivity(intent);
     }
 
 }
