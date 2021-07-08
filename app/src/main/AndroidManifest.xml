@@ -13,6 +13,8 @@
         android:theme="@style/Theme.GTW_101">
         <activity android:name=".controller.ChangePasswordActivity"></activity>
         <activity android:name=".controller.EditProfilePlayerActivity" />
+        <activity android:name=".controller.LeaderActivity"></activity>
+        <activity android:name=".controller.HowToPlayActivity" />
         <activity android:name=".controller.UserMainActivity" />
         <activity android:name=".controller.AchievementActivity" />
         <activity
