@@ -45,11 +45,6 @@
         <activity
             android:name=".controller.menu.MainActivity"
             android:screenOrientation="portrait">
-            <intent-filter tools:ignore="ExtraText">
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".controller.account.LoginActivity"
