@@ -2,6 +2,7 @@ package com.example.gtw_101.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +20,7 @@ public class SlashScreenActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         new Handler().postDelayed(this::slashScreen,2000);
         LoadData.loadAllData();
+
     }
 
     /**

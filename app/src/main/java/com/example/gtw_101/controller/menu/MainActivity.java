@@ -1,19 +1,22 @@
 package com.example.gtw_101.controller.menu;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.Switch;
-import android.widget.ToggleButton;
+
 
 import com.example.gtw_101.R;
 import com.example.gtw_101.controller.user.InGameActivity;
 import com.example.gtw_101.controller.account.LoginActivity;
+import com.example.gtw_101.utilities.CheckNetworkConnection;
 import com.example.gtw_101.utilities.LoadData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     public static FirebaseAuth mAuth;
     public static FirebaseFirestore db;
     public static FirebaseUser user;
+    public static Context context;
 
     private SwitchCompat bSwitch;
 
@@ -43,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         mAuth = FirebaseAuth.getInstance();
         bSwitch = findViewById(R.id.btn_languague_menu);
         bSwitch.setOnCheckedChangeListener(this);
+        context = getApplicationContext();
+        checkConnection();
     }
 
     @Override
@@ -90,4 +96,26 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             // Nữa để code xử lí đổi qua Tiếng Việt vào đây
         }
     }
+
+    public void checkConnection(){
+        if (!CheckNetworkConnection.isConnected()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Please check your Internet connection before playing game!");
+            builder.setTitle("Alert!");
+            builder.setCancelable(false);
+            builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            // Create the Alert dialog
+            AlertDialog alertDialog = builder.create();
+
+            // Show the Alert Dialog box
+            alertDialog.show();
+        }
+
+    }
+
 }
