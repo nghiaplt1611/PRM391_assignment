@@ -1,5 +1,7 @@
 package com.example.gtw_101.dao;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.gtw_101.controller.menu.MainActivity;
@@ -7,8 +9,10 @@ import com.example.gtw_101.model.Account;
 import com.example.gtw_101.model.Question;
 import com.example.gtw_101.model.Score;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -39,6 +43,19 @@ public class UserDAO {
 
     }
 
+
+    public static void updateAvatar(String id, int avatar){
+        MainActivity.db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = MainActivity.db.collection("users").document(id);
+
+        docRef.update("avatar", avatar).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
+        });
+    }
+
     public static Account registeredNewAccount(String email, String fullName, String yearOfBirth){
         Account account = new Account();
         account.setEmail(email);
@@ -48,6 +65,19 @@ public class UserDAO {
         account.setNumOfLetterShown(0);
         account.setAchievements("FFFFF");
         account.setScore(ScoreDAO.score.getInitialScore());
+        account.setAvatar(1);
         return account;
+    }
+
+    public static void updateProfile(String id, String fullName, int yearOfBirth){
+        MainActivity.db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = MainActivity.db.collection("users").document(id);
+
+        docRef.update("fullName", fullName, "yearOfBirth", yearOfBirth).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
+        });
     }
 }

@@ -41,6 +41,7 @@ public class QuestionDAO {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            listQuestion.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Question ques = document.toObject(Question.class);
                                 listQuestion.add(ques);

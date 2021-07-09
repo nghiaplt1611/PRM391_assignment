@@ -42,4 +42,9 @@ public class UserMainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
+    public void howToPlayIntent(View view){
+        Intent intent = new Intent(this, HowToPlayActivity.class);
+        this.startActivity(intent);
+    }
+
 }

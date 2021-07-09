@@ -11,6 +11,7 @@ public class Account implements Serializable {
     private int numOfLetterShown;
     private String achievements;
     private int score;
+    private int avatar;
 
     public Account() {
     }
@@ -77,5 +78,13 @@ public class Account implements Serializable {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public int getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
     }
 }

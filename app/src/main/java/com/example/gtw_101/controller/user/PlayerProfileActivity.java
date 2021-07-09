@@ -5,16 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gtw_101.R;
 import com.example.gtw_101.controller.menu.MainActivity;
 import com.example.gtw_101.controller.user.profile.ChangeAvatarActivity;
-import com.example.gtw_101.controller.user.profile.ChangePasswordActivity;
 import com.example.gtw_101.controller.user.profile.EditProfilePlayerActivity;
 import com.example.gtw_101.dao.UserDAO;
-
-import org.w3c.dom.Text;
+import com.example.gtw_101.utilities.AlertDialogBuilder;
+import com.example.gtw_101.utilities.GetAvatarResource;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class PlayerProfileActivity extends AppCompatActivity {
 
@@ -26,12 +27,20 @@ public class PlayerProfileActivity extends AppCompatActivity {
         loadData();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
+    }
+
     public void loadData(){
         TextView txtPlayerName = (TextView) findViewById(R.id.txt_player_name);
         TextView txtScore = (TextView) findViewById(R.id.txt_score);
+        ImageView avatar = (ImageView) findViewById(R.id.img_profile_image);
 
         txtPlayerName.setText(UserDAO.account.getFullName());
         txtScore.setText(String.valueOf(UserDAO.account.getScore()));
+        avatar.setImageDrawable(getResources().getDrawable(GetAvatarResource.getAvatarImageID(UserDAO.account.getAvatar())));
     }
 
     public void onButtonLogoutClick(View view){
@@ -42,20 +51,24 @@ public class PlayerProfileActivity extends AppCompatActivity {
     }
 
     public void onButtonChangePass(View view){
-        Intent intent = new Intent(this, ChangePasswordActivity.class);
-        this.startActivity(intent);
-        this.finish();
+        MainActivity.mAuth = FirebaseAuth.getInstance();
+        MainActivity.user = MainActivity.mAuth.getCurrentUser();
+        MainActivity.mAuth.sendPasswordResetEmail(MainActivity.user.getEmail());
+        AlertDialogBuilder.showAlertDialog("Notification!", "A email message has been sent to " + MainActivity.user.getEmail()+ " for changing password. Please check it!", this);
+        finish();
     }
 
     public void onButtonEditProfile(View view){
         Intent intent = new Intent(this, EditProfilePlayerActivity.class);
         this.startActivity(intent);
-        this.finish();
     }
 
     public void onButtonChangeAvatar(View view){
         Intent intent = new Intent(this, ChangeAvatarActivity.class);
         this.startActivity(intent);
+    }
+
+    public void returnToUserMenuIntent(View view){
         this.finish();
     }
 

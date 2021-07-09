@@ -1,6 +1,7 @@
 package com.example.gtw_101.utilities;
 
-import android.util.Log;
+
+import com.example.gtw_101.controller.menu.MainActivity;
 
 import java.util.Calendar;
 import java.util.regex.Pattern;
@@ -87,5 +88,10 @@ public class Validation {
     public static boolean checkRegisterFormat(String email, String fullName, String yearOfBirth, String password, String confirmPassword){
         return checkEmailFormat(email) && checkFullNameFormat(fullName) && checkYearOfBirth(yearOfBirth) && checkStrongPassword(password) && checkConfirmPassword(password, confirmPassword);
     }
+
+    public static boolean checkUpdateFormat(String fullName, String yearOfBirth){
+        return checkFullNameFormat(fullName) && checkYearOfBirth(yearOfBirth);
+    }
+
 
 }

@@ -6,6 +6,7 @@ import com.example.gtw_101.dao.AchievementDAO;
 import com.example.gtw_101.model.Achievement;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -44,6 +45,10 @@ public class AchievementActivity extends AppCompatActivity {
             listTitle[i].setText(achievement.getTitle());
             listContent[i].setText(achievement.getContent());
         }
+    }
+
+    public void returnToUserMainMenuIntent(View view){
+        this.finish();
     }
 
 }

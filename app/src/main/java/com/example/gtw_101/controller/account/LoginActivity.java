@@ -37,6 +37,11 @@ public class LoginActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
+    public void forgotPasswordIntent(View view){
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
+        this.startActivity(intent);
+    }
+
     public void backToMainMenuIntent(View view){
         this.finish();
     }

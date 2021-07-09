@@ -145,6 +145,7 @@
             android:layout_marginTop="@dimen/marign_12"
             android:layout_marginEnd="@dimen/marign_8"
             android:layout_marginRight="@dimen/marign_10"
+            android:onClick="forgotPasswordIntent"
             android:text="@string/forgot_password"
             android:textColor="@color/clickable_text"
             android:textSize="@dimen/textsize_14"

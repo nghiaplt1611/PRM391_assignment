@@ -89,6 +89,11 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         this.finish();
     }
 
+    public void howToPlayIntent(View view){
+        Intent intent = new Intent(this, HowToPlayActivity.class);
+        this.startActivity(intent);
+    }
+
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -103,9 +108,11 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             builder.setMessage("Please check your Internet connection before playing game!");
             builder.setTitle("Alert!");
             builder.setCancelable(false);
-            builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Reload", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(MainActivity.this, SlashScreenActivity.class);
+                    startActivity(intent);
                     finish();
                 }
             });

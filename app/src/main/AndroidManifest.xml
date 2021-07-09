@@ -18,7 +18,7 @@
         android:theme="@style/Theme.GTW_101">
         <activity android:name=".controller.user.profile.ChangeAvatarActivity"></activity>
         <activity
-            android:name=".controller.SlashScreenActivity"
+            android:name=".controller.menu.SlashScreenActivity"
             android:screenOrientation="portrait">
             <intent-filter tools:ignore="ExtraText">
                 <action android:name="android.intent.action.MAIN" />
@@ -28,9 +28,8 @@
         </activity>
         <activity android:name=".controller.account.ForgotPasswordActivity" />
         <activity android:name=".controller.user.LeaderActivity" />
-        <activity android:name=".controller.user.profile.ChangePasswordActivity" />
         <activity android:name=".controller.user.profile.EditProfilePlayerActivity" />
-        <activity android:name=".controller.HowToPlayActivity" />
+        <activity android:name=".controller.menu.HowToPlayActivity" />
         <activity android:name=".controller.menu.UserMainActivity" />
         <activity android:name=".controller.user.AchievementActivity" />
         <activity
