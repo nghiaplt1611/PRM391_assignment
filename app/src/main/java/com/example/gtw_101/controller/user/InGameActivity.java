@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,12 +37,13 @@ public class InGameActivity extends AppCompatActivity {
     private int buttonMar=30;
     private int maxButton;
     private int buttonSpace=15;
-    private int buttonWid=150;
-    private int buttonHei=180;
+    private int buttonWid;
+    private int buttonHei;
     private int number=1;
     private String word = "";
     private List<String> list1 = new ArrayList<>();
     private List<String> list2 = new ArrayList<>();
+    private int sceenWid;
     Button newBtn;
 
     //cai chua chay nay giai thich sau :v
@@ -60,6 +62,9 @@ public class InGameActivity extends AppCompatActivity {
         congratDiag = new Dialog(this);
 //        onLetterChosenClick();
 //        returnChosenLetter();
+
+        getSceenPec();
+        calForButton();
 
         //tao nut
         layout = findViewById(R.id.twoline_layout1);
@@ -236,7 +241,7 @@ public class InGameActivity extends AppCompatActivity {
             calForMiddle();
 
             layout = findViewById(R.id.oneline_lay1);
-            LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(150, 180);
+            LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(buttonWid, buttonHei);
             layoutParams1.setMargins(0, 0, 15, 0);
             layout.setPadding(firstMar,0,0,0);
             for (int i=0;i<list1.size();i++){
@@ -245,7 +250,7 @@ public class InGameActivity extends AppCompatActivity {
             }
 
             layout = findViewById(R.id.oneline_lay2);
-            LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(150, 180);
+            LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(buttonWid, buttonHei);
             layoutParams2.setMargins(15, 0, 0, 0);
             layout.setPadding(0,0,firstMar,0);
             for (int i=0;i<list2.size();i++){
@@ -256,7 +261,7 @@ public class InGameActivity extends AppCompatActivity {
             removeButton();
             layout = findViewById(R.id.twoline_layout1);
             calForTwoLine(list1.size());
-            LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(150, 180);
+            LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(buttonWid, buttonHei);
             layoutParams1.setMargins(0, 0, 15, 0);
             layout.setPadding(firstMar,15,0,0);
             for (int i=0;i<list1.size();i++){
@@ -267,7 +272,7 @@ public class InGameActivity extends AppCompatActivity {
             layout = findViewById(R.id.twoline_layout2);
             System.out.println("sau khi doi layout");
             calForTwoLine(list2.size());
-            LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(150, 180);
+            LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(buttonWid, buttonHei);
             layoutParams2.setMargins(0, 0, 15, 0);
             layout.setPadding(firstMar,15,0,0);
             for (int i=0;i<list2.size();i++){
@@ -275,6 +280,17 @@ public class InGameActivity extends AppCompatActivity {
                 addButton(list2.get(i),layoutParams2);
             }
         }
+    }
+
+    public void getSceenPec(){
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        sceenWid = displayMetrics.widthPixels;
+    }
+
+    public void calForButton (){
+        buttonWid = sceenWid/7;
+        buttonHei = sceenWid/6;
     }
 
 
