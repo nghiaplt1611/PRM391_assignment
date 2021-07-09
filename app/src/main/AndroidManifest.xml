@@ -13,7 +13,7 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.GTW_101">
-        <activity android:name=".controller.ChangeAvatarActivity"></activity>
+        <activity android:name=".controller.user.profile.ChangeAvatarActivity"></activity>
         <activity
             android:name=".controller.SlashScreenActivity"
             android:screenOrientation="portrait">
