@@ -188,15 +188,13 @@ public class InGameActivity extends AppCompatActivity {
 
     //tinh toan khoan cach neu ko chia dong
     public void calForMiddle(){
-        firstMar = chuachay-((maxButton*buttonWid)+(maxButton-1)*buttonSpace+buttonSpace);
+        firstMar = sceenWid-((maxButton*buttonWid)+(maxButton-1)*buttonSpace+buttonSpace);
         firstMar= firstMar/2;
-        lastMar = firstMar;
     }
 
     //tinh toan khoan cach neu chia dong
     public void calForTwoLine(int nums){
-
-        firstMar = chuachay-((nums*buttonWid)+(nums-1)*buttonSpace+buttonSpace);
+        firstMar = sceenWid-((nums*buttonWid)+(nums-1)*buttonSpace+buttonSpace);
         firstMar= firstMar/2;
     }
 
