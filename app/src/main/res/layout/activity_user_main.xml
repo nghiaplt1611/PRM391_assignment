@@ -116,7 +116,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="@dimen/marign_5"
-        android:background="@drawable/ovalmenu"
+        android:background="@drawable/howtoplay"
         app:layout_constraintBottom_toTopOf="@+id/id_User_Main_Guideline_4"
         app:layout_constraintEnd_toStartOf="@+id/id_User_Main_Guideline_2"
         app:layout_constraintHorizontal_bias="0.958"
