@@ -24,4 +24,22 @@ public class PlayerProfileActivity extends AppCompatActivity {
         this.finish();
     }
 
+    public void onButtonChangePass(View view){
+        Intent intent = new Intent(this, ChangePasswordActivity.class);
+        this.startActivity(intent);
+        this.finish();
+    }
+
+    public void onButtonEditProfile(View view){
+        Intent intent = new Intent(this, EditProfilePlayerActivity.class);
+        this.startActivity(intent);
+        this.finish();
+    }
+
+    public void onButtonChangeAvatar(View view){
+        Intent intent = new Intent(this, ChangeAvatarActivity.class);
+        this.startActivity(intent);
+        this.finish();
+    }
+
 }
