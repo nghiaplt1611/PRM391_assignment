@@ -190,12 +190,10 @@ public class InGameActivity extends AppCompatActivity {
     public void calForMiddle(){
         firstMar = sceenWid-((maxButton*buttonWid)+(maxButton-1)*buttonSpace+buttonSpace);
         firstMar= firstMar/2;
-        lastMar = firstMar;
     }
 
     //tinh toan khoan cach neu chia dong
     public void calForTwoLine(int nums){
-
         firstMar = sceenWid-((nums*buttonWid)+(nums-1)*buttonSpace+buttonSpace);
         firstMar= firstMar/2;
     }
