@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -16,9 +17,6 @@ import android.widget.LinearLayout;
 
 import com.example.gtw_101.R;
 import com.example.gtw_101.dao.QuestionDAO;
-import com.example.gtw_101.model.Question;
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,6 +73,7 @@ public class InGameActivity extends AppCompatActivity {
 
     public void getImage(){
         ImageView imageView = (ImageView)findViewById(R.id.imageView5);
+
         Picasso.with(this).load(QuestionDAO.question.getImageURL()).fit().into(imageView);
     }
 
@@ -181,9 +180,8 @@ public class InGameActivity extends AppCompatActivity {
     //tao nut moi
     public void addButton(String character, LinearLayout.LayoutParams layoutParams){
         newBtn = new Button(this);
-        newBtn.setText(character);
+        newBtn.setBackground(this.getResources().getDrawable(R.drawable.achievemen_item_background));
         layout.addView(newBtn,layoutParams);
-        Log.e("newButton","shit just got birth");
     }
 
     //tinh toan khoan cach neu ko chia dong
