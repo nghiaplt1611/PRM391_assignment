@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 
 import com.example.gtw_101.R;
 import com.example.gtw_101.dao.QuestionDAO;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
