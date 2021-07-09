@@ -65,6 +65,7 @@
                 android:id="@+id/txt_email_register"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:digits="qwertyuiopasdfghjklzxcvbnm 1234567890 QWERTYUIOPASDFGHJKLZXCVBNM"
                 android:background="@drawable/textfield_background"
                 android:hint="@string/email"
                 android:inputType="text"
@@ -87,13 +88,15 @@
                 android:id="@+id/txt_fullname_register"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:digits="qwertyuiopasdfghjklzxcvbnm 1234567890 QWERTYUIOPASDFGHJKLZXCVBNM"
                 android:background="@drawable/textfield_background"
                 android:hint="@string/full_name"
                 android:inputType="text"
                 android:maxLines="1"
                 android:onClick="hideFullNameError"
                 android:textColor="@color/black"
-                android:textSize="@dimen/textsize_18" />
+                android:textSize="@dimen/textsize_18"
+                android:maxLength="25"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,6 +112,7 @@
                 android:id="@+id/txt_yearofbirth_register"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:digits="qwertyuiopasdfghjklzxcvbnm 1234567890 QWERTYUIOPASDFGHJKLZXCVBNM"
                 android:background="@drawable/textfield_background"
                 android:hint="@string/yob"
                 android:inputType="text"
@@ -131,6 +135,7 @@
                 android:id="@+id/txt_password_register"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:digits="qwertyuiopasdfghjklzxcvbnm 1234567890 QWERTYUIOPASDFGHJKLZXCVBNM"
                 android:background="@drawable/textfield_background"
                 android:hint="@string/password"
                 android:inputType="textPassword"
@@ -152,6 +157,7 @@
                 android:id="@+id/txt_confirm_password_register"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:digits="qwertyuiopasdfghjklzxcvbnm 1234567890 QWERTYUIOPASDFGHJKLZXCVBNM"
                 android:background="@drawable/textfield_background"
                 android:hint="@string/confirmedpassword"
                 android:inputType="textPassword"
