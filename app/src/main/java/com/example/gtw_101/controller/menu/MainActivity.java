@@ -2,10 +2,14 @@ package com.example.gtw_101.controller.menu;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.ToggleButton;
 
 import com.example.gtw_101.R;
 import com.example.gtw_101.controller.user.InGameActivity;
@@ -15,12 +19,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
     //public static DatabaseHandler database;
     public static FirebaseAuth mAuth;
     public static FirebaseFirestore db;
     public static FirebaseUser user;
+
+    private SwitchCompat bSwitch;
 
 
     /**
@@ -35,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
+        bSwitch = findViewById(R.id.btn_languague_menu);
+        bSwitch.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -75,4 +83,11 @@ public class MainActivity extends AppCompatActivity {
         this.finish();
     }
 
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if(isChecked){
+            // Nữa để code xử lí đổi qua Tiếng Việt vào đây
+        }
+    }
 }
