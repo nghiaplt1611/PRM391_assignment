@@ -8,21 +8,21 @@
 
     <!-- User will play the game as Guest -->
 
-
-    <ImageView
+    <!-- btn_play_now is used to direct user to activity_in_game layout -->
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/id_img_logo"
         android:layout_width="360dp"
         android:layout_height="270dp"
+        android:layout_marginBottom="@dimen/marign_60"
         android:src="@drawable/logowithbackground"
         app:layout_constraintBottom_toTopOf="@+id/btn_play_now"
         app:layout_constraintEnd_toStartOf="@+id/id_Main_Guideline_2"
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="@+id/id_Main_Guideline_1"
         app:layout_constraintTop_toTopOf="@+id/id_Main_Guideline_3"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.363"
         tools:ignore="MissingConstraints" />
 
-    <!-- btn_play_now is used to direct user to activity_in_game layout -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_play_now"
         android:layout_width="@dimen/dimen_180"
@@ -60,7 +60,7 @@
         android:id="@+id/btn_save_progress"
         android:layout_width="@dimen/dimen_300"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="112dp"
+        android:layout_marginBottom="60dp"
         android:background="@drawable/rectmenu2"
         android:gravity="center"
         android:onClick="loginIntent"
@@ -68,10 +68,40 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/textsize_24"
-        app:layout_constraintBottom_toTopOf="@+id/id_Main_Guideline_4"
+        app:layout_constraintBottom_toTopOf="@+id/btn_languague_menu"
         app:layout_constraintEnd_toStartOf="@+id/id_Main_Guideline_2"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="@+id/id_Main_Guideline_1" />
+
+    <!-- The btn_language_menu is used to change app's language when user click on it -->
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/btn_languague_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/marign_5"
+        android:textOff="@string/language_eng"
+        android:textOn="@string/language_vn"
+        android:thumb="@drawable/btn_language_thumb"
+        app:layout_constraintBottom_toTopOf="@+id/id_Main_Guideline_4"
+        app:layout_constraintEnd_toStartOf="@+id/id_Main_Guideline_2"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/id_Main_Guideline_1"
+        app:showText="true"
+        app:track="@drawable/btn_language_track" />
+
+    <!--  The btn_how_to_play is used the show how user will play the game  -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_how_to_play"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="@dimen/marign_5"
+        android:background="@drawable/ovalmenu"
+        app:layout_constraintBottom_toTopOf="@+id/id_Main_Guideline_4"
+        app:layout_constraintEnd_toStartOf="@+id/id_Main_Guideline_2"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="@+id/id_Main_Guideline_1"
+        app:layout_constraintTop_toTopOf="@+id/id_Main_Guideline_3"
+        app:layout_constraintVertical_bias="1.0" />
 
     <!-- The id_Main_Guideline_1 is used to limit the left space where items are being place inside -->
     <androidx.constraintlayout.widget.Guideline

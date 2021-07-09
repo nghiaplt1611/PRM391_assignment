@@ -1,11 +1,8 @@
 package com.example.gtw_101.dao;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
-import com.example.gtw_101.controller.MainActivity;
-import com.example.gtw_101.model.Achievement;
+import com.example.gtw_101.controller.menu.MainActivity;
 import com.example.gtw_101.model.Question;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;

@@ -23,24 +23,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.ForgotPasswordActivity" />
-        <activity android:name=".controller.LeaderActivity" />
-        <activity android:name=".controller.ChangePasswordActivity" />
-        <activity android:name=".controller.EditProfilePlayerActivity" />
+        <activity android:name=".controller.account.ForgotPasswordActivity" />
+        <activity android:name=".controller.user.LeaderActivity" />
+        <activity android:name=".controller.user.profile.ChangePasswordActivity" />
+        <activity android:name=".controller.user.profile.EditProfilePlayerActivity" />
         <activity android:name=".controller.HowToPlayActivity" />
-        <activity android:name=".controller.UserMainActivity" />
-        <activity android:name=".controller.AchievementActivity" />
+        <activity android:name=".controller.menu.UserMainActivity" />
+        <activity android:name=".controller.user.AchievementActivity" />
         <activity
-            android:name=".controller.PlayerProfileActivity"
+            android:name=".controller.user.PlayerProfileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".controller.RegisterActivity"
+            android:name=".controller.account.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".controller.InGameActivity"
+            android:name=".controller.user.InGameActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".controller.MainActivity"
+            android:name=".controller.menu.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter tools:ignore="ExtraText">
                 <action android:name="android.intent.action.MAIN" />
@@ -49,7 +49,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".controller.LoginActivity"
+            android:name=".controller.account.LoginActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

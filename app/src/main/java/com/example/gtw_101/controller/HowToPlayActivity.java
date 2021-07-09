@@ -14,21 +14,23 @@ import com.example.gtw_101.fragment.HowToPlaySecondFragment;
 
 public class HowToPlayActivity extends AppCompatActivity {
 
-    Button btnNext = findViewById(R.id.btn_next_h2p);
+    Button btnNext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_how_to_play);
-
+        btnNext = findViewById(R.id.btn_next_h2p);
     }
 
     public void nextButton(View view){
-        if (btnNext.getText().toString().equals("HOME")) {
+        if (btnNext.getText().toString().equals("NEXT")) {
             FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
             fm.replace(R.id.fragment_h2p_1, new HowToPlaySecondFragment());
-            btnNext.setText("Home");
-        }else {
-
+            fm.commit();
+            btnNext.setText("HOME");
+        }
+        else {
+            this.finish();
         }
     }
 
@@ -36,7 +38,11 @@ public class HowToPlayActivity extends AppCompatActivity {
         if (btnNext.getText().toString().equals("HOME")){
             FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
             fm.replace(R.id.fragment_h2p_2, new HowToPlayFirstFragment());
-            btnNext.setText("Home");
+            fm.commit();
+            btnNext.setText("NEXT");
+        }
+        else {
+            this.finish();
         }
     }
 }
