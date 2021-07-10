@@ -86,6 +86,7 @@
         android:layout_margin="@dimen/marign_20"
         android:layout_marginBottom="52dp"
         android:background="@drawable/rectmenu"
+        android:onClick="onButtonLeaderBoardClick"
         android:text="@string/leaderboard"
         android:textAllCaps="false"
         android:textColor="@color/white"

@@ -14,7 +14,6 @@ import com.example.gtw_101.controller.menu.MainActivity;
 import com.example.gtw_101.dao.UserDAO;
 import com.example.gtw_101.model.Account;
 import com.example.gtw_101.utilities.AlertDialogBuilder;
-import com.example.gtw_101.utilities.MD5Hashing;
 import com.example.gtw_101.utilities.Validation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -99,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
         else {
             MainActivity.mAuth = FirebaseAuth.getInstance();
             MainActivity.db = FirebaseFirestore.getInstance();
-            MainActivity.mAuth.createUserWithEmailAndPassword(email, MD5Hashing.getMD5Hash(password)).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            MainActivity.mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {

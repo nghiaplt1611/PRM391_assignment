@@ -1,5 +1,7 @@
 package com.example.gtw_101.dao;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.gtw_101.controller.menu.MainActivity;
@@ -12,8 +14,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class QuestionDAO {
 
@@ -50,5 +54,35 @@ public class QuestionDAO {
                     }
                 });
     }
+
+    public static void loadQuestion(){
+
+        if (UserDAO.account.getQuestionID().isEmpty()){
+            getAllQuestionsInLevel(1);
+        }
+        else {
+            getAllQuestionsInLevel(QuestionDAO.question.getLevel());
+        }
+    }
+
+    public static void getRandomQuestion(){
+        int numOfQuestions = listQuestion.size();
+        Random rand = new Random();
+        int randomQuestion = rand.nextInt(numOfQuestions);
+        question = listQuestion.get(randomQuestion);
+        UserDAO.account.setQuestionID(question.getId());
+        UserDAO.updateQuestion(question.getId());
+    }
+
+    public static void getCurrentQuestion(){
+        if (!UserDAO.account.getQuestionID().isEmpty()){
+            getQuestion(UserDAO.account.getQuestionID());
+        }
+        else {
+            getRandomQuestion();
+        }
+    }
+
+
 
 }

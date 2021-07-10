@@ -3,6 +3,7 @@ package com.example.gtw_101.controller.user;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -10,17 +11,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.gtw_101.R;
 import com.example.gtw_101.dao.QuestionDAO;
+import com.example.gtw_101.dao.UserDAO;
+import com.example.gtw_101.model.Question;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Create class InGameActivity() to handle event in this activity
@@ -43,6 +51,7 @@ public class InGameActivity extends AppCompatActivity {
     private List<String> list1 = new ArrayList<>();
     private List<String> list2 = new ArrayList<>();
     private int sceenWid;
+    private boolean finalChoice = false;
     Button newBtn;
 
     //cai chua chay nay giai thich sau :v
@@ -50,13 +59,14 @@ public class InGameActivity extends AppCompatActivity {
 
 
     // Create variable map (HashMap) to store the ID of random letter button and result letter button
-    HashMap<Integer, Integer> map = new HashMap<>();
+    HashMap<Button, Button> map = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_game);
         getSupportActionBar().hide();
+        QuestionDAO.getCurrentQuestion();
 
         congratDiag = new Dialog(this);
 
@@ -67,19 +77,52 @@ public class InGameActivity extends AppCompatActivity {
         layout = findViewById(R.id.twoline_layout1);
         splitString();
         createButton();
-        getImage();
         onLetterChosenClick();
         layoutChosen();
+        loadData();
     }
 
-    public void getImage() {
-        ImageView imageView = (ImageView) findViewById(R.id.imageView5);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
+    }
 
+    public void loadData(){
+        ImageView imageView = (ImageView) findViewById(R.id.imageView5);
         Picasso.with(this).load(QuestionDAO.question.getImageURL()).fit().into(imageView);
+        TextView lblLevel = findViewById(R.id.lb_level);
+        lblLevel.setText("Level " + QuestionDAO.question.getLevel());
+        TextView lblPoint = findViewById(R.id.lb_point);
+        lblPoint.setText(String.valueOf(UserDAO.account.getScore()));
+        displayRandomLetter();
     }
 
     public void returnToMainScreen(View view) {
         this.finish();
+    }
+
+    public boolean compareAnswer(LinearLayout linearLayout, List<String> list){
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            Button b = (Button) linearLayout.getChildAt(i);
+            if (!b.getText().toString().equals(list.get(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkResult(){
+        if (maxButton <= 6) {
+            LinearLayout linearLayout1 = findViewById(R.id.oneline_lay1);
+            LinearLayout linearLayout2 = findViewById(R.id.oneline_lay2);
+            return compareAnswer(linearLayout1, list1) && compareAnswer(linearLayout2, list2);
+
+        } else {
+            LinearLayout linearLayout3 = findViewById(R.id.twoline_layout1);
+            LinearLayout linearLayout4 = findViewById(R.id.twoline_layout2);
+            return compareAnswer(linearLayout3, list1) && compareAnswer(linearLayout4, list2);
+        }
     }
 
     public void onLetterChosenClick() {
@@ -89,6 +132,11 @@ public class InGameActivity extends AppCompatActivity {
             b.setOnClickListener(v -> {
                 if (displayChoosingLetterToResult(b)) {
                     b.setVisibility(View.INVISIBLE);
+                }
+                if (finalChoice) {
+                    if (checkResult()){
+                        showPopup(findViewById(android.R.id.content).getRootView());
+                    }
                 }
                 // Code here executes on main thread after user presses button
             });
@@ -103,7 +151,7 @@ public class InGameActivity extends AppCompatActivity {
                 Button resultButton = (Button) linearLayout1.getChildAt(i);
                 if (resultButton.getText().equals("")) {
                     resultButton.setText(randomLetterButton.getText());
-                    map.put(randomLetterButton.getId(), resultButton.getId());
+                    map.put(randomLetterButton, resultButton);
                     return true;
                 }
             }
@@ -113,7 +161,10 @@ public class InGameActivity extends AppCompatActivity {
                 Button resultButton = (Button) linearLayout2.getChildAt(i);
                 if (resultButton.getText().equals("")) {
                     resultButton.setText(randomLetterButton.getText());
-                    map.put(randomLetterButton.getId(), resultButton.getId());
+                    map.put(randomLetterButton, resultButton);
+
+                    if (i == linearLayout2.getChildCount() - 1)
+                        finalChoice = true;
                     return true;
                 }
             }
@@ -125,7 +176,7 @@ public class InGameActivity extends AppCompatActivity {
                 Button resultButton = (Button) linearLayout3.getChildAt(i);
                 if (resultButton.getText().equals("")) {
                     resultButton.setText(randomLetterButton.getText());
-                    map.put(randomLetterButton.getId(), resultButton.getId());
+                    map.put(randomLetterButton, resultButton);
                     return true;
                 }
             }
@@ -135,7 +186,10 @@ public class InGameActivity extends AppCompatActivity {
                 Button resultButton = (Button) linearLayout4.getChildAt(i);
                 if (resultButton.getText().equals("")) {
                     resultButton.setText(randomLetterButton.getText());
-                    map.put(randomLetterButton.getId(), resultButton.getId());
+                    map.put(randomLetterButton, resultButton);
+
+                    if (i == linearLayout4.getChildCount() - 1)
+                        finalChoice = true;
                     return true;
                 }
             }
@@ -164,10 +218,10 @@ public class InGameActivity extends AppCompatActivity {
             Button b = (Button) groupResultLetters.getChildAt(i);
             b.setOnClickListener(v -> {
                 if (!b.getText().equals("")) {
-                    for (HashMap.Entry<Integer, Integer> entry : map.entrySet()) {
-                        if (entry.getValue() == b.getId()) {
+                    for (HashMap.Entry<Button, Button> entry : map.entrySet()) {
+                        if (entry.getValue() == b) {
                             b.setText("");
-                            Button randomLetterButton = findViewById(entry.getKey());
+                            Button randomLetterButton = entry.getKey();
                             randomLetterButton.setVisibility(View.VISIBLE);
                             map.remove(entry.getKey());
                             break;
@@ -202,6 +256,16 @@ public class InGameActivity extends AppCompatActivity {
                 b.setBackground(null);
                 b.setEnabled(false);
                 hiddenHintLetter(b.getText().toString());
+
+                for (HashMap.Entry<Button, Button> entry : map.entrySet()) {
+                    if (entry.getValue() == b) {
+                        Button randomLetterButton = entry.getKey();
+                        randomLetterButton.setVisibility(View.VISIBLE);
+                        map.remove(entry.getKey());
+                        break;
+                    }
+                }
+
                 return true;
             }
         }
@@ -290,7 +354,7 @@ public class InGameActivity extends AppCompatActivity {
 
     //tach chu
     public void splitString() {
-        word = "BAO CAO";
+        word = QuestionDAO.question.getAnswer();
         maxButton = word.length();
         list1 = new ArrayList<>();
         list2 = new ArrayList<>();
@@ -370,9 +434,41 @@ public class InGameActivity extends AppCompatActivity {
 
 
     public void showPopup(View v) {
+        QuestionDAO.getAllQuestionsInLevel(QuestionDAO.question.getLevel()+1);
+        UserDAO.account.setQuestionID("");
         congratDiag.setContentView(R.layout.popup_congratulation);
         congratDiag.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         congratDiag.show();
+        congratDiag.setCancelable(false);
     }
 
+    public void returnToUserMainMenuIntent(View view){
+        congratDiag.cancel();
+        QuestionDAO.getCurrentQuestion();
+        this.finish();
+    }
+
+    public void nextQuestion(View view){
+        congratDiag.cancel();
+        QuestionDAO.getCurrentQuestion();
+    }
+
+    public void displayRandomLetter(){
+        List<String> newList = new ArrayList<>();
+        newList.addAll(list1);
+        newList.addAll(list2);
+        for (int i = newList.size(); i < 14; i++){
+            char c = (char) (Math.random()*(90-65+1)+65);
+            newList.add(String.valueOf(c));
+        }
+
+        ConstraintLayout groupRandomLetters = findViewById(R.id.group_key);
+        for (int i = 0; i < groupRandomLetters.getChildCount(); i++) {
+            Button b = (Button) groupRandomLetters.getChildAt(i);
+            Random rand = new Random();
+            int randNumber = rand.nextInt(newList.size());
+            b.setText(newList.get(randNumber));
+            newList.remove(randNumber);
+        }
+    }
 }

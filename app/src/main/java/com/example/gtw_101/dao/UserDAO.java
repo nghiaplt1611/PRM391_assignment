@@ -61,7 +61,7 @@ public class UserDAO {
         account.setEmail(email);
         account.setFullName(fullName);
         account.setYearOfBirth(Integer.parseInt(yearOfBirth));
-        account.setQuestion(null);
+        account.setQuestionID("");
         account.setNumOfLetterShown(0);
         account.setAchievements("FFFFF");
         account.setScore(ScoreDAO.score.getInitialScore());
@@ -74,6 +74,17 @@ public class UserDAO {
         DocumentReference docRef = MainActivity.db.collection("users").document(id);
 
         docRef.update("fullName", fullName, "yearOfBirth", yearOfBirth).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
+        });
+    }
+
+    public static void updateQuestion(String id){
+        MainActivity.db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = MainActivity.db.collection("users").document(UserDAO.account.getId());
+        docRef.update("question", id).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
 

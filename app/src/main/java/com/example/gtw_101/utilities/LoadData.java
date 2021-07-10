@@ -9,12 +9,16 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoadData {
     public static void loadAllData(){
         AchievementDAO.loadAchievementData();
-        QuestionDAO.getAllQuestionsInLevel(1);
-        QuestionDAO.getQuestion("cDTQkK1PlkQ7Qh03ZFfo");
         ScoreDAO.getScore();
     }
 
     public static void loadUserData(FirebaseUser user){
         UserDAO.getUserInfo(user.getEmail());
     }
+
+    public static void loadQuestion(){
+        QuestionDAO.loadQuestion();
+    }
+
+
 }

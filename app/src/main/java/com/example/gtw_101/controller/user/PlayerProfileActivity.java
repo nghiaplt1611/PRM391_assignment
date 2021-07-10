@@ -48,13 +48,14 @@ public class PlayerProfileActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         this.startActivity(intent);
         this.finish();
+        this.finish();
     }
 
     public void onButtonChangePass(View view){
         MainActivity.mAuth = FirebaseAuth.getInstance();
         MainActivity.user = MainActivity.mAuth.getCurrentUser();
         MainActivity.mAuth.sendPasswordResetEmail(MainActivity.user.getEmail());
-        AlertDialogBuilder.showAlertDialog("Notification!", "A email message has been sent to " + MainActivity.user.getEmail()+ " for changing password. Please check it!", this);
+        AlertDialogBuilder.showAlertDialog("Notification!", "A email message has been sent to " + MainActivity.user.getEmail()+ " for verification. Please check it!", this);
         finish();
     }
 

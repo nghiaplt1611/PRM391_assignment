@@ -9,13 +9,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 
 
 import com.example.gtw_101.R;
+import com.example.gtw_101.controller.account.ForgotPasswordActivity;
 import com.example.gtw_101.controller.user.InGameActivity;
 import com.example.gtw_101.controller.account.LoginActivity;
+import com.example.gtw_101.utilities.AlertDialogBuilder;
 import com.example.gtw_101.utilities.CheckNetworkConnection;
 import com.example.gtw_101.utilities.LoadData;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,10 +59,24 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         super.onStart();
         user = mAuth.getCurrentUser();
         if (user != null){
-            //currentUser.sendEmailVerification();
-//            mAuth.sendPasswordResetEmail(currentUser.getEmail());
             LoadData.loadUserData(user);
-            userMainMenuIntent(findViewById(android.R.id.content).getRootView());
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Welcome back! Have fun with Guess The Word!!!");
+            builder.setTitle("Automatic logged in!");
+            builder.setCancelable(false);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                    finish();
+                    userMainMenuIntent(findViewById(android.R.id.content).getRootView());
+                }
+            });
+            // Create the Alert dialog
+            AlertDialog alertDialog = builder.create();
+
+            // Show the Alert Dialog box
+            alertDialog.show();
         }
     }
 
