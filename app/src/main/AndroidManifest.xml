@@ -4,6 +4,9 @@
     package="com.example.gtw_101">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -13,6 +16,7 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.GTW_101">
+        <activity android:name=".controller.user.profile.ChangeAvatarActivity"></activity>
         <activity
             android:name=".controller.SlashScreenActivity"
             android:screenOrientation="portrait">
@@ -41,11 +45,6 @@
         <activity
             android:name=".controller.menu.MainActivity"
             android:screenOrientation="portrait">
-            <intent-filter tools:ignore="ExtraText">
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".controller.account.LoginActivity"

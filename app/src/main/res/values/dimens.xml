@@ -10,6 +10,7 @@
     <dimen name="marign_23">23dp</dimen>
     <dimen name="marign_22">22dp</dimen>
     <dimen name="marign_20">20dp</dimen>
+    <dimen name="marign_60">60dp</dimen>
     <dimen name="marign_8">8dp</dimen>
     <dimen name="marign_6">6dp</dimen>
     <dimen name="marign_5">5dp</dimen>
