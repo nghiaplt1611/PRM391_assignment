@@ -24,7 +24,7 @@ public class Validation {
 
 
     public static boolean checkFullNameFormat(String fullName){
-        String specialCharacters = "~`!@#$%^&*()-_=+[{]}\\|;:'\"<>,./?*";
+        String specialCharacters = "~`!@#$%^&*()-_=+[{]}\\|;:'\"<>,./?* 0123456789";
         for (int i = 0; i < fullName.length(); i++){
             if (specialCharacters.indexOf(fullName.charAt(i)) != -1 || (fullName.charAt(i) >= 48 && fullName.charAt(i) <= 57)){
                 return false;
