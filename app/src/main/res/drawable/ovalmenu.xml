@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#976628"/>
+            <size android:width="230dp" android:height="230dp" />
+        </shape>
+    </item>
+<!--    <item android:drawable="@drawable/howtoplay" >-->
+<!--    </item>-->
+</layer-list>

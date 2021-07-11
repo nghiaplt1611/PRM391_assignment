@@ -103,7 +103,6 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        new Account();
                         Account account = UserDAO.registeredNewAccount(email, fullName, yearOfBirth);
                         DocumentReference documentReference = MainActivity.db.collection("users").document();
                         account.setId(documentReference.getId());
