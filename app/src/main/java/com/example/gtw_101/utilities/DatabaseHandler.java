@@ -19,7 +19,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_SCORE = "score";
     private static final String KEY_ANSWER_OF_QUESTION = "answer_of_question";
     private static final String KEY_NUM_OF_LETTER_SHOWN = "num_of_letter_shown";
-    private static final String KEY_ACHIEVEMENT = "achievement";
+    private static final String KEY_QUESTION = "question";
 
 
 
@@ -40,7 +40,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createGuestTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s INTEGER, %s TEXT, %s INTEGER, %s TEXT)",
-                TABLE_NAME, KEY_LEVEL, KEY_SCORE, KEY_ANSWER_OF_QUESTION, KEY_NUM_OF_LETTER_SHOWN, KEY_ACHIEVEMENT);
+                TABLE_NAME, KEY_LEVEL, KEY_SCORE, KEY_ANSWER_OF_QUESTION, KEY_NUM_OF_LETTER_SHOWN, KEY_QUESTION);
         db.execSQL(createGuestTable);
     }
 
@@ -77,7 +77,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_SCORE, guest.getScore());
         values.put(KEY_ANSWER_OF_QUESTION, guest.getAnswerOfQuestion());
         values.put(KEY_NUM_OF_LETTER_SHOWN, guest.getNumOfLetterShown());
-        values.put(KEY_ACHIEVEMENT, guest.getAchievements());
+        values.put(KEY_QUESTION, guest.getQuestion());
 
         // Call the insert method from the database
         db.insert(TABLE_NAME, null, values);
@@ -93,7 +93,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_SCORE, updatedGuest.getScore());
         values.put(KEY_ANSWER_OF_QUESTION, updatedGuest.getAnswerOfQuestion());
         values.put(KEY_NUM_OF_LETTER_SHOWN, updatedGuest.getNumOfLetterShown());
-        values.put(KEY_ACHIEVEMENT, updatedGuest.getAchievements());
+        values.put(KEY_QUESTION, updatedGuest.getQuestion());
 
         db.update(TABLE_NAME, values, null, null);
         db.close();

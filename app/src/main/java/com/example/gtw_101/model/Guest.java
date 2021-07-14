@@ -7,17 +7,17 @@ public class Guest implements Serializable {
     private int score;
     private String answerOfQuestion;
     private int numOfLetterShown;
-    private String achievements;
+    private String question;
 
     public Guest() {
     }
 
-    public Guest(int level, int score, String answerOfQuestion, int numOfLetterShown, String achievements) {
+    public Guest(int level, int score, String answerOfQuestion, int numOfLetterShown, String question) {
         this.level = level;
         this.score = score;
         this.answerOfQuestion = answerOfQuestion;
         this.numOfLetterShown = numOfLetterShown;
-        this.achievements = achievements;
+        this.question = question;
     }
 
     public int getLevel() {
@@ -52,11 +52,11 @@ public class Guest implements Serializable {
         this.numOfLetterShown = numOfLetterShown;
     }
 
-    public String getAchievements() {
-        return achievements;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setAchievements(String achievements) {
-        this.achievements = achievements;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 }
