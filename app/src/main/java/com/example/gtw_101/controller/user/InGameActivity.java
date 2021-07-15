@@ -25,6 +25,7 @@ import com.example.gtw_101.dao.ScoreDAO;
 import com.example.gtw_101.dao.UserDAO;
 import com.example.gtw_101.model.Account;
 import com.example.gtw_101.utilities.AlertDialogBuilder;
+import com.example.gtw_101.utilities.CustomPopupCongrats;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -40,7 +41,6 @@ import java.util.Random;
 public class InGameActivity extends AppCompatActivity {
 
 
-    Dialog congratDiag;
     //var cho ham tao nut
     LinearLayout layout;
     private int firstMar;
@@ -54,6 +54,7 @@ public class InGameActivity extends AppCompatActivity {
     private int sceenWid;
     private boolean finalChoice = false;
     Button newBtn;
+    Dialog congratDiag;
 
     //cai chua chay nay giai thich sau :v
     private int chuachay = 998;
@@ -69,7 +70,6 @@ public class InGameActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         QuestionDAO.getCurrentQuestion();
 
-        congratDiag = new Dialog(this);
 
         getSceenPec();
         calForButton();
@@ -149,19 +149,21 @@ public class InGameActivity extends AppCompatActivity {
                 }
                 if (finalChoice) {
                     if (checkResult()){
-                        showPopup(findViewById(android.R.id.content).getRootView());
                         int passedLevelScore = ScoreDAO.getRewardScore(QuestionDAO.question.getLevel());
                         if (MainActivity.user == null){
 
                             int score = GuestDAO.guest.getScore() + passedLevelScore;
                             GuestDAO.updateScoreAndShowHints(score, 0);
+                            congratDiag = CustomPopupCongrats.showDialog(this, QuestionDAO.question.getAnswer(), passedLevelScore);
                         }
                         else {
                             String id = UserDAO.account.getId();
                             int score = UserDAO.account.getScore() + passedLevelScore;
                             UserDAO.updateScoreAndShowHints(id, score, 0);
+                            congratDiag = CustomPopupCongrats.showDialog(this, QuestionDAO.question.getAnswer(), passedLevelScore);
                         }
-
+                        congratDiag.show();
+                        getNewData();
                     }
                     else {
                         int minusScore = ScoreDAO.getWrongAnswerScore(QuestionDAO.question.getLevel());
@@ -541,7 +543,8 @@ public class InGameActivity extends AppCompatActivity {
     }
 
 
-    public void showPopup(View v) {
+    public void getNewData() {
+
         QuestionDAO.getAllQuestionsInLevel(QuestionDAO.question.getLevel()+1);
         if (MainActivity.user == null){
             GuestDAO.guest.setQuestion("");
@@ -549,10 +552,6 @@ public class InGameActivity extends AppCompatActivity {
         else {
             UserDAO.account.setQuestionID("");
         }
-        congratDiag.setContentView(R.layout.popup_congratulation);
-        congratDiag.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        congratDiag.show();
-        congratDiag.setCancelable(false);
     }
 
     public void returnToUserMainMenuIntent(View view){
