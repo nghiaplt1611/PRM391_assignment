@@ -544,13 +544,16 @@ public class InGameActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         sceenWid = displayMetrics.widthPixels;
         scennHei = displayMetrics.heightPixels;
-        buttonLayoutHei = scennHei/5;
-        ConstraintLayout botLay = findViewById(R.id.group_answer);
-        ConstraintLayout.LayoutParams bot = (ConstraintLayout.LayoutParams) botLay.getLayoutParams();
-        Button btn = findViewById(R.id.bt_answer_1);
-        bot.height =  scennHei/17*5;
-        Log.e("chieu cao",""+bot.height + " "+btn.getHeight());
-        botLay.setLayoutParams(bot);
+        ConstraintLayout resultlay = findViewById(R.id.group_result);
+        ConstraintLayout.LayoutParams result = (ConstraintLayout.LayoutParams) resultlay.getLayoutParams();
+        buttonLayoutHei = result.height;
+
+//        ConstraintLayout botLay = findViewById(R.id.group_answer);
+//        ConstraintLayout.LayoutParams bot = (ConstraintLayout.LayoutParams) botLay.getLayoutParams();
+//        Button btn = findViewById(R.id.bt_answer_1);
+//        bot.height =  scennHei/17*5;
+//        Log.e("chieu cao",""+bot.height + " "+buttonLayoutHei);
+//        botLay.setLayoutParams(bot);
     }
 
     public void calForButton() {
