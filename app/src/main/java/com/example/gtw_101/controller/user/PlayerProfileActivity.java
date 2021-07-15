@@ -47,8 +47,7 @@ public class PlayerProfileActivity extends AppCompatActivity {
         MainActivity.mAuth.signOut();
         Intent intent = new Intent(this, MainActivity.class);
         this.startActivity(intent);
-        this.finish();
-        this.finish();
+        this.finishAffinity();
     }
 
     public void onButtonChangePass(View view){

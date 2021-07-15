@@ -1,5 +1,6 @@
 package com.example.gtw_101.dao;
 
+
 import androidx.annotation.NonNull;
 
 import com.example.gtw_101.controller.menu.MainActivity;
@@ -28,4 +29,21 @@ public class ScoreDAO {
                     }
                 });
     }
+
+    public static double getMultiplier(int level){
+        return ((double)level)/10 + 0.9;
+    }
+
+    public static int getHintScore(int level){
+        return (int)(score.getHintScore() * getMultiplier(level));
+    }
+
+    public static int getWrongAnswerScore(int level){
+        return (int)(score.getWrongAnswerScore() * getMultiplier(level));
+    }
+
+    public static int getRewardScore(int level){
+        return (int)(score.getPassedLevelScore() * getMultiplier(level));
+    }
+
 }

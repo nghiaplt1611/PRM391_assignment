@@ -1,12 +1,14 @@
 package com.example.gtw_101.utilities;
 
 import com.example.gtw_101.dao.AchievementDAO;
+import com.example.gtw_101.dao.GuestDAO;
 import com.example.gtw_101.dao.QuestionDAO;
 import com.example.gtw_101.dao.ScoreDAO;
 import com.example.gtw_101.dao.UserDAO;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoadData {
+
     public static void loadAllData(){
         AchievementDAO.loadAchievementData();
         ScoreDAO.getScore();
@@ -20,5 +22,7 @@ public class LoadData {
         QuestionDAO.loadQuestion();
     }
 
-
+    public static void loadGuestData(){
+        GuestDAO.getGuestData();
+    }
 }

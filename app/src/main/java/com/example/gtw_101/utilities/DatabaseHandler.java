@@ -15,9 +15,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "Guest_Management";
 
-    private static final String KEY_LEVEL = "level";
     private static final String KEY_SCORE = "score";
-    private static final String KEY_ANSWER_OF_QUESTION = "answer_of_question";
     private static final String KEY_NUM_OF_LETTER_SHOWN = "num_of_letter_shown";
     private static final String KEY_QUESTION = "question";
 
@@ -39,8 +37,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createGuestTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s INTEGER, %s TEXT, %s INTEGER, %s TEXT)",
-                TABLE_NAME, KEY_LEVEL, KEY_SCORE, KEY_ANSWER_OF_QUESTION, KEY_NUM_OF_LETTER_SHOWN, KEY_QUESTION);
+        String createGuestTable = String.format("CREATE TABLE %s(%s INTEGER PRIMARY KEY, %s INTEGER, %s TEXT)",
+                TABLE_NAME, KEY_SCORE, KEY_NUM_OF_LETTER_SHOWN, KEY_QUESTION);
         db.execSQL(createGuestTable);
     }
 
@@ -73,9 +71,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
 
         // Add data to the value by providing the attribute and its value
-        values.put(KEY_LEVEL, guest.getLevel());
         values.put(KEY_SCORE, guest.getScore());
-        values.put(KEY_ANSWER_OF_QUESTION, guest.getAnswerOfQuestion());
         values.put(KEY_NUM_OF_LETTER_SHOWN, guest.getNumOfLetterShown());
         values.put(KEY_QUESTION, guest.getQuestion());
 
@@ -89,9 +85,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(KEY_LEVEL, updatedGuest.getLevel());
         values.put(KEY_SCORE, updatedGuest.getScore());
-        values.put(KEY_ANSWER_OF_QUESTION, updatedGuest.getAnswerOfQuestion());
         values.put(KEY_NUM_OF_LETTER_SHOWN, updatedGuest.getNumOfLetterShown());
         values.put(KEY_QUESTION, updatedGuest.getQuestion());
 
@@ -106,8 +100,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
 
-        Guest guest = new Guest(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getInt(3), cursor.getString(4));
-        return guest;
+        try {
+            Guest guest = new Guest( cursor.getInt(0), cursor.getInt(1), cursor.getString(2));
+            return guest;
+        } catch (Exception e){
+            return null;
+        }
     }
 
 }

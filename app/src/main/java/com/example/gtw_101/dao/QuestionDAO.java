@@ -21,17 +21,17 @@ import java.util.Random;
 
 public class QuestionDAO {
 
-    public static Question question = new Question();
+    public static Question question;
     public static ArrayList<Question> listQuestion = new ArrayList<>();
 
     public static void getQuestion(String id){
-
         MainActivity.db = FirebaseFirestore.getInstance();
         DocumentReference docRef = MainActivity.db.collection("questions").document(id);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 question = documentSnapshot.toObject(Question.class);
+                getAllQuestionsInLevel(question.getLevel());
             }
         });
     }
@@ -57,12 +57,23 @@ public class QuestionDAO {
 
     public static void loadQuestion(){
 
-        if (UserDAO.account.getQuestionID().isEmpty()){
-            getAllQuestionsInLevel(1);
+        if (MainActivity.user == null){
+            if (GuestDAO.guest.getQuestion().isEmpty()){
+                getAllQuestionsInLevel(1);
+            }
+            else {
+                getQuestion(GuestDAO.guest.getQuestion());
+            }
         }
         else {
-            getAllQuestionsInLevel(QuestionDAO.question.getLevel());
+            if (UserDAO.account.getQuestionID().isEmpty()){
+                getAllQuestionsInLevel(1);
+            }
+            else {
+                getAllQuestionsInLevel(QuestionDAO.question.getLevel());
+            }
         }
+
     }
 
     public static void getRandomQuestion(){
@@ -70,17 +81,35 @@ public class QuestionDAO {
         Random rand = new Random();
         int randomQuestion = rand.nextInt(numOfQuestions);
         question = listQuestion.get(randomQuestion);
-        UserDAO.account.setQuestionID(question.getId());
-        UserDAO.updateQuestion(question.getId());
+        if (MainActivity.user == null){
+            GuestDAO.guest.setQuestion(question.getId());
+            GuestDAO.updateQuestion(question.getId());
+        }
+        else {
+            UserDAO.account.setQuestionID(question.getId());
+            UserDAO.updateQuestion(question.getId());
+        }
+
     }
 
     public static void getCurrentQuestion(){
-        if (!UserDAO.account.getQuestionID().isEmpty()){
-            getQuestion(UserDAO.account.getQuestionID());
+        if (MainActivity.user == null){
+            if (!GuestDAO.guest.getQuestion().isEmpty()){
+                getQuestion(GuestDAO.guest.getQuestion());
+            }
+            else {
+                getRandomQuestion();
+            }
         }
         else {
-            getRandomQuestion();
+            if (!UserDAO.account.getQuestionID().isEmpty()){
+                getQuestion(UserDAO.account.getQuestionID());
+            }
+            else {
+                getRandomQuestion();
+            }
         }
+
     }
 
 

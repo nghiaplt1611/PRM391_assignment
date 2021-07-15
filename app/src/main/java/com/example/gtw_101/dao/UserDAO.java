@@ -91,4 +91,31 @@ public class UserDAO {
             }
         });
     }
+
+    public static void updateScoreAndShowHints(String id, int score, int numOfShownHint){
+        account.setScore(score);
+        account.setNumOfLetterShown(numOfShownHint);
+        MainActivity.db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = MainActivity.db.collection("users").document(id);
+
+        docRef.update("score", score, "numOfLetterShown", numOfShownHint).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
+        });
+    }
+
+    public static void updateScore(String id, int score){
+        account.setScore(score);
+        MainActivity.db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = MainActivity.db.collection("users").document(id);
+
+        docRef.update("score", score).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
+        });
+    }
 }
