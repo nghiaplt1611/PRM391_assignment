@@ -1,4 +1,4 @@
-package com.example.gtw_101.controller;
+package com.example.gtw_101.controller.menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -20,6 +20,7 @@ public class HowToPlayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_how_to_play);
         btnNext = findViewById(R.id.btn_next_h2p);
+        getSupportActionBar().hide();
     }
 
     public void nextButton(View view){

@@ -15,7 +15,6 @@ import com.example.gtw_101.controller.menu.MainActivity;
 import com.example.gtw_101.controller.menu.UserMainActivity;
 import com.example.gtw_101.dao.UserDAO;
 import com.example.gtw_101.utilities.AlertDialogBuilder;
-import com.example.gtw_101.utilities.MD5Hashing;
 import com.example.gtw_101.utilities.Validation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,6 +33,11 @@ public class LoginActivity extends AppCompatActivity {
 
     public void registerIntent(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
+        this.startActivity(intent);
+    }
+
+    public void forgotPasswordIntent(View view){
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
         this.startActivity(intent);
     }
 
@@ -58,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
 
             MainActivity.mAuth = FirebaseAuth.getInstance();
-            MainActivity.mAuth.signInWithEmailAndPassword(email, MD5Hashing.getMD5Hash(password)).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            MainActivity.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
@@ -73,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.cancel();
-                                    AlertDialogBuilder.showAlertDialog("Notification!", "A email message has been sent to your email account for verification. Please check it!", LoginActivity.this);
+                                    AlertDialogBuilder.showAlertDialog("Notification!", "An email message has been sent to your email account for verification. Please check it!", LoginActivity.this);
                                     MainActivity.user.sendEmailVerification();
                                 }
                             }).setNegativeButton("Later", new DialogInterface.OnClickListener() {

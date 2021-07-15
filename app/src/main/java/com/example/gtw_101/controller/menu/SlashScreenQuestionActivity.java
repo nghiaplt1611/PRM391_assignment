@@ -1,33 +1,29 @@
-package com.example.gtw_101.controller;
+package com.example.gtw_101.controller.menu;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.gtw_101.R;
-import com.example.gtw_101.controller.menu.MainActivity;
-import com.example.gtw_101.utilities.LoadData;
 
-public class SlashScreenActivity extends AppCompatActivity {
+public class SlashScreenQuestionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_slash_screen);
+        setContentView(R.layout.activity_slash_screen_question);
         getSupportActionBar().hide();
         new Handler().postDelayed(this::slashScreen,2000);
-        LoadData.loadAllData();
 
     }
 
     /**
-     * method is used to make activity_slash_screen layout appear 2 seconds whenever the app start
-      */
+     * method is used to make activity_slash_screen_question layout appear 2 seconds
+     */
     public void slashScreen(){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);   //Nữa đổi class chỗ này nha
         startActivity(intent);
         finish();
     }

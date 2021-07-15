@@ -12,11 +12,11 @@ public class AlertDialogBuilder {
      * @param message store message
      * @param context store application context
      */
-    public static void showAlertDialog(String title, String message, Context context){
+    public static AlertDialog showAlertDialog(String title, String message, Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message).setTitle(title);
         AlertDialog dialog = builder.create();
-        dialog.show();
+        return dialog;
     }
 
 }

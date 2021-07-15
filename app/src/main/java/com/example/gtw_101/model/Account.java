@@ -7,10 +7,14 @@ public class Account implements Serializable {
     private String email;
     private String fullName;
     private int yearOfBirth;
-    private Question question;
+    private String questionID;
+
+
+
     private int numOfLetterShown;
     private String achievements;
     private int score;
+    private int avatar;
 
     public Account() {
     }
@@ -47,12 +51,12 @@ public class Account implements Serializable {
         this.yearOfBirth = yearOfBirth;
     }
 
-    public Question getQuestion() {
-        return question;
+    public String getQuestionID() {
+        return questionID;
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
+    public void setQuestionID(String questionID) {
+        this.questionID = questionID;
     }
 
     public int getNumOfLetterShown() {
@@ -77,5 +81,13 @@ public class Account implements Serializable {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public int getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
     }
 }

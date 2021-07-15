@@ -1,6 +1,8 @@
 package com.example.gtw_101.controller.user;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -10,17 +12,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.gtw_101.R;
+import com.example.gtw_101.controller.menu.MainActivity;
+import com.example.gtw_101.dao.GuestDAO;
 import com.example.gtw_101.dao.QuestionDAO;
+import com.example.gtw_101.dao.ScoreDAO;
+import com.example.gtw_101.dao.UserDAO;
+import com.example.gtw_101.model.Account;
+import com.example.gtw_101.utilities.AlertDialogBuilder;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Create class InGameActivity() to handle event in this activity
@@ -32,17 +44,15 @@ public class InGameActivity extends AppCompatActivity {
     //var cho ham tao nut
     LinearLayout layout;
     private int firstMar;
-    private int lastMar;
-    private int buttonMar = 30;
     private int maxButton;
     private int buttonSpace = 15;
     private int buttonWid;
     private int buttonHei;
-    private int number = 1;
     private String word = "";
     private List<String> list1 = new ArrayList<>();
     private List<String> list2 = new ArrayList<>();
     private int sceenWid;
+    private boolean finalChoice = false;
     Button newBtn;
 
     //cai chua chay nay giai thich sau :v
@@ -50,13 +60,14 @@ public class InGameActivity extends AppCompatActivity {
 
 
     // Create variable map (HashMap) to store the ID of random letter button and result letter button
-    HashMap<Integer, Integer> map = new HashMap<>();
+    HashMap<Button, Button> map = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_in_game);
         getSupportActionBar().hide();
+        QuestionDAO.getCurrentQuestion();
 
         congratDiag = new Dialog(this);
 
@@ -67,19 +78,65 @@ public class InGameActivity extends AppCompatActivity {
         layout = findViewById(R.id.twoline_layout1);
         splitString();
         createButton();
-        getImage();
         onLetterChosenClick();
         layoutChosen();
+        loadData();
+        displayRandomLetter();
+        if (MainActivity.user == null){
+            for (int i = 1; i <= GuestDAO.guest.getNumOfLetterShown(); i++){
+                handleGetHintExecute();
+            }
+        }
+        else {
+            for (int i = 1; i <= UserDAO.account.getNumOfLetterShown(); i++){
+                handleGetHintExecute();
+            }
+        }
+
     }
 
-    public void getImage() {
-        ImageView imageView = (ImageView) findViewById(R.id.imageView5);
 
+    public void loadData(){
+        ImageView imageView = (ImageView) findViewById(R.id.imageView5);
         Picasso.with(this).load(QuestionDAO.question.getImageURL()).fit().into(imageView);
+        TextView lblLevel = findViewById(R.id.lb_level);
+        lblLevel.setText("Level " + QuestionDAO.question.getLevel());
+        TextView lblPoint = findViewById(R.id.lb_point);
+        int score;
+        if (MainActivity.user == null){
+            score = GuestDAO.guest.getScore();
+        }
+        else {
+            score = UserDAO.account.getScore();
+        }
+        lblPoint.setText(String.valueOf(score));
     }
 
     public void returnToMainScreen(View view) {
         this.finish();
+    }
+
+    public boolean compareAnswer(LinearLayout linearLayout, List<String> list){
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            Button b = (Button) linearLayout.getChildAt(i);
+            if (!b.getText().toString().equals(list.get(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkResult(){
+        if (maxButton <= 6) {
+            LinearLayout linearLayout1 = findViewById(R.id.oneline_lay1);
+            LinearLayout linearLayout2 = findViewById(R.id.oneline_lay2);
+            return compareAnswer(linearLayout1, list1) && compareAnswer(linearLayout2, list2);
+
+        } else {
+            LinearLayout linearLayout3 = findViewById(R.id.twoline_layout1);
+            LinearLayout linearLayout4 = findViewById(R.id.twoline_layout2);
+            return compareAnswer(linearLayout3, list1) && compareAnswer(linearLayout4, list2);
+        }
     }
 
     public void onLetterChosenClick() {
@@ -89,6 +146,48 @@ public class InGameActivity extends AppCompatActivity {
             b.setOnClickListener(v -> {
                 if (displayChoosingLetterToResult(b)) {
                     b.setVisibility(View.INVISIBLE);
+                }
+                if (finalChoice) {
+                    if (checkResult()){
+                        showPopup(findViewById(android.R.id.content).getRootView());
+                        int passedLevelScore = ScoreDAO.getRewardScore(QuestionDAO.question.getLevel());
+                        if (MainActivity.user == null){
+
+                            int score = GuestDAO.guest.getScore() + passedLevelScore;
+                            GuestDAO.updateScoreAndShowHints(score, 0);
+                        }
+                        else {
+                            String id = UserDAO.account.getId();
+                            int score = UserDAO.account.getScore() + passedLevelScore;
+                            UserDAO.updateScoreAndShowHints(id, score, 0);
+                        }
+
+                    }
+                    else {
+                        int minusScore = ScoreDAO.getWrongAnswerScore(QuestionDAO.question.getLevel());
+                        AlertDialogBuilder.showAlertDialog("Notification!", "You gave out a wrong answer. The score will be minus " + minusScore + " points!", this).show();
+                        if (MainActivity.user == null){
+                            int score = GuestDAO.guest.getScore() - minusScore;
+                            if (score < 0){
+                                score = 0;
+                            }
+                            TextView lblPoint = findViewById(R.id.lb_point);
+                            lblPoint.setText(String.valueOf(score));
+                            GuestDAO.updateScore(score);
+
+                        }
+                        else {
+                            int score = UserDAO.account.getScore() - minusScore;
+                            if (score < 0){
+                                score = 0;
+                            }
+                            TextView lblPoint = findViewById(R.id.lb_point);
+                            lblPoint.setText(String.valueOf(score));
+                            UserDAO.updateScore(UserDAO.account.getId(), score);
+                        }
+                        finalChoice = false;
+
+                    }
                 }
                 // Code here executes on main thread after user presses button
             });
@@ -103,7 +202,7 @@ public class InGameActivity extends AppCompatActivity {
                 Button resultButton = (Button) linearLayout1.getChildAt(i);
                 if (resultButton.getText().equals("")) {
                     resultButton.setText(randomLetterButton.getText());
-                    map.put(randomLetterButton.getId(), resultButton.getId());
+                    map.put(randomLetterButton, resultButton);
                     return true;
                 }
             }
@@ -113,7 +212,10 @@ public class InGameActivity extends AppCompatActivity {
                 Button resultButton = (Button) linearLayout2.getChildAt(i);
                 if (resultButton.getText().equals("")) {
                     resultButton.setText(randomLetterButton.getText());
-                    map.put(randomLetterButton.getId(), resultButton.getId());
+                    map.put(randomLetterButton, resultButton);
+
+                    if (i == linearLayout2.getChildCount() - 1)
+                        finalChoice = true;
                     return true;
                 }
             }
@@ -125,7 +227,7 @@ public class InGameActivity extends AppCompatActivity {
                 Button resultButton = (Button) linearLayout3.getChildAt(i);
                 if (resultButton.getText().equals("")) {
                     resultButton.setText(randomLetterButton.getText());
-                    map.put(randomLetterButton.getId(), resultButton.getId());
+                    map.put(randomLetterButton, resultButton);
                     return true;
                 }
             }
@@ -135,7 +237,10 @@ public class InGameActivity extends AppCompatActivity {
                 Button resultButton = (Button) linearLayout4.getChildAt(i);
                 if (resultButton.getText().equals("")) {
                     resultButton.setText(randomLetterButton.getText());
-                    map.put(randomLetterButton.getId(), resultButton.getId());
+                    map.put(randomLetterButton, resultButton);
+
+                    if (i == linearLayout4.getChildCount() - 1)
+                        finalChoice = true;
                     return true;
                 }
             }
@@ -164,10 +269,10 @@ public class InGameActivity extends AppCompatActivity {
             Button b = (Button) groupResultLetters.getChildAt(i);
             b.setOnClickListener(v -> {
                 if (!b.getText().equals("")) {
-                    for (HashMap.Entry<Integer, Integer> entry : map.entrySet()) {
-                        if (entry.getValue() == b.getId()) {
+                    for (HashMap.Entry<Button, Button> entry : map.entrySet()) {
+                        if (entry.getValue() == b) {
                             b.setText("");
-                            Button randomLetterButton = findViewById(entry.getKey());
+                            Button randomLetterButton = entry.getKey();
                             randomLetterButton.setVisibility(View.VISIBLE);
                             map.remove(entry.getKey());
                             break;
@@ -180,6 +285,63 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     public void getHint(View view) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        int hintScore = ScoreDAO.getHintScore(QuestionDAO.question.getLevel());
+        builder.setMessage("It will cost " + hintScore + " when using SHOW ONE LETTER hint!");
+        builder.setTitle("Alert!!!");
+        builder.setCancelable(false);
+        builder.setPositiveButton("USE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                if (MainActivity.user == null){
+                    int score = GuestDAO.guest.getScore() - hintScore;
+                    if (score < 0){
+                        AlertDialogBuilder.showAlertDialog("Alert!!!", "You don't have enough money to use this hint!", InGameActivity.this).show();
+                    }
+                    else {
+                        int numOfShownLetter = GuestDAO.guest.getNumOfLetterShown();
+                        GuestDAO.guest.setScore(score);
+                        GuestDAO.guest.setNumOfLetterShown(++numOfShownLetter);
+                        GuestDAO.updateScoreAndShowHints(score, numOfShownLetter);
+
+                        TextView lblPoint = findViewById(R.id.lb_point);
+                        lblPoint.setText(String.valueOf(GuestDAO.guest.getScore()));
+
+                    }
+                }
+                else {
+                    int score = UserDAO.account.getScore() - hintScore;
+                    if (score < 0){
+                        AlertDialogBuilder.showAlertDialog("Alert!!!", "You don't have enough money to use this hint!", InGameActivity.this).show();
+                    }
+                    else {
+                        int numOfShownLetter = UserDAO.account.getNumOfLetterShown();
+                        UserDAO.account.setScore(score);
+                        UserDAO.account.setNumOfLetterShown(++numOfShownLetter);
+                        UserDAO.updateScoreAndShowHints(UserDAO.account.getId(), score, numOfShownLetter);
+
+                        TextView lblPoint = findViewById(R.id.lb_point);
+                        lblPoint.setText(String.valueOf(UserDAO.account.getScore()));
+                    }
+                }
+                handleGetHintExecute();
+            }
+        }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        // Create the Alert dialog
+        AlertDialog alertDialog = builder.create();
+
+        // Show the Alert Dialog box
+        alertDialog.show();
+    }
+
+    public void handleGetHintExecute(){
         if (maxButton <= 6){
             LinearLayout linearLayout1 = findViewById(R.id.oneline_lay1);
             LinearLayout linearLayout2 = findViewById(R.id.oneline_lay2);
@@ -202,6 +364,16 @@ public class InGameActivity extends AppCompatActivity {
                 b.setBackground(null);
                 b.setEnabled(false);
                 hiddenHintLetter(b.getText().toString());
+
+                for (HashMap.Entry<Button, Button> entry : map.entrySet()) {
+                    if (entry.getValue() == b) {
+                        Button randomLetterButton = entry.getKey();
+                        randomLetterButton.setVisibility(View.VISIBLE);
+                        map.remove(entry.getKey());
+                        break;
+                    }
+                }
+
                 return true;
             }
         }
@@ -290,7 +462,7 @@ public class InGameActivity extends AppCompatActivity {
 
     //tach chu
     public void splitString() {
-        word = "BAO CAO";
+        word = QuestionDAO.question.getAnswer();
         maxButton = word.length();
         list1 = new ArrayList<>();
         list2 = new ArrayList<>();
@@ -370,9 +542,58 @@ public class InGameActivity extends AppCompatActivity {
 
 
     public void showPopup(View v) {
+        QuestionDAO.getAllQuestionsInLevel(QuestionDAO.question.getLevel()+1);
+        if (MainActivity.user == null){
+            GuestDAO.guest.setQuestion("");
+        }
+        else {
+            UserDAO.account.setQuestionID("");
+        }
         congratDiag.setContentView(R.layout.popup_congratulation);
         congratDiag.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         congratDiag.show();
+        congratDiag.setCancelable(false);
     }
 
+    public void returnToUserMainMenuIntent(View view){
+        congratDiag.cancel();
+        QuestionDAO.getCurrentQuestion();
+        this.finish();
+    }
+
+    public void nextQuestion(View view){
+        congratDiag.cancel();
+        QuestionDAO.getCurrentQuestion();
+        loadQuestion();
+    }
+
+    public void loadQuestion(){
+        reset(findViewById(android.R.id.content).getRootView());
+        loadData();
+        splitString();
+        createButton();
+        onLetterChosenClick();
+        layoutChosen();
+        displayRandomLetter();
+        finalChoice = false;
+    }
+
+    public void displayRandomLetter(){
+        List<String> newList = new ArrayList<>();
+        newList.addAll(list1);
+        newList.addAll(list2);
+        for (int i = newList.size(); i < 14; i++){
+            char c = (char) (Math.random()*(90-65+1)+65);
+            newList.add(String.valueOf(c));
+        }
+
+        ConstraintLayout groupRandomLetters = findViewById(R.id.group_key);
+        for (int i = 0; i < groupRandomLetters.getChildCount(); i++) {
+            Button b = (Button) groupRandomLetters.getChildAt(i);
+            Random rand = new Random();
+            int randNumber = rand.nextInt(newList.size());
+            b.setText(newList.get(randNumber));
+            newList.remove(randNumber);
+        }
+    }
 }

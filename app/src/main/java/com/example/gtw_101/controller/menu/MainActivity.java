@@ -9,14 +9,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 
 
 import com.example.gtw_101.R;
+import com.example.gtw_101.controller.account.ForgotPasswordActivity;
 import com.example.gtw_101.controller.user.InGameActivity;
 import com.example.gtw_101.controller.account.LoginActivity;
+import com.example.gtw_101.utilities.AlertDialogBuilder;
 import com.example.gtw_101.utilities.CheckNetworkConnection;
+import com.example.gtw_101.utilities.DatabaseHandler;
 import com.example.gtw_101.utilities.LoadData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,11 +29,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
-    //public static DatabaseHandler database;
     public static FirebaseAuth mAuth;
     public static FirebaseFirestore db;
     public static FirebaseUser user;
     public static Context context;
+    AlertDialog dialog;
 
     private SwitchCompat bSwitch;
 
@@ -41,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //database = new DatabaseHandler(this);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         bSwitch.setOnCheckedChangeListener(this);
         context = getApplicationContext();
         checkConnection();
+
     }
 
     @Override
@@ -56,10 +61,27 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         super.onStart();
         user = mAuth.getCurrentUser();
         if (user != null){
-            //currentUser.sendEmailVerification();
-//            mAuth.sendPasswordResetEmail(currentUser.getEmail());
             LoadData.loadUserData(user);
-            userMainMenuIntent(findViewById(android.R.id.content).getRootView());
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Welcome back! Have fun with Guess The Word!!!");
+            builder.setTitle("Automatic logged in!");
+            builder.setCancelable(false);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                    finish();
+                    userMainMenuIntent(findViewById(android.R.id.content).getRootView());
+                }
+            });
+            // Create the Alert dialog
+            AlertDialog alertDialog = builder.create();
+
+            // Show the Alert Dialog box
+            alertDialog.show();
+        }
+        else {
+            LoadData.loadGuestData();
         }
     }
 
@@ -73,12 +95,16 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         this.startActivity(intent);
     }
 
-    /**
-     * Create method playGameIntent to change to play game intent
-     *
-     * @param view storing view
-     */
-    public void playGameIntent(View view){
+    public void loadQuestionAlertDialog(View view){
+        LoadData.loadQuestion();
+        dialog = AlertDialogBuilder.showAlertDialog("Notification!", "Please wait a little bit for loading questions...", this);
+        dialog.show();
+        new Handler().postDelayed(this::playGameIntent,2000);
+
+    }
+
+    public void playGameIntent(){
+        dialog.cancel();
         Intent intent = new Intent(this, InGameActivity.class);
         this.startActivity(intent);
     }
@@ -87,6 +113,11 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         Intent intent = new Intent(this, UserMainActivity.class);
         this.startActivity(intent);
         this.finish();
+    }
+
+    public void howToPlayIntent(View view){
+        Intent intent = new Intent(this, HowToPlayActivity.class);
+        this.startActivity(intent);
     }
 
 
@@ -103,9 +134,11 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             builder.setMessage("Please check your Internet connection before playing game!");
             builder.setTitle("Alert!");
             builder.setCancelable(false);
-            builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Reload", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(MainActivity.this, SlashScreenActivity.class);
+                    startActivity(intent);
                     finish();
                 }
             });

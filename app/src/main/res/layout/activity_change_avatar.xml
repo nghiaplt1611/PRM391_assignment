@@ -26,6 +26,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/close"
+        android:onClick="returnToUserProfileIntent"
         app:backgroundTint="@null"
         app:layout_constraintStart_toStartOf="@+id/img_blur_screen"
         app:layout_constraintTop_toTopOf="parent" />
@@ -92,7 +93,8 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/avatar_1"
-                    android:foreground="@drawable/choose_avatar_foreground"
+                    android:foreground="@null"
+                    android:onClick="onFirstAvatarClick"
                     app:backgroundTint="@null" />
 
                 <Button
@@ -106,6 +108,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/avatar_2"
+                    android:onClick="onSecondAvatarClick"
                     app:backgroundTint="@null" />
             </TableRow>
 
@@ -123,6 +126,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/avatar_3"
+                    android:onClick="onThirdAvatarClick"
                     app:backgroundTint="@null" />
 
                 <Button
@@ -136,6 +140,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/avatar_4"
+                    android:onClick="onFourthAvatarClick"
                     app:backgroundTint="@null" />
             </TableRow>
 
@@ -153,6 +158,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/avatar_5"
+                    android:onClick="onFifthAvatarClick"
                     app:backgroundTint="@null" />
 
                 <Button
@@ -166,6 +172,7 @@
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="5dp"
                     android:background="@drawable/avatar_6"
+                    android:onClick="onSixthAvatarClick"
                     app:backgroundTint="@null" />
             </TableRow>
         </TableLayout>

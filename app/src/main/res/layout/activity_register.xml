@@ -89,12 +89,12 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/textfield_background"
                 android:hint="@string/full_name"
-                android:inputType="textVisiblePassword"
+                android:inputType="text"
+                android:maxLength="25"
                 android:maxLines="1"
                 android:onClick="hideFullNameError"
                 android:textColor="@color/black"
-                android:textSize="@dimen/textsize_18"
-                android:maxLength="25"/>
+                android:textSize="@dimen/textsize_18" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
