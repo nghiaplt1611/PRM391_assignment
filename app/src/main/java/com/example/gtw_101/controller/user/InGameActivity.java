@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.example.gtw_101.R;
 import com.example.gtw_101.controller.menu.MainActivity;
@@ -44,20 +45,21 @@ public class InGameActivity extends AppCompatActivity {
     //var cho ham tao nut
     LinearLayout layout;
     private int firstMar;
+    private int topMar;
     private int maxButton;
     private int buttonSpace = 15;
     private int buttonWid;
     private int buttonHei;
+    private int buttonLayoutHei;
     private String word = "";
     private List<String> list1 = new ArrayList<>();
     private List<String> list2 = new ArrayList<>();
     private int sceenWid;
+    private int scennHei;
     private boolean finalChoice = false;
     Button newBtn;
     Dialog congratDiag;
 
-    //cai chua chay nay giai thich sau :v
-    private int chuachay = 998;
 
 
     // Create variable map (HashMap) to store the ID of random letter button and result letter button
@@ -433,6 +435,7 @@ public class InGameActivity extends AppCompatActivity {
     //tao nut moi
     public void addButton(String character, LinearLayout.LayoutParams layoutParams) {
         newBtn = new Button(this);
+        newBtn.setTextSize(16f);
         newBtn.setBackground(this.getResources().getDrawable(R.drawable.achievemen_item_background));
         layout.addView(newBtn, layoutParams);
     }
@@ -441,12 +444,16 @@ public class InGameActivity extends AppCompatActivity {
     public void calForMiddle() {
         firstMar = sceenWid - ((maxButton * buttonWid) + (maxButton - 1) * buttonSpace + buttonSpace);
         firstMar = firstMar / 2;
+        topMar = buttonLayoutHei - buttonHei;
+        topMar = topMar/2;
     }
 
     //tinh toan khoan cach neu chia dong
     public void calForTwoLine(int nums) {
         firstMar = sceenWid - ((nums * buttonWid) + (nums - 1) * buttonSpace + buttonSpace);
         firstMar = firstMar / 2;
+        topMar = buttonLayoutHei - buttonHei*2 - 15;
+        topMar= topMar/2;
     }
 
 
@@ -492,7 +499,7 @@ public class InGameActivity extends AppCompatActivity {
             layout = findViewById(R.id.oneline_lay1);
             LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(buttonWid, buttonHei);
             layoutParams1.setMargins(0, 0, 15, 0);
-            layout.setPadding(firstMar, 0, 0, 0);
+            layout.setPadding(firstMar, topMar, 0, 0);
             for (int i = 0; i < list1.size(); i++) {
                 Log.e("for", "so lan" + i);
                 addButton(list1.get(i), layoutParams1);
@@ -501,7 +508,7 @@ public class InGameActivity extends AppCompatActivity {
             layout = findViewById(R.id.oneline_lay2);
             LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(buttonWid, buttonHei);
             layoutParams2.setMargins(15, 0, 0, 0);
-            layout.setPadding(0, 0, firstMar, 0);
+            layout.setPadding(0, topMar, firstMar, 0);
             for (int i = 0; i < list2.size(); i++) {
                 Log.e("for", "so lan" + i);
                 addButton(list2.get(i), layoutParams2);
@@ -512,7 +519,7 @@ public class InGameActivity extends AppCompatActivity {
             calForTwoLine(list1.size());
             LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(buttonWid, buttonHei);
             layoutParams1.setMargins(0, 0, 15, 0);
-            layout.setPadding(firstMar, 15, 0, 0);
+            layout.setPadding(firstMar, topMar, 0, 0);
             for (int i = 0; i < list1.size(); i++) {
                 Log.e("for", "so lan" + i);
                 addButton(list1.get(i), layoutParams1);
@@ -535,11 +542,19 @@ public class InGameActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         sceenWid = displayMetrics.widthPixels;
+        scennHei = displayMetrics.heightPixels;
+        buttonLayoutHei = scennHei/5;
+        ConstraintLayout botLay = findViewById(R.id.group_answer);
+        ConstraintLayout.LayoutParams bot = (ConstraintLayout.LayoutParams) botLay.getLayoutParams();
+        Button btn = findViewById(R.id.bt_answer_1);
+        bot.height =  scennHei/17*5;
+        Log.e("chieu cao",""+bot.height + " "+btn.getHeight());
+        botLay.setLayoutParams(bot);
     }
 
     public void calForButton() {
         buttonWid = sceenWid / 7;
-        buttonHei = sceenWid / 6;
+        buttonHei = scennHei / 12;
     }
 
 

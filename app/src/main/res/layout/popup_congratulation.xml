@@ -5,7 +5,7 @@
     android:layout_width="350dp"
     android:layout_height="300dp"
     android:layout_gravity="center"
-    android:background="@color/backbuttongrediantleft">
+    android:background="@drawable/app_background_color">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
