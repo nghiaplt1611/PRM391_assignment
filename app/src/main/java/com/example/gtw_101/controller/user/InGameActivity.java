@@ -367,6 +367,7 @@ public class InGameActivity extends AppCompatActivity {
                 b.setText(list.get(i));
                 b.setBackground(null);
                 b.setEnabled(false);
+                b.setTextColor(Color.BLACK);
                 hiddenHintLetter(b.getText().toString());
 
                 for (HashMap.Entry<Button, Button> entry : map.entrySet()) {
@@ -435,7 +436,7 @@ public class InGameActivity extends AppCompatActivity {
     //tao nut moi
     public void addButton(String character, LinearLayout.LayoutParams layoutParams) {
         newBtn = new Button(this);
-        newBtn.setTextSize(16f);
+        newBtn.setTextSize(24f);
         newBtn.setBackground(this.getResources().getDrawable(R.drawable.achievemen_item_background));
         layout.addView(newBtn, layoutParams);
     }
