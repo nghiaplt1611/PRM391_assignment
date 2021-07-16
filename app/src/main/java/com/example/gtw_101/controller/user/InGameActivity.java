@@ -502,7 +502,6 @@ public class InGameActivity extends AppCompatActivity {
             layoutParams1.setMargins(0, 0, 15, 0);
             layout.setPadding(firstMar, topMar, 0, 0);
             for (int i = 0; i < list1.size(); i++) {
-                Log.e("for", "so lan" + i);
                 addButton(list1.get(i), layoutParams1);
             }
 
@@ -511,7 +510,6 @@ public class InGameActivity extends AppCompatActivity {
             layoutParams2.setMargins(15, 0, 0, 0);
             layout.setPadding(0, topMar, firstMar, 0);
             for (int i = 0; i < list2.size(); i++) {
-                Log.e("for", "so lan" + i);
                 addButton(list2.get(i), layoutParams2);
             }
         } else {
@@ -522,18 +520,15 @@ public class InGameActivity extends AppCompatActivity {
             layoutParams1.setMargins(0, 0, 15, 0);
             layout.setPadding(firstMar, topMar, 0, 0);
             for (int i = 0; i < list1.size(); i++) {
-                Log.e("for", "so lan" + i);
                 addButton(list1.get(i), layoutParams1);
             }
 
             layout = findViewById(R.id.twoline_layout2);
-            System.out.println("sau khi doi layout");
             calForTwoLine(list2.size());
             LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(buttonWid, buttonHei);
             layoutParams2.setMargins(0, 0, 15, 0);
             layout.setPadding(firstMar, 15, 0, 0);
             for (int i = 0; i < list2.size(); i++) {
-                Log.e("for", "so lan" + i);
                 addButton(list2.get(i), layoutParams2);
             }
         }
@@ -547,7 +542,7 @@ public class InGameActivity extends AppCompatActivity {
         ConstraintLayout resultlay = findViewById(R.id.group_result);
         ConstraintLayout.LayoutParams result = (ConstraintLayout.LayoutParams) resultlay.getLayoutParams();
         buttonLayoutHei = result.height;
-
+    Log.e("chieu cao",""+scennHei);
 //        ConstraintLayout botLay = findViewById(R.id.group_answer);
 //        ConstraintLayout.LayoutParams bot = (ConstraintLayout.LayoutParams) botLay.getLayoutParams();
 //        Button btn = findViewById(R.id.bt_answer_1);
