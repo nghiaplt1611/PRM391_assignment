@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import com.example.gtw_101.utilities.AlertDialogBuilder;
 import com.example.gtw_101.utilities.CheckNetworkConnection;
 import com.example.gtw_101.utilities.DatabaseHandler;
 import com.example.gtw_101.utilities.LoadData;
+import com.example.gtw_101.utilities.LoadingPopup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     public static FirebaseUser user;
     public static Context context;
     AlertDialog dialog;
+    Dialog loadingDiag;
 
     private SwitchCompat bSwitch;
 
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
+                    loadingDiag.cancel();
                     finish();
                     userMainMenuIntent(findViewById(android.R.id.content).getRootView());
                 }
@@ -98,13 +102,16 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     public void loadQuestionAlertDialog(View view){
         LoadData.loadQuestion();
         dialog = AlertDialogBuilder.showAlertDialog("Notification!", "Please wait a little bit for loading questions...", this);
-        dialog.show();
+//        dialog.show();
+        loadingDiag = LoadingPopup.loadingDialog(this);
+        loadingDiag.show();
         new Handler().postDelayed(this::playGameIntent,2000);
 
     }
 
     public void playGameIntent(){
-        dialog.cancel();
+//        dialog.cancel();
+        loadingDiag.cancel();
         Intent intent = new Intent(this, InGameActivity.class);
         this.startActivity(intent);
     }

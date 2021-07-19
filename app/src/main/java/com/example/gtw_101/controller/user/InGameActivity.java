@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import com.example.gtw_101.R;
 import com.example.gtw_101.controller.menu.MainActivity;
@@ -25,6 +26,7 @@ import com.example.gtw_101.dao.ScoreDAO;
 import com.example.gtw_101.dao.UserDAO;
 import com.example.gtw_101.model.Account;
 import com.example.gtw_101.utilities.AlertDialogBuilder;
+import com.example.gtw_101.utilities.CustomPopupCongrats;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -40,23 +42,24 @@ import java.util.Random;
 public class InGameActivity extends AppCompatActivity {
 
 
-    Dialog congratDiag;
     //var cho ham tao nut
     LinearLayout layout;
     private int firstMar;
+    private int topMar;
     private int maxButton;
     private int buttonSpace = 15;
     private int buttonWid;
     private int buttonHei;
+    private int buttonLayoutHei;
     private String word = "";
     private List<String> list1 = new ArrayList<>();
     private List<String> list2 = new ArrayList<>();
     private int sceenWid;
+    private int scennHei;
     private boolean finalChoice = false;
     Button newBtn;
+    Dialog congratDiag;
 
-    //cai chua chay nay giai thich sau :v
-    private int chuachay = 998;
 
 
     // Create variable map (HashMap) to store the ID of random letter button and result letter button
@@ -69,7 +72,6 @@ public class InGameActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         QuestionDAO.getCurrentQuestion();
 
-        congratDiag = new Dialog(this);
 
         getSceenPec();
         calForButton();
@@ -149,19 +151,21 @@ public class InGameActivity extends AppCompatActivity {
                 }
                 if (finalChoice) {
                     if (checkResult()){
-                        showPopup(findViewById(android.R.id.content).getRootView());
                         int passedLevelScore = ScoreDAO.getRewardScore(QuestionDAO.question.getLevel());
                         if (MainActivity.user == null){
 
                             int score = GuestDAO.guest.getScore() + passedLevelScore;
                             GuestDAO.updateScoreAndShowHints(score, 0);
+                            congratDiag = CustomPopupCongrats.showDialog(this, QuestionDAO.question.getAnswer(), passedLevelScore);
                         }
                         else {
                             String id = UserDAO.account.getId();
                             int score = UserDAO.account.getScore() + passedLevelScore;
                             UserDAO.updateScoreAndShowHints(id, score, 0);
+                            congratDiag = CustomPopupCongrats.showDialog(this, QuestionDAO.question.getAnswer(), passedLevelScore);
                         }
-
+                        congratDiag.show();
+                        getNewData();
                     }
                     else {
                         int minusScore = ScoreDAO.getWrongAnswerScore(QuestionDAO.question.getLevel());
@@ -363,6 +367,7 @@ public class InGameActivity extends AppCompatActivity {
                 b.setText(list.get(i));
                 b.setBackground(null);
                 b.setEnabled(false);
+                b.setTextColor(Color.BLACK);
                 hiddenHintLetter(b.getText().toString());
 
                 for (HashMap.Entry<Button, Button> entry : map.entrySet()) {
@@ -431,6 +436,7 @@ public class InGameActivity extends AppCompatActivity {
     //tao nut moi
     public void addButton(String character, LinearLayout.LayoutParams layoutParams) {
         newBtn = new Button(this);
+        newBtn.setTextSize(24f);
         newBtn.setBackground(this.getResources().getDrawable(R.drawable.achievemen_item_background));
         layout.addView(newBtn, layoutParams);
     }
@@ -439,12 +445,16 @@ public class InGameActivity extends AppCompatActivity {
     public void calForMiddle() {
         firstMar = sceenWid - ((maxButton * buttonWid) + (maxButton - 1) * buttonSpace + buttonSpace);
         firstMar = firstMar / 2;
+        topMar = buttonLayoutHei - buttonHei;
+        topMar = topMar/2;
     }
 
     //tinh toan khoan cach neu chia dong
     public void calForTwoLine(int nums) {
         firstMar = sceenWid - ((nums * buttonWid) + (nums - 1) * buttonSpace + buttonSpace);
         firstMar = firstMar / 2;
+        topMar = buttonLayoutHei - buttonHei*2 - 15;
+        topMar= topMar/2;
     }
 
 
@@ -490,18 +500,16 @@ public class InGameActivity extends AppCompatActivity {
             layout = findViewById(R.id.oneline_lay1);
             LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(buttonWid, buttonHei);
             layoutParams1.setMargins(0, 0, 15, 0);
-            layout.setPadding(firstMar, 0, 0, 0);
+            layout.setPadding(firstMar, topMar, 0, 0);
             for (int i = 0; i < list1.size(); i++) {
-                Log.e("for", "so lan" + i);
                 addButton(list1.get(i), layoutParams1);
             }
 
             layout = findViewById(R.id.oneline_lay2);
             LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(buttonWid, buttonHei);
             layoutParams2.setMargins(15, 0, 0, 0);
-            layout.setPadding(0, 0, firstMar, 0);
+            layout.setPadding(0, topMar, firstMar, 0);
             for (int i = 0; i < list2.size(); i++) {
-                Log.e("for", "so lan" + i);
                 addButton(list2.get(i), layoutParams2);
             }
         } else {
@@ -510,20 +518,17 @@ public class InGameActivity extends AppCompatActivity {
             calForTwoLine(list1.size());
             LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(buttonWid, buttonHei);
             layoutParams1.setMargins(0, 0, 15, 0);
-            layout.setPadding(firstMar, 15, 0, 0);
+            layout.setPadding(firstMar, topMar, 0, 0);
             for (int i = 0; i < list1.size(); i++) {
-                Log.e("for", "so lan" + i);
                 addButton(list1.get(i), layoutParams1);
             }
 
             layout = findViewById(R.id.twoline_layout2);
-            System.out.println("sau khi doi layout");
             calForTwoLine(list2.size());
             LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(buttonWid, buttonHei);
             layoutParams2.setMargins(0, 0, 15, 0);
             layout.setPadding(firstMar, 15, 0, 0);
             for (int i = 0; i < list2.size(); i++) {
-                Log.e("for", "so lan" + i);
                 addButton(list2.get(i), layoutParams2);
             }
         }
@@ -533,15 +538,27 @@ public class InGameActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         sceenWid = displayMetrics.widthPixels;
+        scennHei = displayMetrics.heightPixels;
+        ConstraintLayout resultlay = findViewById(R.id.group_result);
+        ConstraintLayout.LayoutParams result = (ConstraintLayout.LayoutParams) resultlay.getLayoutParams();
+        buttonLayoutHei = result.height;
+    Log.e("chieu cao",""+scennHei);
+//        ConstraintLayout botLay = findViewById(R.id.group_answer);
+//        ConstraintLayout.LayoutParams bot = (ConstraintLayout.LayoutParams) botLay.getLayoutParams();
+//        Button btn = findViewById(R.id.bt_answer_1);
+//        bot.height =  scennHei/17*5;
+//        Log.e("chieu cao",""+bot.height + " "+buttonLayoutHei);
+//        botLay.setLayoutParams(bot);
     }
 
     public void calForButton() {
         buttonWid = sceenWid / 7;
-        buttonHei = sceenWid / 6;
+        buttonHei = scennHei / 12;
     }
 
 
-    public void showPopup(View v) {
+    public void getNewData() {
+
         QuestionDAO.getAllQuestionsInLevel(QuestionDAO.question.getLevel()+1);
         if (MainActivity.user == null){
             GuestDAO.guest.setQuestion("");
@@ -549,10 +566,6 @@ public class InGameActivity extends AppCompatActivity {
         else {
             UserDAO.account.setQuestionID("");
         }
-        congratDiag.setContentView(R.layout.popup_congratulation);
-        congratDiag.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        congratDiag.show();
-        congratDiag.setCancelable(false);
     }
 
     public void returnToUserMainMenuIntent(View view){
