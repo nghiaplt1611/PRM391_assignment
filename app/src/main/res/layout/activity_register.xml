@@ -89,7 +89,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/textfield_background"
                 android:hint="@string/full_name"
-                android:inputType="text"
+                android:inputType="textPersonName"
                 android:maxLength="25"
                 android:maxLines="1"
                 android:onClick="hideFullNameError"

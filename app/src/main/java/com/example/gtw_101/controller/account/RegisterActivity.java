@@ -126,13 +126,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 // Show the Alert Dialog box
                                 alertDialog.show();
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                AlertDialogBuilder.showAlertDialog("Notification!", "Error occurred while registering!", RegisterActivity.this);
-                            }
                         });
 
+                    }
+                    else {
+                        AlertDialog dialog = AlertDialogBuilder.showAlertDialog("Alert!", "This email has been used for registering!", RegisterActivity.this);
+                        dialog.show();
                     }
                 }
             });

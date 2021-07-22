@@ -64,6 +64,7 @@ public class UserDAO {
         account.setScore(ScoreDAO.score.getInitialScore());
         account.setAvatar(1);
         account.setUseHint(false);
+        account.setFinishedGame(false);
         return account;
     }
 

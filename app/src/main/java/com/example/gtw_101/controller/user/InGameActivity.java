@@ -652,6 +652,7 @@ public class InGameActivity extends AppCompatActivity {
     public void getNewData() {
         int level = QuestionDAO.question.getLevel() + 1;
         if (level == 21){
+            congratDiag.cancel();
             UserDAO.account.setFinishedGame(true);
             UserDAO.updateFinishedGameStatus(UserDAO.account.getId(), true);
             congratDiag = CustomPopupCongrats.showFinishedGameDialog(this, UserDAO.account.getScore());
