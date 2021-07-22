@@ -25,6 +25,7 @@ public class UserMainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         LoadData.loadQuestion();
         LoadData.loadLeaderboard();
+        LoadData.loadAllData();
     }
 
 
