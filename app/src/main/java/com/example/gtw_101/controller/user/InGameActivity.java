@@ -692,8 +692,10 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     public void loadQuestion(){
-        UserDAO.account.setUseHint(false);
-        UserDAO.updateUseHint(UserDAO.account.getId(), false);
+        if (MainActivity.user != null){
+            UserDAO.account.setUseHint(false);
+            UserDAO.updateUseHint(UserDAO.account.getId(), false);
+        }
         topMar = 0;
         showAllRandomLetters();
         reset(findViewById(android.R.id.content).getRootView());
