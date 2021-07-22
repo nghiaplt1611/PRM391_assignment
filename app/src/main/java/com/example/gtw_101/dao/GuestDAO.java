@@ -4,12 +4,16 @@ import com.example.gtw_101.controller.menu.SlashScreenActivity;
 import com.example.gtw_101.model.Guest;
 
 public class GuestDAO {
-    public static Guest guest;
+    public static Guest guest = null;
 
     public static void getGuestData(){
-        guest = SlashScreenActivity.database.getGuestInfo();
-        if (guest == null){
-            createNewGuest();
+        try {
+            guest = SlashScreenActivity.database.getGuestInfo();
+        }
+        catch (Exception e){
+            if (guest == null){
+                createNewGuest();
+            }
         }
     }
 
