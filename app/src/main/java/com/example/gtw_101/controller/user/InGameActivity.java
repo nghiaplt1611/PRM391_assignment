@@ -445,6 +445,32 @@ public class InGameActivity extends AppCompatActivity {
             if (!showHint(linearLayout3, list1))
                 showHint(linearLayout4, list2);
         }
+
+        if (MainActivity.user == null){
+            if (GuestDAO.guest.getNumOfLetterShown() + 1 == maxButton){
+                int passedLevelScore = ScoreDAO.getRewardScore(QuestionDAO.question.getLevel());
+
+                int score = GuestDAO.guest.getScore() + passedLevelScore;
+                GuestDAO.updateScoreAndShowHints(score, 0);
+                congratDiag = CustomPopupCongrats.showDialog(this, QuestionDAO.question.getAnswer(), passedLevelScore);
+                congratDiag.show();
+                getNewData();
+            }
+        }
+        else {
+            if (UserDAO.account.getNumOfLetterShown() + 1 == maxButton){
+                int passedLevelScore = ScoreDAO.getRewardScore(QuestionDAO.question.getLevel());
+
+                String id = UserDAO.account.getId();
+                int score = UserDAO.account.getScore() + passedLevelScore;
+                UserDAO.updateScoreAndShowHints(id, score, 0);
+                congratDiag = CustomPopupCongrats.showDialog(this, QuestionDAO.question.getAnswer(), passedLevelScore);
+                congratDiag.show();
+                checkAchievement();
+                getNewData();
+            }
+        }
+
     }
 
     public boolean showHint(LinearLayout linearLayout, List<String> list){
