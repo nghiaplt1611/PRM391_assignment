@@ -94,13 +94,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public Guest getGuestInfo(){
-        String query = "SELECT * FROM " + TABLE_NAME;
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        cursor.moveToFirst();
-
         try {
+            String query = "SELECT * FROM " + TABLE_NAME;
+
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery(query, null);
+            cursor.moveToFirst();
             Guest guest = new Guest( cursor.getInt(0), cursor.getInt(1), cursor.getString(2));
             return guest;
         } catch (Exception e){

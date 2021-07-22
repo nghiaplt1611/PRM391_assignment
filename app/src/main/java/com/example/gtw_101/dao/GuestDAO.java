@@ -7,14 +7,12 @@ public class GuestDAO {
     public static Guest guest = null;
 
     public static void getGuestData(){
-        try {
-            guest = SlashScreenActivity.database.getGuestInfo();
+        guest = SlashScreenActivity.database.getGuestInfo();
+
+        if (guest == null){
+            createNewGuest();
         }
-        catch (Exception e){
-            if (guest == null){
-                createNewGuest();
-            }
-        }
+
     }
 
     public static void createNewGuest(){
