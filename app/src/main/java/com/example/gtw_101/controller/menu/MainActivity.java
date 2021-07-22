@@ -112,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        AlertDialog dialog = AlertDialogBuilder.showAlertDialog("Notification!", "This function is still in development. Sorry for this inconvenience", this);
+        dialog.show();
         if(isChecked){
             // Nữa để code xử lí đổi qua Tiếng Việt vào đây
         }

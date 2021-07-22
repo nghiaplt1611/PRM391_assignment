@@ -153,4 +153,17 @@ public class UserDAO {
             }
         });
     }
+
+    public static void updateFinishedGameStatus(String id, boolean finishedGame){
+        MainActivity.db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = MainActivity.db.collection("users").document(id);
+
+
+        docRef.update("finishedGame", finishedGame).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
+        });
+    }
 }

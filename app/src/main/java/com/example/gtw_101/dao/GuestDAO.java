@@ -37,4 +37,5 @@ public class GuestDAO {
         SlashScreenActivity.database.updateGuestInfo(guest);
     }
 
+
 }

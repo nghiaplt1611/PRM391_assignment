@@ -9,21 +9,14 @@ public class Account implements Serializable {
     private int yearOfBirth;
     private String question;
 
-
-
     private int numOfLetterShown;
     private String achievements;
     private int score;
     private int avatar;
     private boolean useHint;
+    private boolean finishedGame;
 
-    public boolean isUseHint() {
-        return useHint;
-    }
 
-    public void setUseHint(boolean useHint) {
-        this.useHint = useHint;
-    }
 
     public Account() {
     }
@@ -98,5 +91,21 @@ public class Account implements Serializable {
 
     public void setAvatar(int avatar) {
         this.avatar = avatar;
+    }
+
+    public boolean isFinishedGame() {
+        return finishedGame;
+    }
+
+    public void setFinishedGame(boolean finishedGame) {
+        this.finishedGame = finishedGame;
+    }
+
+    public boolean isUseHint() {
+        return useHint;
+    }
+
+    public void setUseHint(boolean useHint) {
+        this.useHint = useHint;
     }
 }

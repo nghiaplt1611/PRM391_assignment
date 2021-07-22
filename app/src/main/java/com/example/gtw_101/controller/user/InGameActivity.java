@@ -186,6 +186,7 @@ public class InGameActivity extends AppCompatActivity {
                             UserDAO.updateScore(UserDAO.account.getId(), score);
                         }
                         finalChoice = false;
+                        reset(findViewById(android.R.id.content).getRootView());
 
                     }
                 }
@@ -329,6 +330,7 @@ public class InGameActivity extends AppCompatActivity {
                             GuestDAO.updateScore(score);
                             TextView lblPoint = findViewById(R.id.lb_point);
                             lblPoint.setText(String.valueOf(GuestDAO.guest.getScore()));
+                            handleChangeQuestionExecute();
                         }
                     }
                     else {
@@ -345,9 +347,10 @@ public class InGameActivity extends AppCompatActivity {
                             UserDAO.updateUseHint(UserDAO.account.getId(), true);
                             UserDAO.account.setNumOfLetterShown(0);
                             UserDAO.updateShownHints(UserDAO.account.getId(), 0);
+                            handleChangeQuestionExecute();
                         }
                     }
-                    handleChangeQuestionExecute();
+
                 }
             }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                 @Override
@@ -483,6 +486,7 @@ public class InGameActivity extends AppCompatActivity {
     }
 
     public void resetLayoutAnswer(LinearLayout linearLayout){
+
         for (int i = 0; i < linearLayout.getChildCount(); i++) {
             Button b = (Button) linearLayout.getChildAt(i);
             if (b.isEnabled()) {
@@ -546,12 +550,16 @@ public class InGameActivity extends AppCompatActivity {
     public void removeButton() {
         layout = findViewById(R.id.oneline_lay1);
         layout.removeAllViews();
+        layout.setPadding(0,0,0,0);
         layout = findViewById(R.id.oneline_lay2);
         layout.removeAllViews();
+        layout.setPadding(0,0,0,0);
         layout = findViewById(R.id.twoline_layout1);
         layout.removeAllViews();
+        layout.setPadding(0,0,0,0);
         layout = findViewById(R.id.twoline_layout2);
         layout.removeAllViews();
+        layout.setPadding(0,0,0,0);
     }
 
     //tach chu
@@ -642,19 +650,29 @@ public class InGameActivity extends AppCompatActivity {
 
 
     public void getNewData() {
-
-        QuestionDAO.getAllQuestionsInLevel(QuestionDAO.question.getLevel()+1);
-        if (MainActivity.user == null){
-            GuestDAO.guest.setQuestion("");
+        int level = QuestionDAO.question.getLevel() + 1;
+        if (level == 21){
+            UserDAO.account.setFinishedGame(true);
+            UserDAO.updateFinishedGameStatus(UserDAO.account.getId(), true);
+            congratDiag = CustomPopupCongrats.showFinishedGameDialog(this, UserDAO.account.getScore());
+            congratDiag.show();
         }
         else {
-            UserDAO.account.setQuestion("");
+            QuestionDAO.getAllQuestionsInLevel(QuestionDAO.question.getLevel()+1);
+            if (MainActivity.user == null){
+                GuestDAO.guest.setQuestion("");
+            }
+            else {
+                UserDAO.account.setQuestion("");
+            }
         }
+
     }
 
     public void returnToUserMainMenuIntent(View view){
         congratDiag.cancel();
-        QuestionDAO.getCurrentQuestion();
+        if (!UserDAO.account.isFinishedGame())
+            QuestionDAO.getCurrentQuestion();
         this.finish();
     }
 

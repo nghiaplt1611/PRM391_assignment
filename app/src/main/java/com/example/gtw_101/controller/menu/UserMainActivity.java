@@ -2,6 +2,7 @@ package com.example.gtw_101.controller.menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,10 +14,14 @@ import com.example.gtw_101.controller.user.InGameActivity;
 import com.example.gtw_101.controller.user.LeaderActivity;
 import com.example.gtw_101.controller.user.PlayerProfileActivity;
 import com.example.gtw_101.dao.LeaderboardDAO;
+import com.example.gtw_101.dao.QuestionDAO;
 import com.example.gtw_101.dao.UserDAO;
+import com.example.gtw_101.utilities.CustomPopupCongrats;
 import com.example.gtw_101.utilities.LoadData;
 
 public class UserMainActivity extends AppCompatActivity {
+
+    Dialog congratDiag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +51,15 @@ public class UserMainActivity extends AppCompatActivity {
     }
 
     public void onButtonPlayGameClick(View view){
-        Intent intent = new Intent(this, InGameActivity.class);
-        this.startActivity(intent);
+        if (UserDAO.account.isFinishedGame()){
+            congratDiag = CustomPopupCongrats.showFinishedGameDialog(this, UserDAO.account.getScore());
+            congratDiag.show();
+        }
+        else {
+            Intent intent = new Intent(this, InGameActivity.class);
+            this.startActivity(intent);
+        }
+
     }
 
     public void howToPlayIntent(View view){
@@ -60,9 +72,15 @@ public class UserMainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
+    public void returnToUserMainMenuIntent(View view){
+        congratDiag.cancel();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         LoadData.loadLeaderboard();
     }
+
+
 }

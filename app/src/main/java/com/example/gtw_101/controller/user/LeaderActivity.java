@@ -3,6 +3,7 @@ package com.example.gtw_101.controller.user;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ public class LeaderActivity extends AppCompatActivity {
         for (int i = 0; i < LeaderboardDAO.listTop3Ranking.size(); i++){
             Account a = LeaderboardDAO.listTop3Ranking.get(i);
             displayEachData(a, i);
+            Log.e("AAAAAAAAAA", "AAAAAAAAA");
         }
 
         displayEachData(UserDAO.account, 3);
