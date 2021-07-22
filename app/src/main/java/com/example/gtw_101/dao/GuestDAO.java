@@ -1,17 +1,26 @@
 package com.example.gtw_101.dao;
 
+import android.util.Log;
+
 import com.example.gtw_101.controller.menu.SlashScreenActivity;
 import com.example.gtw_101.model.Guest;
 
 public class GuestDAO {
-    public static Guest guest = null;
+    public static Guest guest;
 
     public static void getGuestData(){
-        guest = SlashScreenActivity.database.getGuestInfo();
 
-        if (guest == null){
-            createNewGuest();
+        Log.e("AAAAAAAA", String.valueOf(guest == null));
+        try {
+            guest = SlashScreenActivity.database.getGuestInfo();
+            Log.e("BBBBBBB", String.valueOf(guest == null));
+            if (guest == null){
+                createNewGuest();
+            }
+        } catch (Exception e){
+
         }
+
 
     }
 

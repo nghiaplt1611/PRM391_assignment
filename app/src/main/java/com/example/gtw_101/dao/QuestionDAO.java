@@ -1,5 +1,7 @@
 package com.example.gtw_101.dao;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.gtw_101.controller.menu.MainActivity;

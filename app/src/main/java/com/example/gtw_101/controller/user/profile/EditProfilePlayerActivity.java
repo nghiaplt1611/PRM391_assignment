@@ -47,8 +47,8 @@ public class EditProfilePlayerActivity extends AppCompatActivity {
         EditText txtFullName = (EditText) findViewById(R.id.txt_input_name);
         EditText txtYearOfBirth = (EditText) findViewById(R.id.txt_input_dob);
 
-        String fullName = txtFullName.getText().toString();
-        String yearOfBirth = txtYearOfBirth.getText().toString();
+        String fullName = txtFullName.getText().toString().trim();
+        String yearOfBirth = txtYearOfBirth.getText().toString().trim();
 
         if (Validation.checkNullData(new String[]{fullName, yearOfBirth})){
             if (fullName.isEmpty()){

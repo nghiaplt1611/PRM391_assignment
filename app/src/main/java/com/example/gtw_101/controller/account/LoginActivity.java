@@ -50,8 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         EditText txtEmail = (EditText) findViewById(R.id.txt_email_login);
         EditText txtPassword = (EditText) findViewById(R.id.txt_password_login);
 
-        String email = txtEmail.getText().toString();
-        String password = txtPassword.getText().toString();
+        String email = txtEmail.getText().toString().trim();
+        String password = txtPassword.getText().toString().trim();
 
         if (Validation.checkNullData(new String[]{email, password})){
             if (email.isEmpty()){
@@ -105,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent(LoginActivity.this, UserMainActivity.class);
                                     LoadData.loadAllData();
+                                    LoadData.loadUserData(MainActivity.mAuth.getCurrentUser());
                                     startActivity(intent);
                                     finish();
                                 }

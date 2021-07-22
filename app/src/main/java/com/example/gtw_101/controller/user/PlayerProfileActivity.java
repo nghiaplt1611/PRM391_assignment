@@ -5,18 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gtw_101.R;
 import com.example.gtw_101.controller.menu.MainActivity;
+import com.example.gtw_101.controller.menu.SlashScreenActivity;
 import com.example.gtw_101.controller.user.profile.ChangeAvatarActivity;
 import com.example.gtw_101.controller.user.profile.EditProfilePlayerActivity;
+import com.example.gtw_101.dao.GuestDAO;
 import com.example.gtw_101.dao.UserDAO;
 import com.example.gtw_101.utilities.AlertDialogBuilder;
 import com.example.gtw_101.utilities.GetAvatarResource;
+import com.example.gtw_101.utilities.LoadData;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.auth.User;
 
 public class PlayerProfileActivity extends AppCompatActivity {
 

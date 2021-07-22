@@ -55,12 +55,10 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         bSwitch.setOnCheckedChangeListener(this);
         context = getApplicationContext();
         checkConnection();
-
+        checkUserStatus();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    public void checkUserStatus(){
         user = mAuth.getCurrentUser();
         if (user != null){
             LoadData.loadUserData(user);
@@ -69,9 +67,12 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             new Handler().postDelayed(this::userMainMenuIntent,2000);
         }
         else {
+            SlashScreenActivity.database = new DatabaseHandler(this);
             LoadData.loadGuestData();
         }
+
     }
+
 
     /**
      * Create method loginIntent to change to login intent

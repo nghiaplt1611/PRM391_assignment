@@ -28,7 +28,6 @@ public class LeaderActivity extends AppCompatActivity {
         for (int i = 0; i < LeaderboardDAO.listTop3Ranking.size(); i++){
             Account a = LeaderboardDAO.listTop3Ranking.get(i);
             displayEachData(a, i);
-            Log.e("AAAAAAAAAA", "AAAAAAAAA");
         }
 
         displayEachData(UserDAO.account, 3);

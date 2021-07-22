@@ -44,9 +44,9 @@ public class RegisterActivity extends AppCompatActivity {
         EditText txtPassword = findViewById(R.id.txt_password_register);
         EditText txtConfirmPassword = findViewById(R.id.txt_confirm_password_register);
 
-        String email = txtEmail.getText().toString();
-        String fullName = txtFullName.getText().toString();
-        String yearOfBirth = txtYearOfBirth.getText().toString();
+        String email = txtEmail.getText().toString().trim();
+        String fullName = txtFullName.getText().toString().trim();
+        String yearOfBirth = txtYearOfBirth.getText().toString().trim();
         String password = txtPassword.getText().toString();
         String confirmPassword = txtConfirmPassword.getText().toString();
 
