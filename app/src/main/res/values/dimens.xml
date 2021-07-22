@@ -59,7 +59,9 @@
     <dimen name="height_36">36dp</dimen>
     <dimen name="height_38">38dp</dimen>
     <dimen name="height_40">40dp</dimen>
+    <dimen name="height_30">30dp</dimen>
     <dimen name="width_40">40dp</dimen>
+    <dimen name="width_30">30dp</dimen>
     <dimen name="dimen_650">650dp</dimen>
     <dimen name="dimen_480">480dp</dimen>
     <dimen name="dimen_380">380dp</dimen>

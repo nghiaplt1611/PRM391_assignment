@@ -134,12 +134,22 @@
                 android:id="@+id/txt_top2_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="5dp"
                 android:text="TextView"
                 app:layout_constraintStart_toEndOf="@+id/img_top2"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="@dimen/width_30"
+                android:layout_height="@dimen/height_30"
+                android:background="@drawable/top_2"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/img_top2"
+                app:layout_constraintTop_toBottomOf="@+id/txt_top2_name" />
 
             <TextView
                 android:id="@+id/txt_top2_point"
@@ -183,12 +193,22 @@
                 android:id="@+id/txt_top1_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="5dp"
                 android:text="TextView"
                 app:layout_constraintStart_toEndOf="@+id/img_top1"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="@dimen/width_30"
+                android:layout_height="@dimen/height_30"
+                android:background="@drawable/top_1"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/img_top1"
+                app:layout_constraintTop_toBottomOf="@+id/txt_top1_name" />
 
             <TextView
                 android:id="@+id/txt_top1_point"
@@ -232,12 +252,22 @@
                 android:id="@+id/txt_top3_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="5dp"
                 android:text="TextView"
                 app:layout_constraintStart_toEndOf="@+id/img_top3"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="@dimen/width_30"
+                android:layout_height="@dimen/height_30"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/top_3"
+                app:layout_constraintStart_toEndOf="@+id/img_top3"
+                app:layout_constraintTop_toBottomOf="@+id/txt_top3_name" />
 
             <TextView
                 android:id="@+id/txt_top3_point"
