@@ -412,6 +412,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/exchnge"
+                android:onClick="changeQuestion"
                 android:shadowRadius="3"
                 app:backgroundTint="@null"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -77,13 +77,15 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.cancel();
-                                    AlertDialogBuilder.showAlertDialog("Notification!", "An email message has been sent to your email account for verification. Please check it!", LoginActivity.this);
+                                    AlertDialog dialog1 = AlertDialogBuilder.showAlertDialog("Notification!", "An email message has been sent to your email account for verification. Please check it!", LoginActivity.this);
+                                    dialog1.show();
                                     MainActivity.user.sendEmailVerification();
                                 }
                             }).setNegativeButton("Later", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.cancel();
+                                    MainActivity.mAuth.signOut();
                                 }
                             });
                             // Create the Alert dialog
@@ -113,7 +115,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                     else {
-                        AlertDialogBuilder.showAlertDialog("Alert!", "Email or password is invalid!!!", LoginActivity.this);
+                        AlertDialog dialog = AlertDialogBuilder.showAlertDialog("Alert!", "Email or password is invalid!!!", LoginActivity.this);
+                        dialog.show();
                     }
                 }
             });

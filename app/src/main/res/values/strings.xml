@@ -4,7 +4,7 @@
     <string name="play" translatable="false">Play</string>
     <string name="save_progress" translatable="false">Save Your Progress</string>
     <string name="log_in" translatable="false">Log in to your GDW account</string>
-    <string name="forgot_your_password" translatable="false">FORGOT<br>YOUR PASSWORD?</br></string>
+    <string name="forgot_your_password" translatable="false">FORGOT YOUR PASSWORD?</string>
     <string name="not_to_worry" translatable="false">Not to worry, we got you! Let’s get you a new password.</string>
     <string name="leaderboard" translatable="false">Leaderboard</string>
     <string name="onlyor" translatable="false">OR</string>

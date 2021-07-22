@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     public static FirebaseFirestore db;
     public static FirebaseUser user;
     public static Context context;
-    AlertDialog dialog;
     Dialog loadingDiag;
 
     private SwitchCompat bSwitch;
@@ -65,24 +64,9 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         user = mAuth.getCurrentUser();
         if (user != null){
             LoadData.loadUserData(user);
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Welcome back! Have fun with Guess The Word!!!");
-            builder.setTitle("Automatic logged in!");
-            builder.setCancelable(false);
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                    loadingDiag.cancel();
-                    finish();
-                    userMainMenuIntent(findViewById(android.R.id.content).getRootView());
-                }
-            });
-            // Create the Alert dialog
-            AlertDialog alertDialog = builder.create();
-
-            // Show the Alert Dialog box
-            alertDialog.show();
+            loadingDiag = LoadingPopup.loadingDialog(this);
+            loadingDiag.show();
+            new Handler().postDelayed(this::userMainMenuIntent,2000);
         }
         else {
             LoadData.loadGuestData();
@@ -101,8 +85,6 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     public void loadQuestionAlertDialog(View view){
         LoadData.loadQuestion();
-        dialog = AlertDialogBuilder.showAlertDialog("Notification!", "Please wait a little bit for loading questions...", this);
-//        dialog.show();
         loadingDiag = LoadingPopup.loadingDialog(this);
         loadingDiag.show();
         new Handler().postDelayed(this::playGameIntent,2000);
@@ -110,13 +92,13 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     }
 
     public void playGameIntent(){
-//        dialog.cancel();
         loadingDiag.cancel();
         Intent intent = new Intent(this, InGameActivity.class);
         this.startActivity(intent);
     }
 
-    public void userMainMenuIntent(View view){
+    public void userMainMenuIntent(){
+        loadingDiag.cancel();
         Intent intent = new Intent(this, UserMainActivity.class);
         this.startActivity(intent);
         this.finish();

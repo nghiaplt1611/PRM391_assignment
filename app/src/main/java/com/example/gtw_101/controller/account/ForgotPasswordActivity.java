@@ -13,6 +13,7 @@ import com.example.gtw_101.R;
 import com.example.gtw_101.controller.menu.MainActivity;
 import com.example.gtw_101.dao.UserDAO;
 import com.example.gtw_101.utilities.AlertDialogBuilder;
+import com.example.gtw_101.utilities.Validation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -30,6 +31,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         String email = txtEmail.getText().toString();
         if (email.isEmpty()){
             txtEmail.setError("Email cannot be empty! Please input!");
+        }
+        else if (!Validation.checkEmailFormat(email)){
+            AlertDialog dialog = AlertDialogBuilder.showAlertDialog("Alert!", "This email is not in correct format. Please check!", this);
+            dialog.show();
         }
         else {
             MainActivity.mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -54,7 +59,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         alertDialog.show();
                     }
                     else {
-                        AlertDialogBuilder.showAlertDialog("Alert!", "This email account doesn't exist or is in invalid format!", ForgotPasswordActivity.this);
+                        AlertDialog dialog = AlertDialogBuilder.showAlertDialog("Alert!", "This email account doesn't exist in the database. Please check!", ForgotPasswordActivity.this);
+                        dialog.show();
                     }
                 }
             });

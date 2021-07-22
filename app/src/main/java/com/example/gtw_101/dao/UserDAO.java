@@ -1,17 +1,12 @@
 package com.example.gtw_101.dao;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.example.gtw_101.controller.menu.MainActivity;
 import com.example.gtw_101.model.Account;
-import com.example.gtw_101.model.Question;
-import com.example.gtw_101.model.Score;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -61,11 +56,12 @@ public class UserDAO {
         account.setEmail(email);
         account.setFullName(fullName);
         account.setYearOfBirth(Integer.parseInt(yearOfBirth));
-        account.setQuestionID("");
+        account.setQuestion("");
         account.setNumOfLetterShown(0);
         account.setAchievements("FFFFF");
         account.setScore(ScoreDAO.score.getInitialScore());
         account.setAvatar(1);
+        account.setUseHint(false);
         return account;
     }
 
@@ -112,6 +108,30 @@ public class UserDAO {
         DocumentReference docRef = MainActivity.db.collection("users").document(id);
 
         docRef.update("score", score).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
+        });
+    }
+
+    public static void updateAchievement(String id, String achievement){
+        MainActivity.db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = MainActivity.db.collection("users").document(id);
+
+        docRef.update("achievements", achievement).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
+        });
+    }
+
+    public static void updateUseHint(String id, boolean useHint){
+        MainActivity.db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = MainActivity.db.collection("users").document(id);
+
+        docRef.update("useHint", useHint).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
 

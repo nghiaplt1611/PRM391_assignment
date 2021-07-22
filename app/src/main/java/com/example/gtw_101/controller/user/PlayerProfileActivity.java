@@ -2,6 +2,7 @@ package com.example.gtw_101.controller.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -56,8 +57,8 @@ public class PlayerProfileActivity extends AppCompatActivity {
         MainActivity.mAuth = FirebaseAuth.getInstance();
         MainActivity.user = MainActivity.mAuth.getCurrentUser();
         MainActivity.mAuth.sendPasswordResetEmail(MainActivity.user.getEmail());
-        AlertDialogBuilder.showAlertDialog("Notification!", "A email message has been sent to " + MainActivity.user.getEmail()+ " for verification. Please check it!", this);
-        finish();
+        AlertDialog dialog = AlertDialogBuilder.showAlertDialog("Notification!", "A email message has been sent to " + MainActivity.user.getEmail()+ " for verification. Please check it!", this);
+        dialog.show();
     }
 
     public void onButtonEditProfile(View view){

@@ -1,7 +1,5 @@
 package com.example.gtw_101.dao;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.example.gtw_101.controller.menu.MainActivity;
@@ -66,11 +64,12 @@ public class QuestionDAO {
             }
         }
         else {
-            if (UserDAO.account.getQuestionID().isEmpty()){
+
+            if (UserDAO.account.getQuestion().isEmpty()){
                 getAllQuestionsInLevel(1);
             }
             else {
-                getAllQuestionsInLevel(QuestionDAO.question.getLevel());
+                getQuestion(UserDAO.account.getQuestion());
             }
         }
 
@@ -86,7 +85,7 @@ public class QuestionDAO {
             GuestDAO.updateQuestion(question.getId());
         }
         else {
-            UserDAO.account.setQuestionID(question.getId());
+            UserDAO.account.setQuestion(question.getId());
             UserDAO.updateQuestion(question.getId());
         }
 
@@ -102,8 +101,8 @@ public class QuestionDAO {
             }
         }
         else {
-            if (!UserDAO.account.getQuestionID().isEmpty()){
-                getQuestion(UserDAO.account.getQuestionID());
+            if (!UserDAO.account.getQuestion().isEmpty()){
+                getQuestion(UserDAO.account.getQuestion());
             }
             else {
                 getRandomQuestion();

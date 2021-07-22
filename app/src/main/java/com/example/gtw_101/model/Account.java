@@ -7,7 +7,7 @@ public class Account implements Serializable {
     private String email;
     private String fullName;
     private int yearOfBirth;
-    private String questionID;
+    private String question;
 
 
 
@@ -15,6 +15,15 @@ public class Account implements Serializable {
     private String achievements;
     private int score;
     private int avatar;
+    private boolean useHint;
+
+    public boolean isUseHint() {
+        return useHint;
+    }
+
+    public void setUseHint(boolean useHint) {
+        this.useHint = useHint;
+    }
 
     public Account() {
     }
@@ -51,12 +60,12 @@ public class Account implements Serializable {
         this.yearOfBirth = yearOfBirth;
     }
 
-    public String getQuestionID() {
-        return questionID;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setQuestionID(String questionID) {
-        this.questionID = questionID;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     public int getNumOfLetterShown() {

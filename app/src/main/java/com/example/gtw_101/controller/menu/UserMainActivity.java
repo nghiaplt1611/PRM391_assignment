@@ -12,6 +12,7 @@ import com.example.gtw_101.controller.user.AchievementActivity;
 import com.example.gtw_101.controller.user.InGameActivity;
 import com.example.gtw_101.controller.user.LeaderActivity;
 import com.example.gtw_101.controller.user.PlayerProfileActivity;
+import com.example.gtw_101.dao.LeaderboardDAO;
 import com.example.gtw_101.dao.UserDAO;
 import com.example.gtw_101.utilities.LoadData;
 
@@ -23,6 +24,7 @@ public class UserMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_main);
         getSupportActionBar().hide();
         LoadData.loadQuestion();
+        LoadData.loadLeaderboard();
     }
 
 
@@ -57,4 +59,9 @@ public class UserMainActivity extends AppCompatActivity {
         this.startActivity(intent);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LoadData.loadLeaderboard();
+    }
 }
