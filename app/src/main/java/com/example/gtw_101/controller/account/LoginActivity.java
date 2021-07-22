@@ -15,6 +15,7 @@ import com.example.gtw_101.controller.menu.MainActivity;
 import com.example.gtw_101.controller.menu.UserMainActivity;
 import com.example.gtw_101.dao.UserDAO;
 import com.example.gtw_101.utilities.AlertDialogBuilder;
+import com.example.gtw_101.utilities.LoadData;
 import com.example.gtw_101.utilities.Validation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -103,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     Intent intent = new Intent(LoginActivity.this, UserMainActivity.class);
+                                    LoadData.loadAllData();
                                     startActivity(intent);
                                     finish();
                                 }

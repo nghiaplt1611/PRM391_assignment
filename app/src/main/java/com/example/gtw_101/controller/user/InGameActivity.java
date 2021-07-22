@@ -343,6 +343,8 @@ public class InGameActivity extends AppCompatActivity {
                             lblPoint.setText(String.valueOf(UserDAO.account.getScore()));
                             UserDAO.account.setUseHint(true);
                             UserDAO.updateUseHint(UserDAO.account.getId(), true);
+                            UserDAO.account.setNumOfLetterShown(0);
+                            UserDAO.updateShownHints(UserDAO.account.getId(), 0);
                         }
                     }
                     handleChangeQuestionExecute();

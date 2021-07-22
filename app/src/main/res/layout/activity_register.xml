@@ -112,6 +112,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/textfield_background"
                 android:hint="@string/yob"
+                android:inputType="number"
                 android:maxLines="1"
                 android:onClick="hideYearOfBirthError"
                 android:textColor="@color/black"

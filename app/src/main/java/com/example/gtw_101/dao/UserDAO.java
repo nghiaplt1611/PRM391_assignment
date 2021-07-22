@@ -1,5 +1,7 @@
 package com.example.gtw_101.dao;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.gtw_101.controller.menu.MainActivity;
@@ -132,6 +134,19 @@ public class UserDAO {
         DocumentReference docRef = MainActivity.db.collection("users").document(id);
 
         docRef.update("useHint", useHint).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+            }
+        });
+    }
+
+    public static void updateShownHints(String id, int numOfShownLetters){
+        MainActivity.db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = MainActivity.db.collection("users").document(id);
+
+
+        docRef.update("numOfLetterShown", numOfShownLetters).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
 
